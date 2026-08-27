@@ -1,0 +1,1 @@
+node_modules/\n/vendor/\n/.env\n/.env.local\n/storage/*.key\n/public/storage\n.DS_Store
