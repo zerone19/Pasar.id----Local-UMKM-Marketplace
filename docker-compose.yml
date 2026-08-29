@@ -1,0 +1,61 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pasar-id-app
+    working_dir: /var/www/html
+    volumes:
+      - ./pasar-id:/var/www/html
+    networks:
+      - pasar-id-network
+
+  web:
+    image: nginx:alpine
+    container_name: pasar-id-web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./pasar-id:/var/www/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
+    networks:
+      - pasar-id-network
+
+  db:
+    image: mysql:8.0
+    container_name: pasar-id-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pasar_id
+      MYSQL_USER: pasar_user
+      MYSQL_PASSWORD: pasar_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - pasar-id-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: pasar-id-phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - pasar-id-network
+
+volumes:
+  db_data:
+
+networks:
+  pasar-id-network:
+    driver: bridge

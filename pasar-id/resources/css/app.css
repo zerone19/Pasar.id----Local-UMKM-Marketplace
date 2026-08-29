@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
+    }
+    body {
+        background-color: #fbf9f4;
+        color: #1b1c19;
+    }
+    h1, h2, h3, h4 {
+        font-family: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
+        letter-spacing: -0.01em;
+    }
+}
+
+@layer components {
+    /* Primary button — forest green, cream text, soft press */
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-md bg-brand px-5 py-2.5 text-sm font-semibold text-brand-on transition-transform duration-100 hover:brightness-110 active:scale-[0.98] shadow-leaf-sm;
+    }
+    /* Secondary button — outline forest green on cream */
+    .btn-outline {
+        @apply inline-flex items-center justify-center gap-2 rounded-md border border-brand px-5 py-2.5 text-sm font-semibold text-brand transition-colors hover:bg-brand/5 active:scale-[0.98];
+    }
+    .btn-leaf {
+        @apply inline-flex items-center justify-center gap-2 rounded-md bg-leaf-container px-5 py-2.5 text-sm font-semibold text-brand transition-transform duration-100 hover:brightness-105 active:scale-[0.98];
+    }
+    /* Surface card — white with thin burlap border, grounded not floating */
+    .card {
+        @apply bg-white rounded-lg border border-outline-variant/60;
+    }
+    .chip {
+        @apply inline-flex items-center rounded-full bg-burlap-container px-3 py-1 text-xs font-medium text-burlap-onContainer;
+    }
+    .input-field {
+        @apply w-full rounded-md border-outline-variant bg-white px-3 py-2.5 text-sm text-ink shadow-sm focus:border-brand focus:ring-brand;
+    }
+    .label {
+        @apply block text-xs font-semibold uppercase tracking-wide text-ink-variant mb-1;
+    }
+}

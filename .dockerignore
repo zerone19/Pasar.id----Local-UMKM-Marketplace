@@ -1,0 +1,10 @@
+/pasar-id/vendor
+/pasar-id/node_modules
+/pasar-id/public/build
+/pasar-id/storage/*.key
+/pasar-id/.env
+/pasar-id/.env.backup
+**/.git
+**/.gitignore
+**/.DS_Store
+backups

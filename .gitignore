@@ -1,1 +1,11 @@
-node_modules/\n/vendor/\n/.env\n/.env.local\n/storage/*.key\n/public/storage\n.DS_Store
+node_modules/
+/vendor/
+/.env
+/.env.local
+/storage/*.key
+/public/storage
+.DS_Store
+
+# Redundant / junk artifacts (not part of source)
+stitch_pasar.id_local_digital_marketplace.zip
+pasar-id/nul.txt

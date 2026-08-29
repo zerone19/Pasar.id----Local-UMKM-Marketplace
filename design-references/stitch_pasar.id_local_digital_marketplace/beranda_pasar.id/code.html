@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="id" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Pasar.ID - Halaman Beranda</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&amp;family=Work+Sans:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#154212",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#30312e",
+                        "primary-fixed-dim": "#a1d494",
+                        "surface": "#fbf9f4",
+                        "primary-fixed": "#bcf0ae",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "secondary": "#456800",
+                        "on-secondary-fixed-variant": "#334f00",
+                        "inverse-primary": "#a1d494",
+                        "on-primary-fixed": "#002201",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-secondary-container": "#496d00",
+                        "background": "#fbf9f4",
+                        "secondary-container": "#bfef73",
+                        "on-primary-fixed-variant": "#23501e",
+                        "secondary-fixed": "#c2f276",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#121f00",
+                        "secondary-fixed-dim": "#a7d55d",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#2d5a27",
+                        "on-surface-variant": "#42493e",
+                        "tertiary-container": "#6c4924",
+                        "on-tertiary-container": "#ebba8b",
+                        "surface-container": "#f0eee9",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#2c1600",
+                        "on-tertiary-fixed-variant": "#61401b",
+                        "surface-container-low": "#f5f3ee",
+                        "outline": "#72796e",
+                        "on-background": "#1b1c19",
+                        "on-primary-container": "#9dd090",
+                        "surface-dim": "#dbdad5",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e4e2dd",
+                        "tertiary-fixed": "#ffdcbd",
+                        "surface-container-high": "#eae8e3",
+                        "outline-variant": "#c2c9bb",
+                        "on-surface": "#1b1c19",
+                        "surface-tint": "#3b6934",
+                        "tertiary": "#52330f",
+                        "surface-bright": "#fbf9f4",
+                        "tertiary-fixed-dim": "#eebd8e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "auto",
+                        "gutter": "16px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Be Vietnam Pro"],
+                        "headline-lg-mobile": ["Be Vietnam Pro"],
+                        "label-md": ["Work Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-sm": ["Work Sans"],
+                        "headline-xl": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .texture-bamboo {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(108, 73, 36, 0.05) 10px, rgba(108, 73, 36, 0.05) 20px);
+        }
+        .shadow-organic {
+            box-shadow: 0 4px 12px rgba(45, 90, 39, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface-dim full-width top-0 z-50 border-b border-outline-variant dark:border-outline sticky transition-all duration-300"><div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-7xl mx-auto">
+<!-- Brand / Logo -->
+<div class="flex items-center gap-sm">
+<img alt="Pasar.ID Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYwY1v19vdcIiNATEO-0XocsnqgrxPnAQuv1OtoBmdcZzedTdZTiLVW-6wMDKZQEMdqU3QSQl-nUJwn8--t7JSWoC_n3icsBqsRlu-mfu_OQphpV9MQ4hpDqQRTRS6dyziZqmH261oSplZm0cNMgNFZ9zpoTGGYyklJUE33IUfoq4VdTeQLYD8H1lqwxy8LPmwnoOrnkYoJdSzQKwXkonh1MFz7rP9jPIi8Kt0cCLppPWyKYsJoT_rSk6ZwbqXw_uWMg">
+<span class="font-headline-lg text-headline-lg text-primary tracking-tight hidden md:block">Pasar.ID</span>
+</div>
+<!-- Navigation Links (Desktop) -->
+<ul class="hidden md:flex items-center gap-md">
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Pasar</a></li>
+<li class=""><a class="text-primary font-bold border-b-2 border-primary pb-1 text-label-md font-label-md" href="#">Kategori</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">UMKM Terdekat</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Tentang Kami</a></li>
+</ul>
+<!-- Trailing Icons / Actions -->
+<div class="flex items-center gap-sm">
+<!-- Search Bar -->
+<div class="relative hidden md:block">
+<input class="pl-10 pr-4 py-2 rounded-full border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-sm font-body-sm text-on-surface w-64 placeholder-on-surface-variant" placeholder="Cari produk lokal..." type="text">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant">search</span>
+</div>
+<button aria-label="Location" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full scale-98 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">location_on</span>
+</button>
+<button aria-label="Shopping Basket" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full scale-98 active:scale-95 transition-transform relative">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="absolute top-1 right-1 bg-error text-on-error text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">3</span>
+</button>
+<button aria-label="Account" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full scale-98 active:scale-95 transition-transform hidden md:block">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<!-- Mobile Menu Toggle -->
+<button aria-label="Menu" class="md:hidden p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div></nav>
+<!-- Main Content -->
+<main>
+<!-- Hero Section -->
+<section class="relative px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto py-xl">
+<div class="rounded-xl overflow-hidden shadow-organic relative min-h-[400px] flex items-center bg-surface-container-highest">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A vibrant, modern traditional Indonesian market scene (pasar tradisional). High-key lighting, warm sunlight filtering through woven canopies. Stalls neatly displaying fresh tropical fruits, vibrant vegetables, and handcrafted goods. Clean, organized, aesthetic yet bustling with authentic local life. Tactile minimalism style, banana leaf green accents, natural textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7l6mBMtXwbI9pYPCOvBX0BcieZvgv2thpi6dOroPlV9gAkeIRm-5l-XJ838rhq06NhNJNJeG97GmYwWDqPeuQqe_MhCXzLeFmYQDvyDQRO7So56iV27gjYCScKxG2hoCqy4eCDeYGkHIJRtz7QIG0tMaReP5IYtiSVrKlYsGUfpIxk55ycnsYw66qhTx_e_1MlFCPjroJRZuGaNsaUy4El1numa-6C2u2ibF7NVzrrdZ0-E5w0qX0">
+</div>
+<div class="relative z-10 p-lg md:p-xl max-w-2xl bg-primary/80 backdrop-blur-sm rounded-xl border border-primary-fixed/20 shadow-organic">
+<h1 class="font-headline-xl text-headline-xl text-surface-container-lowest mb-md">Mendukung UMKM Lokal, Dari Pasar ke Pintu Anda.</h1>
+<p class="font-body-lg text-body-lg text-surface-container-lowest mb-lg">Temukan kesegaran sayur mayur, kelezatan jajanan pasar, dan keunikan kerajinan tangan dari ribuan penjual lokal terpercaya.</p>
+<div class="flex gap-sm">
+<button class="bg-secondary-fixed text-on-secondary-fixed font-label-md px-lg py-sm rounded-lg hover:bg-secondary-container transition-all scale-98 active:scale-95 shadow-organic flex items-center gap-2">
+                            Mulai Belanja <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto py-lg">
+<div class="flex justify-between items-end mb-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Kategori Pilihan</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Jelajahi kebutuhan harian Anda</p>
+</div>
+<a class="font-label-md text-primary hover:text-primary-container flex items-center gap-1" href="#">Lihat Semua <span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<!-- Category Card 1 -->
+<a class="group block relative overflow-hidden rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm hover:border-primary hover:shadow-organic transition-all" href="#">
+<div class="h-32 bg-surface-container-high texture-bamboo">
+<img class="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="Close up of fresh, vibrant green vegetables (spinach, bok choy, long beans) neatly arranged in a woven bamboo basket. Dew drops on leaves, bright natural lighting, clean presentation, modern traditional market feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFoFubuRvClVqGBewEcpC88OBalHfL83mm2aoyNoByBDdpkjweomr0lpybYtlfiS_aw-JE92eBa7r_rcA5la4uu9UFVOJpf5oBrKUYzma-ua_NK4hhSWRj1Nvh6e0jZDyG3wzvvYyPat22YJJU_8gHU6hvu2TmDXIoAAq2zWauErSLtGLn5wOvo6l6PS0fCidORvzDidKO4UNBqZnvTbeUhD3g1kMtpHiw6jkQK8I9P3-KB_aitGZw">
+</div>
+<div class="p-sm text-center bg-surface-container-lowest">
+<span class="font-label-md text-on-surface">Sayur Segar</span>
+</div>
+</a>
+<!-- Category Card 2 -->
+<a class="group block relative overflow-hidden rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm hover:border-primary hover:shadow-organic transition-all" href="#">
+<div class="h-32 bg-surface-container-high texture-bamboo">
+<img class="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="Assortment of colorful traditional Indonesian snacks (jajanan pasar) like klepon, kue lapis, and onde-onde, beautifully presented on a fresh green banana leaf. Warm, appetizing lighting, tactile textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0iitaQk0d9XYNciMZ5AGm6xS8FTX8ZVgapk9B0QrxvKOqFmbAhv8EYy-xvJiLgUpQcmdhSlV8EDePMSMfGU9m8AFv8_fwV6AHVqB1JnLgz5IHTVrbo2gBLLeAs4O-fSYFlHlkfL3Jq7VvutEsZjDjjmwA6VjUg0K6euzjGNdoIes0aarSmrEBy4XzN7NQRMnO2yv8FNb5mwrFE_wSbAvUgvFi4by3YAuizVIRahVKpgHsLL6l87AZ">
+</div>
+<div class="p-sm text-center bg-surface-container-lowest">
+<span class="font-label-md text-on-surface">Jajanan Pasar</span>
+</div>
+</a>
+<!-- Category Card 3 -->
+<a class="group block relative overflow-hidden rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm hover:border-primary hover:shadow-organic transition-all" href="#">
+<div class="h-32 bg-surface-container-high texture-bamboo">
+<img class="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="Detailed shot of intricately woven rattan baskets and handcrafted pottery displayed on a wooden surface. Earthy tones, soft natural light highlighting the textures of the craftsmanship, conveying a sense of local heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHvPNQNqQkHF4lxY6jyf7r2svZYio6OSiN9qzbXLuhMalWwkhZLpoGsJBpjpBPTDIyXiAWvHo67PtR3wQPk3gsoNIZeWACCUHYHZMrI6c-18VZo8A4cujh2KLXA974q4d6no0RjsxIn79GRJnrQhpMEUIfWuX_fsH0mSYFqDTUjIxjG_WSJ69mc9dSE-KIWUQsykn_f90fhhpw9yI8kiXDUZf32ax2-yA8z9E5-oa7SxEsN-qeb1La">
+</div>
+<div class="p-sm text-center bg-surface-container-lowest">
+<span class="font-label-md text-on-surface">Kerajinan Lokal</span>
+</div>
+</a>
+<!-- Category Card 4 -->
+<a class="group block relative overflow-hidden rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm hover:border-primary hover:shadow-organic transition-all" href="#">
+<div class="h-32 bg-surface-container-high texture-bamboo flex items-center justify-center">
+<img class="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="Fresh cuts of local meat and poultry cleanly displayed on a pristine white ceramic counter in a modern market setting. Bright, hygienic lighting, fresh appearance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlA3eU7nigtUi3I_jLfpxNf8HnlWOpkui7zG5Ay1-I5S79Dc4Gjn4tUH8ZmfMSW0VeFhP5sD7j_uvLIngNOD4NGnJYcy-92IOh_4wFe-29fYk3W3TywgpQ0WNZGKD8_MzGUAsLyC9-7h5AeO71qTcbOWAL32x6cv2e4FfvR0YKYjbY4xrms8FUcfpEHn2SYAhwGG2XyM__2wEDATnyffyws4KrpWalynGCmGBDdk-Ot8lOT7LqfWPg">
+</div>
+<div class="p-sm text-center bg-surface-container-lowest">
+<span class="font-label-md text-on-surface">Daging &amp; Ikan</span>
+</div>
+</a>
+</div>
+</section>
+<!-- Featured MSME Section (Bento Grid) -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto py-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-sm">UMKM Unggulan</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Dukung penggerak ekonomi sekitar Anda</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Main Feature (Spans 2 columns on desktop) -->
+<div class="md:col-span-2 relative rounded-xl overflow-hidden group shadow-organic border border-outline-variant">
+<img class="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A portrait of a smiling Indonesian woman in an apron, proudly standing behind her neat market stall overflowing with fresh tropical fruits. Warm, engaging lighting, conveying authenticity and hard work. Market background slightly blurred." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAkdekNah68LMdS2W1lr_SnP8DKfeTai9avQCtmTleJSl9sWJrNjy9cPNYM3zwk7dgnmb2gqU1Fwu-3pyUtEfO423SXhnMZmApjCyOReMWWadg2leYvvOJdEKAuPbPpaeuiCzCYKWm4OWuEwT-05fHxTVIb4F4Ap-KcqvEGoSfJFyDYPmSA7yjMkxgoCwFYg8cU3kzJNAFVuV199LooXqyya5cAXn5dpWWX0VygXaVu-LKIQ9ZaA7M">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg w-full">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-tertiary-container text-on-tertiary-container font-label-sm px-2 py-1 rounded-sm text-xs">Pilihan Editor</span>
+<span class="flex items-center text-surface-container-lowest font-label-sm text-xs"><span class="material-symbols-outlined text-[14px] mr-1">location_on</span> Pasar Beringharjo</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-surface-container-lowest">Bu Ning Buah Segar</h3>
+<p class="font-body-sm text-surface-variant mt-1 max-w-md">Menyediakan buah-buahan lokal kualitas terbaik sejak 1995. Langsung dari petani.</p>
+</div>
+</div>
+<!-- Secondary Features -->
+<div class="flex flex-col gap-md">
+<div class="relative rounded-xl overflow-hidden group shadow-sm border border-outline-variant flex-1">
+<img class="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-700" data-alt="Close up of traditional woven bamboo food covers (tudung saji) stacked neatly. High quality craftsmanship, natural earthy colors, studio-like lighting to emphasize texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEtX7vXL6i6W_P0P_Awm2kLP5MGRPMCtbMBeZiRk0w0N1klXWgyUxLR1dTYEJz_BuP63_mz-XTbhEtyJ7o-ctzGI0RrAWoJtIGtqsdkYQX5p4P2ZDJg47sL46TzHi8PlJfQ6lo0GdlOoxfEDlf4GyKez1Sgp8YdvE5XhzgicKLq9VhQPd1hFGm_S6PfVy4YT5QqE7DC2m7W-ScXeNcmSMBTP6FfeIZbEzVWtMf1ePcql9Y-4etsPuw">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md w-full">
+<h3 class="font-headline-md text-headline-md text-surface-container-lowest text-lg">Kriya Anyam Mbah Tarjo</h3>
+<span class="flex items-center text-surface-variant font-label-sm text-xs mt-1"><span class="material-symbols-outlined text-[14px] mr-1">location_on</span> Bantul</span>
+</div>
+</div>
+<div class="relative rounded-xl overflow-hidden group shadow-sm border border-outline-variant flex-1">
+<img class="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-700" data-alt="Freshly baked traditional cakes (kue basah) neatly arranged in a clear vitrine. Bright, inviting lighting, focus on the glossy texture of the sweets." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA93gW8HEHGZiPiuySESFgu8LCek3dF-Tg52kmPSBOche8I0AK0IlmzySPZKiBXYavZYY6XeNMVtIiWdfgaTrfzEItbTRBjhU_PbJKBc_GuywyF7fuS7FP0474WI95pnm-0vecxry8aUbEUjaD1nL3eg2SgAFW797A7wVEXSyxbEwCyuVMHQjxxjbutjB_yAhjf-MvP5pbEroFdkBmk5vjW3_8Fz7bRKi25WE4jur1LRsCSQAq1g1WF">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md w-full">
+<h3 class="font-headline-md text-headline-md text-surface-container-lowest text-lg">Toko Jajanan Ayu</h3>
+<span class="flex items-center text-surface-variant font-label-sm text-xs mt-1"><span class="material-symbols-outlined text-[14px] mr-1">location_on</span> Pasar Senen</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface full-width py-lg border-t border-outline-variant dark:border-outline mt-xl">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop max-w-7xl mx-auto gap-md px-margin-mobile md:px-lg">
+<div class="flex items-center gap-sm">
+<span class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">Pasar.ID</span>
+</div>
+<div class="flex flex-wrap justify-center gap-md font-body-sm text-body-sm">
+<a class="text-on-surface-variant hover:text-secondary underline transition-all" href="#">Misi Komunitas</a>
+<a class="text-on-surface-variant hover:text-secondary underline transition-all" href="#">Daftar Jadi Penjual</a>
+<a class="text-on-surface-variant hover:text-secondary underline transition-all" href="#">Pusat Bantuan</a>
+<a class="text-on-surface-variant hover:text-secondary underline transition-all" href="#">Syarat &amp; Ketentuan</a>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface opacity-80 hover:opacity-100 transition-opacity text-center md:text-right">
+                © 2024 Pasar.ID - Gotong Royong Memajukan UMKM Indonesia
+            </div>
+</div>
+</footer>
+
+
+
+
+</body></html>

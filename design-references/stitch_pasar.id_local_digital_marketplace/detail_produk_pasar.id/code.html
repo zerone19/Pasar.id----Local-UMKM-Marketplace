@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detail Produk - Pasar.ID</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#154212",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#30312e",
+                        "primary-fixed-dim": "#a1d494",
+                        "surface": "#fbf9f4",
+                        "primary-fixed": "#bcf0ae",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "secondary": "#456800",
+                        "on-secondary-fixed-variant": "#334f00",
+                        "inverse-primary": "#a1d494",
+                        "on-primary-fixed": "#002201",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-secondary-container": "#496d00",
+                        "background": "#fbf9f4",
+                        "secondary-container": "#bfef73",
+                        "on-primary-fixed-variant": "#23501e",
+                        "secondary-fixed": "#c2f276",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#121f00",
+                        "secondary-fixed-dim": "#a7d55d",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#2d5a27",
+                        "on-surface-variant": "#42493e",
+                        "tertiary-container": "#6c4924",
+                        "on-tertiary-container": "#ebba8b",
+                        "surface-container": "#f0eee9",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#2c1600",
+                        "on-tertiary-fixed-variant": "#61401b",
+                        "surface-container-low": "#f5f3ee",
+                        "outline": "#72796e",
+                        "on-background": "#1b1c19",
+                        "on-primary-container": "#9dd090",
+                        "surface-dim": "#dbdad5",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e4e2dd",
+                        "tertiary-fixed": "#ffdcbd",
+                        "surface-container-high": "#eae8e3",
+                        "outline-variant": "#c2c9bb",
+                        "on-surface": "#1b1c19",
+                        "surface-tint": "#3b6934",
+                        "tertiary": "#52330f",
+                        "surface-bright": "#fbf9f4",
+                        "tertiary-fixed-dim": "#eebd8e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "auto",
+                        "gutter": "16px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Be Vietnam Pro"],
+                        "headline-lg-mobile": ["Be Vietnam Pro"],
+                        "label-md": ["Work Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-sm": ["Work Sans"],
+                        "headline-xl": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Soft, organic shadow for cards */
+        .shadow-organic {
+            box-shadow: 0 4px 20px rgba(45, 90, 39, 0.05);
+        }
+        /* Woven texture background */
+        .bg-woven {
+            background-color: #fbf9f4;
+            background-image: radial-gradient(#c2c9bb 1px, transparent 1px), radial-gradient(#c2c9bb 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface border-b border-outline-variant full-width top-0 z-50 flat no shadows">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-7xl mx-auto">
+<!-- Brand / Logo -->
+<div class="flex items-center gap-sm">
+<img alt="Pasar.ID Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzzyX3hcegjhIRuohNLX4EUzUvx40VVIeFVsExb1dmq4Nz_VvfAc997NVIRFKRi5zXiys8Kg_rWV_DffkKUtimOjBOn8RD7jskb_prq_Kc5WokgQ4Jb8HiBOE4hp6QoNmjmPVOW1tLr0wUrJlqTy_GbUfwPc6GhKEcf5j9uJxW49f8-agHIP5D0Wu36A0D0f5WyrPSdf4PAd9oCrTNf9aPUHSHQ5JNmit1rxmlA5PLLirrQ5fxuR-YxIMSAVDoENXkGQ"/>
+<span class="font-headline-lg text-headline-lg text-primary tracking-tight hidden md:block">Pasar.ID</span>
+</div>
+<!-- Navigation Links (Desktop) -->
+<ul class="hidden md:flex items-center gap-md">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Pasar</a></li>
+<li><a class="text-primary font-bold border-b-2 border-primary pb-1 text-label-md font-label-md" href="#">Kategori</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">UMKM Terdekat</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Tentang Kami</a></li>
+</ul>
+<!-- Trailing Icons / Actions -->
+<div class="flex items-center gap-sm">
+<!-- Search Bar (Simplified for brevity, assuming standard placement) -->
+<div class="relative hidden md:block">
+<input class="pl-10 pr-4 py-2 rounded-full border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-sm font-body-sm text-on-surface w-64 placeholder-on-surface-variant" placeholder="Cari produk lokal..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant">search</span>
+</div>
+<button aria-label="Location" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full scale-98 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</button>
+<button aria-label="Shopping Basket" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full scale-98 active:scale-95 transition-transform relative">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+<span class="absolute top-1 right-1 bg-error text-on-error text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">2</span>
+</button>
+<button aria-label="Account" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full scale-98 active:scale-95 transition-transform hidden md:block">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+<!-- Mobile Menu Toggle -->
+<button aria-label="Menu" class="md:hidden p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col gap-xl py-lg">
+<!-- Product Detail Section -->
+<section class="max-w-7xl mx-auto w-full px-margin-mobile md:px-margin-desktop">
+<!-- Breadcrumbs -->
+<nav class="text-body-sm font-body-sm text-on-surface-variant mb-6 flex items-center gap-2">
+<a class="hover:text-primary transition-colors" href="#">Beranda</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Kriya &amp; Anyaman</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface font-medium">Tas Anyaman Pandan Premium</span>
+</nav>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg lg:gap-xl">
+<!-- Left: Product Image Gallery -->
+<div class="md:col-span-6 lg:col-span-7 flex flex-col gap-sm">
+<!-- Main Hero Image -->
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container-low shadow-organic border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A highly detailed close-up shot of a meticulously hand-woven pandan tote bag. The bag is placed on a slightly textured, rustic wooden table. The lighting is soft and natural, suggesting early morning sunlight filtering through a traditional bamboo blind, casting gentle, organic shadows. The overall aesthetic is warm, earthy, and highlights the tactile quality of the natural fibers, fitting a high-end artisanal e-commerce style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCovP2xmwiJH97OLd2Aad3f80KR0FhjYKeuWjl2Ws1540TUogNtmO8os_xEYOJdlVSyBv16VC2eznHdqpXxxZiiV8jltnhVOxZoAAukfpTD6ZusFJuwNGNbbzvvapOdKkr6u5qnb8z586yoQ16YGMoiCOSf3KwzAwYZUk4bBaK02SLXmPyup8OZdRUUh7KkO_t_HGPrSCbvp9dqj19o3FeuL2PZOLcnsUqIO23LvVFC8mnVApKiTlJ0"/>
+<!-- Decorative Leaf Element (Subtle) -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full pointer-events-none"></div>
+</div>
+<!-- Thumbnails -->
+<div class="grid grid-cols-4 gap-sm">
+<button class="aspect-square rounded-lg overflow-hidden border-2 border-primary bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="A close-up shot of a beautifully hand-woven pandan bag resting on a clean, bright cream surface. The intricate weaving pattern is clearly visible. The lighting is bright and modern, creating a fresh, minimalist aesthetic with a focus on artisanal craftsmanship and natural textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXzljEsgTa934C374VgEmAaO6BRN2kAgb0kPv4bYr8Sa_mjbuEzTM_DRWfhDe2M1iZTK2B-gsJBa8gHuV-9I0RQCk0oVebr7YiRYlRILoFA2W6_uusI56Sg0hen-KF3ToSLVWYP9mCwVEfxJd6Xa1X25mQRm7Z2f8bejy6lCl8m6VN58bIaTwr5rI4Rlz6sdWVZatbmNuzuDn619WpKrOuBx7ufs6amHM1FOdzgOA9nphn5L3bfjTV"/>
+</button>
+<button class="aspect-square rounded-lg overflow-hidden border border-outline-variant bg-surface-container-lowest hover:border-primary transition-colors opacity-70 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="A detailed view of the sturdy, woven handles of a pandan bag. The focus is on the strong, natural fibers and the neat finish of the craftsmanship. The background is a soft, out-of-focus burlap texture, adding warmth and reinforcing the organic, sustainable theme of the product." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb6sMx7l_yXgdLO8KJbK7tQJLDqSMe6yNbrjfPJgoc_bXRtXRbh_AnBIVza4GKyl-8nlQ1YfsoNq5NoHebvEcFcgicyWLtaBtggPuy6siEJcHME9QbpAh6j36rXrIH_E6jdUCFr5OB9dyQs30sxyAe57Zkqf1bmMPKMFjoB11v71iYmO3fasfSpyMBMGfdbiX1oqu0jbsvgta89hBbPpweHdPbVD85Gre7AMGeHUUXSyUijq2zH-Hh"/>
+</button>
+<button class="aspect-square rounded-lg overflow-hidden border border-outline-variant bg-surface-container-lowest hover:border-primary transition-colors opacity-70 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="An interior view of a woven pandan bag, showing a simple cotton lining and a small inner pocket. The lighting is clean and illuminating, showing the practical aspect of the artisanal product. The overall tone is bright, earthy, and functional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgWW6PM-SAge_-6ZUMhWmLKsReTkwf0XbBZB0JUphrF_wy4N3FCH-e5YICBhghz4Lvogu4KXMZ1tsA60iKTyVHxLT3Lri91Xo58lktJ40DoANIvoMpXwF_tFgABkw6vO_bvDadLQe73jEuILT35jdEes3KLIbVr-5MNY0Pirj4a3FaIfsd2kXrIn7yo8CpFUwxevSXqR-kUggWXui7xasFmq6D2B0rmPgwiECiVwC040p82shQDGeP"/>
+</button>
+<button class="aspect-square rounded-lg overflow-hidden border border-outline-variant bg-surface-container-lowest hover:border-primary transition-colors opacity-70 hover:opacity-100 relative flex items-center justify-center">
+<img class="w-full h-full object-cover opacity-50" data-alt="A lifestyle shot of a person holding the woven pandan bag against a backdrop of vibrant green tropical leaves. The lighting is bright outdoor sunlight, creating a fresh, lively, and natural mood that connects the product to its organic origins." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJIRRoarK0UkPM0FCzhdSiVBYzYkvTQo55Mh-c3mEM0FmJdFOqzqrUqwP_Dn7NF4EdKvocWl3UT19nYBwUgCD98B5L0U6koYBPKmyQcpFEarvEcag_v0AFiJ6OmVjJ2eAXGDFFkBfjbVRmmkEC62BX3TwsznQGfsHImIrm0vjcRJjzB8FJYKDj2nxdPHPKUw5rmwG3T2G1UASJT_LJciColJ2QlURJ70d45jrnN6oGz3QicLM3ccf8"/>
+<span class="absolute text-on-surface font-label-md text-label-md bg-surface/80 px-2 py-1 rounded">+3</span>
+</button>
+</div>
+</div>
+<!-- Right: Product Info & Actions -->
+<div class="md:col-span-6 lg:col-span-5 flex flex-col">
+<!-- Title & Price -->
+<div class="mb-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="inline-flex items-center rounded-full bg-tertiary-container/10 px-2.5 py-0.5 text-label-sm font-label-sm text-tertiary-container border border-tertiary-container/20">
+                                Kriya Nusantara
+                            </span>
+<span class="flex items-center text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-yellow-500 mr-1 icon-fill">star</span>
+                                4.9 (124 Ulasan)
+                            </span>
+</div>
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-surface mb-2 tracking-tight">Tas Anyaman Pandan Premium - Motif Daun Pisang</h1>
+<p class="text-headline-md font-headline-md text-primary">Rp 185.000</p>
+</div>
+<!-- UMKM Seller Profile Card (Glassmorphism inspired, grounded) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 mb-6 shadow-organic flex items-center justify-between relative overflow-hidden">
+<!-- Subtle background texture -->
+<div class="absolute inset-0 bg-woven pointer-events-none"></div>
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A warm, inviting portrait of a smiling Indonesian female artisan in a traditional setting, surrounded by woven baskets. The lighting is soft and natural, creating a sense of trust and community connection. The mood is authentic and emphasizes the human element behind the craft." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzoxDwzTPl_XScsOVHifCR0jDV9Vm58YpoFyk7-KgGOyURzuoLgMg5MbZVR_T1_NI_jFJxn1JS6AHkwyaft0vv_GER3Y4_bJqQIweJ0TtUc7iPQv8TsVYTuDokkgn_Ga9V2pdc4T1x3O1FmcxlmT9MCKtPxHwMWwAxNzUy_rxxWNuD3NoJp--ZELt4Mryb76_LJSBMAMp-6r3MBk5dy9T8xF9g_I5oFuD6Yqx0fWieO0woWatG_ApR"/>
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg text-on-surface font-medium leading-tight">Sanggar Anyam Makmur</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant flex items-center mt-1">
+<span class="material-symbols-outlined text-[14px] mr-1">location_on</span> Tasikmalaya, Jawa Barat
+                                </p>
+</div>
+</div>
+<button class="relative z-10 px-4 py-2 border border-primary text-primary rounded-lg text-label-md font-label-md hover:bg-primary/5 transition-colors">
+                            Kunjungi Toko
+                        </button>
+</div>
+<!-- Description -->
+<div class="mb-8">
+<h4 class="text-label-md font-label-md text-on-surface mb-2 uppercase tracking-wider border-b border-outline-variant pb-1">Deskripsi Produk</h4>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                            Tas anyaman pandan buatan tangan pengrajin lokal Tasikmalaya. Dibuat dengan teknik anyaman tradisional yang diwariskan turun-temurun, menghasilkan tekstur yang kuat namun tetap lentur. Cocok untuk digunakan sehari-hari, berbelanja, atau sebagai aksen gaya natural Anda. Setiap pembelian mendukung keberlangsungan hidup komunitas pengrajin lokal.
+                        </p>
+<ul class="mt-4 space-y-2 text-body-sm font-body-sm text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check_circle</span>
+                                Material: 100% Daun Pandan Alami, ramah lingkungan.
+                            </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check_circle</span>
+                                Ukuran: 35cm x 25cm x 15cm (P x L x T)
+                            </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check_circle</span>
+                                Finishing: Natural anti-jamur non-toxic.
+                            </li>
+</ul>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-sm mt-auto">
+<div class="flex items-center gap-4 mb-2">
+<label class="text-label-md font-label-md text-on-surface">Jumlah:</label>
+<div class="flex items-center border border-outline-variant rounded-lg bg-surface-container-lowest">
+<button class="px-3 py-1 text-on-surface-variant hover:text-primary transition-colors material-symbols-outlined">remove</button>
+<input class="w-12 text-center border-none bg-transparent text-body-md font-body-md focus:ring-0 p-0" min="1" type="number" value="1"/>
+<button class="px-3 py-1 text-on-surface-variant hover:text-primary transition-colors material-symbols-outlined">add</button>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Tersisa 15 buah</span>
+</div>
+<div class="flex gap-sm">
+<button class="flex-grow bg-primary text-on-primary font-label-md text-label-md py-3 px-6 rounded-lg shadow-organic hover:bg-primary-container transition-colors flex justify-center items-center gap-2 scale-98 active:scale-95">
+<span class="material-symbols-outlined">shopping_cart</span>
+                                Tambah ke Keranjang
+                            </button>
+<button aria-label="Simpan ke Wishlist" class="bg-surface-container-lowest border border-outline-variant text-on-surface p-3 rounded-lg hover:border-primary hover:text-primary transition-colors flex justify-center items-center scale-98 active:scale-95">
+<span class="material-symbols-outlined">favorite_border</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Divider with subtle styling -->
+<div class="w-full flex justify-center py-8">
+<div class="w-24 h-1 rounded-full bg-gradient-to-r from-transparent via-outline-variant to-transparent opacity-50"></div>
+</div>
+<!-- Similar Products Section -->
+<section class="max-w-7xl mx-auto w-full px-margin-mobile md:px-margin-desktop mb-xl">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">Produk Serupa dari UMKM Ini</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Karya tangan berkualitas lainnya dari Sanggar Anyam Makmur.</p>
+</div>
+<a class="text-label-md font-label-md text-primary hover:underline hidden md:block" href="#">Lihat Semua Karya</a>
+</div>
+<!-- Bento-style Grid for Products -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-sm md:gap-md">
+<!-- Product Card 1 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-organic hover:border-primary/50 transition-all cursor-pointer flex flex-col">
+<div class="aspect-square relative overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautifully crafted woven pandan storage box with a lid, sitting on a rustic wooden floor. The light is warm and natural, casting soft shadows that highlight the intricate weave. The setting implies a cozy, organized, and sustainable home environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeDKSxLJfQnDgtKVeaOLRh-nWu5vKM1BIcrzsv6gg2WzHLhD7ro4vX4jhpMmkis2khPC0RXNXh6ZBZhIUA5o64DXSIjzA2k7IfO-TWoj1v0SPtA8KsiLJ3W2K4UVw6snAU6s_erXu7rOiNO8r4wEtqVu-A1Drk8NkKZ5ii0ajesrmeIR31A-yNVlszUBdde7qDEC9KOgqEvbxRDnbo3kPHbIKBlye7Kv1RzOs4Y4WobcsWO0QNRusy"/>
+<div class="absolute inset-0 bg-woven pointer-events-none opacity-0 group-hover:opacity-20 transition-opacity"></div>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<h3 class="text-label-md font-label-md text-on-surface line-clamp-2 mb-1 group-hover:text-primary transition-colors">Kotak Penyimpanan Anyaman Pandan</h3>
+<p class="text-body-md font-body-md text-primary font-medium mt-auto">Rp 85.000</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-organic hover:border-primary/50 transition-all cursor-pointer flex flex-col">
+<div class="aspect-square relative overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stylish, round hand-woven pandan placemat placed on a clean dining table. A simple white ceramic plate rests partially on it. The lighting is bright, airy, and inviting, showcasing the product as a beautiful addition to a modern, natural dining setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFKFeJZ7ckgvvPuxRb7-JdTDANId0yRSbInfWsY-P5Gfj_pvZhSMvn7oH1rLZZyRIB4lxIaDZBvfHHWV1m3Vvdi5rFUezOPG_ycqXM4Ooe6tvG1t5wqIelXuBRH5Mo-1K3IV5Wv2hjdEgkayl3vGo37z-QlN4KvDOn5PZ3odwQafwFlSqvS9_CyjthBKBVKUTjvFEIB9cdl2TJXah8Hd3AupXCAD6jyLgPZTMWYm4f3Z1SLRDrubJc"/>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<h3 class="text-label-md font-label-md text-on-surface line-clamp-2 mb-1 group-hover:text-primary transition-colors">Alas Piring Anyaman Bundar (Set of 4)</h3>
+<p class="text-body-md font-body-md text-primary font-medium mt-auto">Rp 120.000</p>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-organic hover:border-primary/50 transition-all cursor-pointer flex flex-col">
+<div class="aspect-square relative overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A tall, cylindrical woven pandan basket used as a planter for a lush, green indoor plant. The basket sits in a bright, modern living room corner. The image conveys an earthy, organic aesthetic, blending traditional craftsmanship with contemporary interior design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuwWWKv9G5aZBT7CjgkpPaCw6oxkjKfQjuejGbhE0uihMF5APJAZCAJsPikxClvAX0G3LEYwjLjJ-RBLqbAOr5U73mmBqYgxUtMdGXKw-v1mvNisrG9Ig2nwK1YmPFLA2mj_no-8XVFWu-EziQLjMYqP1ZWyxU1hN-Bw-OfkQyzyIY8M7xH_oJoPgu1KT8laNwWHbnsiOAtKaehowHDev0R7UBLer-VU-VsJeMnCg1rOdVcIbhDLSO"/>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<h3 class="text-label-md font-label-md text-on-surface line-clamp-2 mb-1 group-hover:text-primary transition-colors">Keranjang Pot Tanaman Anyam Besar</h3>
+<p class="text-body-md font-body-md text-primary font-medium mt-auto">Rp 210.000</p>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-organic hover:border-primary/50 transition-all cursor-pointer flex flex-col">
+<div class="aspect-square relative overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A small, intricately woven pandan wallet or clutch resting on a soft fabric surface. The focus is on a unique, colored weaving pattern incorporated into the design. The lighting is soft and focused, creating an elegant and artisanal feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYTZ9tzbR40GN_WVexQIOQ7jBve9NrZLD6rrksJ91itXVrji_xedV7Ze-I9i84l1a3Q92kz14nff8B40cneCkFVWunh-097wBZb9qrVY_kjM6yQtdBDMGJka49Q0Tt8R0u8sJbuuvLNpXxkbVN7wifsu21Prj1bFa9zrb7ESFP1ensS9eeNH5BAxlsEiQtRwF5gru2zvyy0oE_oqNcKRI3rjhNUH3dGpZT_H4R7vQxBKNztvogylHE"/>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<h3 class="text-label-md font-label-md text-on-surface line-clamp-2 mb-1 group-hover:text-primary transition-colors">Dompet Anyaman Motif Tradisional</h3>
+<p class="text-body-md font-body-md text-primary font-medium mt-auto">Rp 65.000</p>
+</div>
+</div>
+</div>
+<div class="mt-6 text-center md:hidden">
+<a class="inline-block border border-primary text-primary px-4 py-2 rounded-lg text-label-md font-label-md" href="#">Lihat Semua Karya</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest border-t border-outline-variant full-width py-lg flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto gap-md">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-headline-md text-headline-md text-primary">Pasar.ID</span>
+<p class="text-body-sm font-body-sm text-on-surface text-center md:text-left">© 2024 Pasar.ID - Gotong Royong Memajukan UMKM Indonesia</p>
+</div>
+<ul class="flex flex-wrap justify-center md:justify-end gap-4 text-body-sm font-body-sm">
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all opacity-80 hover:opacity-100 transition-opacity" href="#">Misi Komunitas</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all opacity-80 hover:opacity-100 transition-opacity" href="#">Daftar Jadi Penjual</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all opacity-80 hover:opacity-100 transition-opacity" href="#">Pusat Bantuan</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all opacity-80 hover:opacity-100 transition-opacity" href="#">Syarat &amp; Ketentuan</a></li>
+</ul>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,67 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pasar-id-app
+    working_dir: /var/www/html
+    volumes:
+      - ./pasar-id:/var/www/html
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+    networks:
+      - pasar-id-network
+    restart: unless-stopped
+
+  web:
+    image: nginx:alpine
+    container_name: pasar-id-web
+    ports:
+      - "80:80"
+    volumes:
+      - ./pasar-id:/var/www/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
+    networks:
+      - pasar-id-network
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: pasar-id-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: pasar_id
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - pasar-id-network
+    restart: unless-stopped
+    # Tidak expose port DB ke publik di production
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: pasar-id-phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - pasar-id-network
+    restart: unless-stopped
+
+volumes:
+  db_data:
+
+networks:
+  pasar-id-network:
+    driver: bridge
