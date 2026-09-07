@@ -1,0 +1,42 @@
+ Image pasarid-app Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 493B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.10kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/composer:latest
+#3 ...
+
+#4 [internal] load metadata for docker.io/library/php:8.4-fpm
+#4 DONE 1.2s
+
+#3 [internal] load metadata for docker.io/library/composer:latest
+#3 DONE 1.2s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 209B 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 [stage-0 1/8] FROM docker.io/library/php:8.4-fpm@sha256:59fa733c9af643a122f8a9976119460e35ce76dd0a3f2b9c8f75af8e361a54e2
+#7 resolve docker.io/library/php:8.4-fpm@sha256:59fa733c9af643a122f8a9976119460e35ce76dd0a3f2b9c8f75af8e361a54e2 0.0s done
+#7 DONE 0.0s
+
+#8 FROM docker.io/library/composer:latest@sha256:d8f6343d3fae98107426bc49163ccad46ef85aabd4a27d80a74401fab4aba332
+#8 resolve docker.io/library/composer:latest@sha256:d8f6343d3fae98107426bc49163ccad46ef85aabd4a27d80a74401fab4aba332
+#8 resolve docker.io/library/composer:latest@sha256:d8f6343d3fae98107426bc49163ccad46ef85aabd4a27d80a74401fab4aba332 0.0s done
+#8 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 200.44kB 0.1s done
+#6 ERROR: invalid file request pasar-id/public/storage
+------
+ > [internal] load build context:
+------
+failed to solve: invalid file request pasar-id/public/storage
+
