@@ -35,6 +35,11 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    public function store()
+    {
+        return $this->hasOne(Store::class);
+    }
+
     public function isBuyer(): bool
     {
         return $this->role === 'buyer';
