@@ -21,8 +21,9 @@ WORKDIR /var/www/html
 # Copy Laravel application source into working directory
 COPY ./pasar-id/ .
 
-# Install dependencies
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+# Copy entrypoint script and make it executable
+COPY ./pasar-id/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Create non-root user
 RUN useradd -m -G www-data -u 1000 laravel && \
@@ -36,5 +37,5 @@ RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 9000
 
-# Set entrypoint
-CMD ["php-fpm"]
+# Set entrypoint to ensure dependencies are installed on container start
+ENTRYPOINT ["docker-entrypoint.sh"]

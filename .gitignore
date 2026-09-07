@@ -7,5 +7,5 @@ node_modules/
 .DS_Store
 
 # Redundant / junk artifacts (not part of source)
-stitch_pasar.id_local_digital_marketplace.zip
+stitch_pasar.id_local_digital_marketplace*.zip
 pasar-id/nul.txt
