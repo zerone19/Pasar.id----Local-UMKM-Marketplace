@@ -337,6 +337,15 @@ Boleh dikerjakan bertahap.
   perbaiki. Lalu generate 22 foto produk + 9 logo toko AI-generated (.png), update DB,
   hapus sisa .svg. Verifikasi HTTP 200 semua aset.
 
+|---
+
+## 📝 Log Singkat (Lanjutan)
+
+- **Sesi 2026-09-07**: 
+  - Tambah `TECH_NOTES.md` — dokumentasi teknis setup Docker, migrasi, seeder, dan build frontend.
+  - Push semua perubahan ke branch `work-session-log` di GitHub.
+  - Siapkan kerangka untuk sesi berikutnya: pengembangan fitur upload gambar produk dan email verification.
+
 ---
 
 *Dokumen ini otomatis disusun dari sesi kerja — boleh diedit manual bila ada
