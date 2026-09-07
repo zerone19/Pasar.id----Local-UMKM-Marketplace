@@ -5,7 +5,7 @@
             <p class="text-sm text-ink-variant">Perbarui detail produk.</p>
         </div>
 
-        <form method="POST" action="{{ route('seller.products.update', $product) }}" class="card p-6 space-y-4">
+        <form method="POST" action="{{ route('seller.products.update', $product) }}" enctype="multipart/form-data" class="card p-6 space-y-4">
             @csrf @method('patch')
             <div>
                 <label class="label">Nama Produk</label>
@@ -39,6 +39,24 @@
                 </div>
             </div>
             <div>
+                <label class="label">Thumbnail Saat Ini</label>
+                @if ($product->thumbnail && Storage::disk('public')->exists($product->thumbnail))
+                    <img src="{{ asset('storage/' . $product->thumbnail) }}" alt="Thumbnail" class="w-24 h-24 object-cover rounded border">
+                @else
+                    <span class="text-sm text-ink-variant italic">Belum ada thumbnail</span>
+                @endif
+            </div>
+            <div>
+                <label class="label">Ganti Thumbnail</label>
+                <input type="file" name="thumbnail" accept="image/*" class="input-field file:input-file file:btn-outline">
+                <p class="text-xs text-ink-variant mt-1">Format: JPG, PNG, WEBP — maksimal 2MB</p>
+            </div>
+            <div>
+                <label class="label">Foto Tambahan</label>
+                <input type="file" name="images[]" accept="image/*" multiple class="input-field file:input-file file:btn-outline">
+                <p class="text-xs text-ink-variant mt-1">Pilih foto baru untuk menambah galeri</p>
+            </div>
+            <div>
                 <label class="label">Status</label>
                 <select name="status" class="input-field">
                     @foreach (['draft', 'active', 'inactive', 'out_of_stock'] as $s)
@@ -46,7 +64,7 @@
                     @endforeach
                 </select>
             </div>
-            <button class="btn-primary">Perbarui</button>
+            <button class="btn-primary w-full">Perbarui</button>
         </form>
     </div>
 </x-seller-layout>

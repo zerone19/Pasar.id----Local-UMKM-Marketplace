@@ -5,7 +5,7 @@
             <p class="text-sm text-ink-variant">Isi detail produk yang akan dijual.</p>
         </div>
 
-        <form method="POST" action="{{ route('seller.products.store') }}" class="card p-6 space-y-4">
+        <form method="POST" action="{{ route('seller.products.store') }}" enctype="multipart/form-data" class="card p-6 space-y-4">
             @csrf
             <div>
                 <label class="label">Nama Produk</label>
@@ -38,7 +38,17 @@
                     <input type="number" name="weight" value="{{ old('weight') }}" min="0" step="0.1" class="input-field">
                 </div>
             </div>
-            <button class="btn-primary">Simpan Produk</button>
+            <div>
+                <label class="label">Foto Produk (Thumbnail)</label>
+                <input type="file" name="thumbnail" accept="image/*" class="input-field file:input-file file:btn-outline">
+                <p class="text-xs text-ink-variant mt-1">Format: JPG, PNG, WEBP — maksimal 2MB</p>
+            </div>
+            <div>
+                <label class="label">Foto Tambahan</label>
+                <input type="file" name="images[]" accept="image/*" multiple class="input-field file:input-file file:btn-outline">
+                <p class="text-xs text-ink-variant mt-1">Bisa pilih lebih dari satu foto</p>
+            </div>
+            <button class="btn-primary w-full">Simpan Produk</button>
         </form>
     </div>
 </x-seller-layout>
