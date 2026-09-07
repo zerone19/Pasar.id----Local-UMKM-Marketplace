@@ -20,8 +20,8 @@
         @endforelse
     </div>
 
-    <div class="mt-6">
-        {{ $products->links() }}
+    <div class="mt-0">
+        {{ $products->withQueryString()->links() }}
     </div>
 </div>
 @endsection

@@ -15,13 +15,21 @@ use App\Http\Controllers\Seller\DashboardController;
 use App\Http\Controllers\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Seller\StoreController;
+use App\Http\Controllers\Auth\MitraController;
 use Illuminate\Support\Facades\Route;
 
 // Marketplace public routes
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/categories', [ProductController::class, 'categories'])->name('categories.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/categories/{category}', [ProductController::class, 'byCategory'])->name('categories.show');
 Route::get('/stores/{store}', [ProductController::class, 'byStore'])->name('stores.show');
+
+// Mitra UMKM (seller) registration — split-screen branded page
+Route::middleware('guest')->group(function () {
+    Route::get('/mitra', [MitraController::class, 'create'])->name('mitra.create');
+    Route::post('/mitra', [MitraController::class, 'store'])->name('mitra.store');
+});
 
 Route::get('/', function () {
     return app(ProductController::class)->index(request());

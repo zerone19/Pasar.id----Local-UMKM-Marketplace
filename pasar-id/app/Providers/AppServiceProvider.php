@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('marketplace.partials.navbar', function ($view) {
+            $view->with('navCategories', Category::orderBy('name')->get());
+        });
+
+        // Use custom pagination views
+        \Illuminate\Pagination\AbstractPaginator::defaultView('components.pagination');
+        \Illuminate\Pagination\AbstractPaginator::defaultSimpleView('components.pagination');
     }
 }
