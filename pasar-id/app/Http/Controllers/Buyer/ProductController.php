@@ -43,6 +43,18 @@ class ProductController extends Controller
         return view('marketplace.index', compact('products', 'categories', 'featured', 'stores'));
     }
 
+    // All categories
+    public function categories()
+    {
+        $categories = Category::withCount(['products' => function ($query) {
+                $query->where('status', 'active')->where('stock', '>', 0);
+            }])
+            ->orderBy('name')
+            ->get();
+
+        return view('marketplace.categories', compact('categories'));
+    }
+
     // Product detail
     public function show(Product $product)
     {

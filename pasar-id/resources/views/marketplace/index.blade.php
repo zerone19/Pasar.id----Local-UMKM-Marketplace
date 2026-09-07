@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="relative hidden min-h-[260px] md:block">
-                <img src="{{ asset('assets/img/hero-pasar.png') }}" alt="Pasar tradisional lokal" class="absolute inset-0 h-full w-full rounded-r-lg object-cover">
+                <img src="{{ asset('assets/img/hero-pasar.png') }}?v=2" alt="Pasar tradisional lokal" class="absolute inset-0 h-full w-full rounded-r-lg object-cover">
                 <div class="absolute inset-0 rounded-r-lg bg-gradient-to-br from-brand-container/30 to-brand/15"></div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 <h2 class="text-2xl font-bold text-ink">Kategori Pilihan</h2>
                 <p class="text-sm text-ink-variant">Jelajahi kebutuhan harian Anda</p>
             </div>
-            <a href="{{ route('products.index') }}" class="text-sm font-semibold text-brand hover:underline">Lihat Semua &rsaquo;</a>
+            <a href="{{ route('categories.index') }}" class="text-sm font-semibold text-brand hover:underline">Lihat Semua &rsaquo;</a>
         </div>
         <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
             @forelse ($categories as $category)

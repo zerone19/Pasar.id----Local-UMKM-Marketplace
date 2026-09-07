@@ -19,7 +19,22 @@
             {{-- Nav --}}
             <nav class="ml-auto flex items-center gap-1 sm:gap-3 text-sm">
                 <a href="{{ route('products.index') }}" class="hidden sm:inline rounded-full px-3 py-2 font-medium text-brand-on/90 hover:bg-brand-on/10">Produk</a>
-                <a href="{{ route('products.index') }}#kategori" class="hidden sm:inline rounded-full px-3 py-2 font-medium text-brand-on/90 hover:bg-brand-on/10">Kategori</a>
+                <div x-data="{ open: false }" class="relative hidden sm:block" @click.outside="open = false">
+                    <button type="button" @click="open = !open" :aria-expanded="open"
+                            class="inline-flex items-center gap-1 rounded-full px-3 py-2 font-medium text-brand-on/90 hover:bg-brand-on/10">
+                        Kategori
+                        <svg :class="open ? 'rotate-180' : ''" class="h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div x-show="open" x-transition style="display:none;"
+                         class="absolute right-0 z-40 mt-2 w-56 rounded-lg bg-surface p-2 shadow-leaf-sm ring-1 ring-ink/5">
+                        @foreach ($navCategories as $cat)
+                            <a href="{{ route('categories.show', $cat) }}"
+                               class="block rounded-md px-3 py-2 text-sm font-medium text-ink hover:bg-surface-mid">{{ $cat->name }}</a>
+                        @endforeach
+                        <a href="{{ route('categories.index') }}"
+                           class="mt-1 block rounded-md bg-brand-soft px-3 py-2 text-center text-sm font-semibold text-brand hover:brightness-105">Lihat Semua Kategori</a>
+                    </div>
+                </div>
                 @auth
                     @if (auth()->user()->role === 'seller')
                         <a href="{{ route('seller.dashboard') }}" class="hidden sm:inline rounded-full px-3 py-2 font-medium text-brand-on/90 hover:bg-brand-on/10">Toko Saya</a>

@@ -10,15 +10,29 @@ use Illuminate\View\View;
 
 class OrderController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
         $store = \App\Models\Store::where('user_id', auth()->id())->first();
 
+        $status = $request->input('status');
+        $search = $request->input('search');
+
         $orders = $store
-            ? Order::where('store_id', $store->id)->latest()->with('buyer', 'items')->paginate(15)
+            ? Order::where('store_id', $store->id)
+                ->when($status && $status !== 'all', fn ($q) => $q->where('order_status', $status))
+                ->when($search, fn ($q) => $q->where(function ($q) use ($search) {
+                    $q->where('order_number', 'like', "%{$search}%")
+                      ->orWhereHas('buyer', fn ($b) => $b->where('name', 'like', "%{$search}%"));
+                }))
+                ->latest()
+                ->with('buyer', 'items')
+                ->paginate(15)
+                ->withQueryString()
             : collect();
 
-        return view('seller.orders', compact('orders', 'store'));
+        $statuses = ['pending', 'confirmed', 'processing', 'shipped', 'completed', 'cancelled'];
+
+        return view('seller.orders', compact('orders', 'store', 'statuses', 'status', 'search'));
     }
 
     public function show(Order $order): View

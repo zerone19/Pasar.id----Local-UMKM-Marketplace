@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -103,19 +104,32 @@ class DatabaseSeeder extends Seeder
             ];
 
             foreach ($samples as $i => [$name, $catName, $price, $stock]) {
-                Product::updateOrCreate(
-                    ['slug' => \Illuminate\Support\Str::slug($name . '-' . $store->id)],
+                $slug = \Illuminate\Support\Str::slug($name . '-' . $store->id);
+                $thumb = 'products/' . \Illuminate\Support\Str::slug($name) . '.svg';
+
+                $product = Product::updateOrCreate(
+                    ['slug' => $slug],
                     [
                         'store_id' => $store->id,
                         'category_id' => $categoryIds[$catName] ?? null,
                         'name' => $name,
-                        'slug' => \Illuminate\Support\Str::slug($name . '-' . $store->id),
+                        'slug' => $slug,
                         'description' => 'Produk ' . strtolower($name) . ' khas lokal dari ' . $store->store_name . '.',
                         'price' => $price,
                         'stock' => $stock,
+                        'thumbnail' => $thumb,
                         'status' => 'active',
                     ]
                 );
+
+                // Pastikan setiap produk punya setidaknya satu gambar dummy
+                if ($product->images()->count() === 0) {
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_path' => $thumb,
+                        'sort_order' => 0,
+                    ]);
+                }
             }
 
             // Demo order dari buyer
