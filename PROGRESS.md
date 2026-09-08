@@ -5,7 +5,7 @@
 
 ---
 
-## 📌 Status Terkini (2026-08-31)
+## 📌 Status Terkini (2026-09-08)
 
 **MVP SELESAI** — 7/7 sprint selesai & terverifikasi (35 test lulus).
 **UI Marketplace** sudah di-polish mengikuti design system Stitch (warna, font, logo & foto asli).
@@ -16,9 +16,14 @@
 
 **SESI LANJUTAN (2026-08-31, same day)**: ditambahkan **data dummy** (10 pembeli +
 8 pemilik UMKM via `DummyUsersSeeder`) dan **aset visual asli** — 22 foto produk
-+ 9 logo toko AI-generated (.png), menggantikan placeholder. Audit gambar produk
++ 9 logo toki AI-generated (.png), menggantikan placeholder. Audit gambar produk
 juga menemukan & memperbaiki bug seeder (path DB vs file disk tidak konsisten).
 Lihat section "📊 Data Dummy & Aset Visual" di bawah.
+
+**SESI UPDATE (2026-09-08)**: refactor `DatabaseSeeder` untuk modular — pisahkan
+menjadi `CategorySeeder` + `DemoAccountSeeder` + `DummyUsersSeeder`. Perluas data
+dummy menjadi **10 toko UMKM** (9 active + 1 pending) dengan **100 produk dummy**
+di 8 kategori. Semua sudah di-test & di-push ke GitHub commit `7489f6c`.
 
 ---
 
@@ -148,20 +153,47 @@ konsisten dan tidak depend CSP/CDN.
 
 ---
 
-## 📊 Data Dummy & Aset Visual (2026-08-31, sesi lanjutan)
+## 📊 Data Dummy & Aset Visual 
+
+### Seeder Modular (Diupdate 2026-09-08)
+Refactor lengkap `DatabaseSeeder` untuk modular — sekarang memanggil tiga seeders terpisah:
+
+```php
+$this->call([
+    CategorySeeder::class,        // 8 kategori marketplace
+    DemoAccountSeeder::class,     // akun admin/seller/buyer + produk demo + order contoh
+    DummyUsersSeeder::class,      // 10 toko UMKM dummy + 100 produk
+]);
+```
+
+Jalankan via:
+```bash
+docker compose exec app php artisan migrate:fresh --seed
+```
 
 ### Data Dummy (`DummyUsersSeeder`)
-File baru: `database/seeders/DummyUsersSeeder.php` (jalankan:
-`docker compose exec app php artisan db:seed --class=DummyUsersSeeder`).
+File: `database/seeders/DummyUsersSeeder.php`  
 Pakai `updateOrCreate` → aman dijalankan berkali-kali (tidak duplikat).
 
 - **10 pembeli** — `users.role=buyer`, email `pembeli1..10@pasar.id`, nama + kota asal Indonesia.
-- **8 pemilik UMKM** — `users.role=seller` (`umkm1..8@pasar.id`) + 1 `stores` per user
-  (7 active, 1 pending: "Sayur Organik Tani Makmur" sengaja pending untuk contoh moderasi admin).
-  Tiap toko punya 2 produk (total 16 produk baru) dengan kategori yang nyambung.
+- **10 pemilik UMKM** — `users.role=seller` (`umkm1..10@pasar.id`) + 1 `stores` per user
+  (9 active, 1 pending: "Sayur Organik Tani Makkur" sengaja pending untuk contoh moderasi admin).
+  Setiap toko punya **10 produk** (total **100 produk dummy** baru) dengan kategori yang nyambung.
 - Password semua akun dummy: `password`.
-- Total setelah seeder awal: 10 pembeli + 8 seller (termasuk `seller@pasar.id` demo) +
-  9 toko + 22 produk (16 dummy baru + 6 demo awal).
+- **Total database**: 23 user (10 buyer + 11 seller + 1 admin demo + 1 seller demo + 1 buyer demo),  
+  11 toko, 106 produk (100 dummy + 6 demo), 8 kategori.
+
+### Distribusi Produk per Kategori (100 produk dummy)
+| Kategori         | Jumlah Produk |
+|------------------|---------------|
+| Makanan          | 30            |
+| Minuman          | 20            |
+| Fashion          | 20            |
+| Kerajinan        | 10            |
+| Pertanian        | 10            |
+| Elektronik       | 10            |
+| Sembako          | 0             |
+| Kebutuhan Rumah  | 0             |
 
 ### ASET VISUAL ASLI (AI-generated)
 - **22 foto produk** (.png, ~1–1.9 MB masing-masing) → `storage/app/public/products/<slug>.png`.
@@ -176,7 +208,7 @@ Pakai `updateOrCreate` → aman dijalankan berkali-kali (tidak duplikat).
 |---|----------|-----|-----|
 | 1 | HIGH | Seeder hanya menulis path `thumbnail`/`image_path` ke DB, tapi **tidak pernah membuat file-nya** → 16 produk dummy broken image | Generator placeholder SVG per-kategori (`scripts/gen_product_images.php`) + method `ensureProductPlaceholder()` di seeder |
 | 2 | MEDIUM | 6 file .svg placeholder lama warnanya statis ungu, tidak sesuai kategori | Ditimpa warna per kategori (makanan coklat, minuman cyan, dst) |
-| 3 | HIGH | Saat simpan foto PNG, DB masih nyebut `.svg` → foto baru tidak kepakai (view tetap nampilin占位 placeholder lama) | Samakan ekstensi `.png` di `product.thumbnail` + `product_images` + hapus sisa `.svg` |
+| 3 | HIGH | Saat simpan foto PNG, DB masih nyebut `.svg` → foto baru tidak kepakai (view tetap nampilin placeholder lama) | Samakan ekstensi `.png` di `product.thumbnail` + `product_images` + hapus sisa `.svg` |
 
 ### Verifikasi
 - HTTP lewat web (`asset('storage/...')`): produk & logo → **200** ✔
@@ -189,6 +221,8 @@ Pakai `updateOrCreate` → aman dijalankan berkali-kali (tidak duplikat).
   tidak broken. Bila Master punya foto asli, bisa diupload lewat seller dashboard nanti.
 - Script generator tersimpan: `scripts/gen_product_images.php`, `scripts/save_gen_images.php`
   (bisa diulang kalau perlu regenerasi).
+- Data dummy sekarang jauh lebih kaya: 10 toko × 10 produk = 100 produk dummy,  
+  mendukung testing UI/UX yang lebih realistis.
 
 ---
 
