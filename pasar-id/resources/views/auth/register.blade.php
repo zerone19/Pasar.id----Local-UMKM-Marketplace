@@ -45,7 +45,7 @@
                 <div>
                     <label class="block text-sm font-label font-semibold text-on-surface mb-1.5" for="name">Nama Lengkap</label>
                     <div class="relative">
-                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">person</span>
+                        
                         <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name"
                             class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded-lg bg-surface focus:ring-primary focus:border-primary sm:text-sm transition-colors text-on-surface placeholder:text-outline-variant"
                             placeholder="Nama lengkap">
@@ -56,7 +56,7 @@
                 <div>
                     <label class="block text-sm font-label font-semibold text-on-surface mb-1.5" for="email">Alamat Email</label>
                     <div class="relative">
-                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">mail</span>
+                        
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username"
                             class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded-lg bg-surface focus:ring-primary focus:border-primary sm:text-sm transition-colors text-on-surface placeholder:text-outline-variant"
                             placeholder="email@contoh.com">
@@ -68,7 +68,7 @@
                     <div>
                         <label class="block text-sm font-label font-semibold text-on-surface mb-1.5" for="password">Kata Sandi</label>
                         <div class="relative">
-                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">lock</span>
+                            
                             <input id="password" type="password" name="password" required autocomplete="new-password"
                                 class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded-lg bg-surface focus:ring-primary focus:border-primary sm:text-sm transition-colors text-on-surface"
                                 placeholder="Minimal 8 karakter">
@@ -79,7 +79,7 @@
                     <div>
                         <label class="block text-sm font-label font-semibold text-on-surface mb-1.5" for="password_confirmation">Konfirmasi Kata Sandi</label>
                         <div class="relative">
-                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">lock</span>
+                            
                             <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password"
                                 class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded-lg bg-surface focus:ring-primary focus:border-primary sm:text-sm transition-colors text-on-surface"
                                 placeholder="Ulangi kata sandi">
