@@ -1,71 +1,128 @@
 <x-guest-layout>
-    <div class="flex min-h-screen flex-col md:flex-row">
-        {{-- Left: branding --}}
-        <div class="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-brand p-12 text-brand-on md:flex">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-container/60 to-transparent"></div>
-            <div class="relative z-10 flex items-center gap-2">
-                <img src="{{ asset('assets/img/logo-pasar-id.png') }}" alt="Pasar.ID" class="h-10 w-10 rounded-full bg-brand-soft object-contain">
-                <span class="text-xl font-bold tracking-tight">Pasar.ID</span>
-            </div>
-            <div class="relative z-10">
-                <h1 class="text-3xl font-bold leading-tight tracking-tight sm:text-4xl">Gotong Royong<br>Memajukan UMKM<br>Indonesia</h1>
-                <p class="mt-4 max-w-sm text-brand-on/90">Belanja produk lokal autentik dari ribuan UMKM terpercaya di seluruh Indonesia.</p>
-            </div>
-            <p class="relative z-10 text-xs text-brand-on/60">© 2026 Pasar.ID — Nurturing Indonesian MSMEs</p>
-        </div>
+<div class="bg-surface text-on-surface flex flex-col min-h-screen font-body">
+    <!-- Main Content Area - Split Layout -->
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
+        <!-- Pattern overlay -->
+        <div class="absolute inset-0 pattern-overlay pointer-events-none z-0"></div>
 
-        {{-- Right: form --}}
-        <div class="flex w-full items-center justify-center px-4 py-10 md:w-1/2 md:p-12">
-            <div class="w-full max-w-md">
-                <div class="mb-8 text-center md:text-left">
-                    <h2 class="text-2xl font-bold text-brand tracking-tight sm:text-3xl">Daftar Akun Baru</h2>
-                    <p class="mt-1 text-sm text-ink-variant">Lengkapi data diri Anda untuk mulai berbelanja.</p>
+        <div class="max-w-5xl w-full flex flex-col md:flex-row bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(45,90,39,0.08)] border border-outline-variant/30 overflow-hidden z-10">
+            
+            <!-- Illustration Side -->
+            <div class="hidden md:block w-1/2 bg-surface-container relative">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('assets/img/hero-pasar.png') }}');"></div>
+                <div class="absolute inset-0 bg-primary/20 backdrop-blur-[2px]"></div>
+                <div class="absolute bottom-12 left-12 right-12 text-surface-container-lowest">
+                    <h2 class="text-3xl font-bold font-headline mb-4 tracking-tight">Gotong Royong Modern.</h2>
+                    <p class="text-lg font-body leading-relaxed text-surface-container-lowest/90">Bergabung dengan komunitas Pasar.ID. Temukan produk lokal autentik dari ribuan UMKM terpercaya di seluruh Indonesia.</p>
+                </div>
+            </div>
+
+            <!-- Form Side -->
+            <div class="w-full md:w-1/2 p-8 sm:p-12">
+                <div class="text-center mb-10">
+                    <h1 class="text-3xl font-bold text-primary font-headline tracking-tight mb-2">Daftar Akun Baru</h1>
+                    <p class="text-on-surface-variant font-body text-sm">Lengkapi data diri Anda untuk mulai berbelanja.</p>
                 </div>
 
-                <form method="POST" action="{{ route('register') }}" class="space-y-4">
+                <!-- Register Form -->
+                <form method="POST" action="{{ route('register') }}" class="space-y-6">
                     @csrf
 
                     <div>
-                        <label class="label">Nama Lengkap</label>
-                        <input type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" class="input-field">
+                        <label class="block text-sm font-label font-semibold text-on-surface mb-2" for="name">Nama Lengkap</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+                            <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name"
+                                class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface focus:ring-primary focus:border-primary sm:text-sm transition-colors text-on-surface"
+                                placeholder="Nama lengkap">
+                        </div>
                         <x-input-error :messages="$errors->get('name')" class="mt-1" />
                     </div>
 
                     <div>
-                        <label class="label">Alamat Email</label>
-                        <input type="email" name="email" value="{{ old('email') }}" required autocomplete="username" class="input-field">
+                        <label class="block text-sm font-label font-semibold text-on-surface mb-2" for="email">Alamat Email</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">mail</span>
+                            <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username"
+                                class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface focus:ring-primary focus:border-primary sm:text-sm transition-colors text-on-surface"
+                                placeholder="email@contoh.com">
+                        </div>
                         <x-input-error :messages="$errors->get('email')" class="mt-1" />
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
-                            <label class="label">Kata Sandi</label>
-                            <input type="password" name="password" required autocomplete="new-password" class="input-field">
+                            <label class="block text-sm font-label font-semibold text-on-surface mb-2" for="password">Kata Sandi</label>
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
+                                <input id="password" type="password" name="password" required autocomplete="new-password"
+                                    class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface focus:ring-primary focus:border-primary sm:text-sm transition-colors text-on-surface"
+                                    placeholder="Minimal 8 karakter">
+                            </div>
                             <x-input-error :messages="$errors->get('password')" class="mt-1" />
                         </div>
+
                         <div>
-                            <label class="label">Konfirmasi</label>
-                            <input type="password" name="password_confirmation" required autocomplete="new-password" class="input-field">
+                            <label class="block text-sm font-label font-semibold text-on-surface mb-2" for="password_confirmation">Konfirmasi</label>
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
+                                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password"
+                                    class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface focus:ring-primary focus:border-primary sm:text-sm transition-colors text-on-surface"
+                                    placeholder="Ulangi kata sandi">
+                            </div>
                         </div>
                     </div>
 
-                    <button class="btn-primary w-full justify-center">Daftar Sekarang</button>
+                    <div class="flex items-start gap-2 mt-4">
+                        <input id="terms" type="checkbox" name="terms" required
+                            class="mt-1 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer h-4 w-4">
+                        <label class="text-body-sm text-on-surface-variant" for="terms">Saya menyetujui <a href="#" class="text-primary hover:underline font-bold">Syarat & Ketentuan</a> serta <a href="#" class="text-primary hover:underline font-bold">Kebijikan Privasi</a> Pasar.ID.</label>
+                    </div>
+
+                    <div>
+                        <button type="submit"
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-label font-bold text-on-primary bg-primary hover:bg-primary-container focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary scale-95 hover:scale-[0.98] transition-all">
+                            Daftar Sekarang
+                        </button>
+                    </div>
                 </form>
 
-                <div class="my-6 flex items-center">
-                    <div class="h-px flex-1 bg-outline-variant"></div>
-                    <span class="px-3 text-xs text-ink-variant">atau</span>
-                    <div class="h-px flex-1 bg-outline-variant"></div>
+                <!-- Divider -->
+                <div class="my-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-outline-variant border-dashed"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-surface-container-lowest text-on-surface-variant font-label">Atau lanjutkan dengan</span>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button type="button"
+                            class="w-full flex justify-center items-center py-3 px-4 border border-outline-variant rounded-lg bg-surface-container-lowest text-sm font-label font-semibold text-on-surface hover:bg-surface-container-low transition-colors">
+                            <span class="material-symbols-outlined mr-2">account_circle</span>
+                            Google
+                        </button>
+                    </div>
                 </div>
 
-                <div class="flex flex-col gap-3 text-sm">
-                    <a href="{{ route('mitra.create') }}" class="btn-outline w-full justify-center">Daftar sebagai Mitra UMKM</a>
-                    <p class="text-center text-ink-variant">
-                        Sudah punya akun?
-                        <a href="{{ route('login') }}" class="font-semibold text-brand hover:underline">Masuk di sini</a>
-                    </p>
-                </div>
+                <!-- Link to Login / Mitra -->
+                <p class="mt-8 text-center text-sm font-body text-on-surface-variant">
+                    Sudah punya akun?
+                    <a href="{{ route('login') }}" class="font-label font-bold text-primary hover:underline decoration-primary">Masuk di sini</a>
+                </p>
+                <p class="mt-4 text-center text-sm font-body text-on-surface-variant">
+                    <a href="{{ route('mitra.create') }}" class="font-label font-bold text-primary hover:underline decoration-primary">Daftar sebagai Mitra UMKM</a>
+                </p>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer (Minimal for Auth Pages) -->
+    <footer class="bg-surface-container border-t border-outline-variant py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-label-sm text-outline">© 2026 Pasar.ID — Nurturing Indonesian MSMEs</p>
+        </div>
+    </footer>
+</div>
 </x-guest-layout>

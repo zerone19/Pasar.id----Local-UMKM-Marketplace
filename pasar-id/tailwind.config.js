@@ -61,10 +61,70 @@ export default {
                     container: '#ffdad6',
                     onContainer: '#93000a',
                 },
+                // Material Design Tokens tambahan (dari Stitch pt2)
+                'primary': '#154212',
+                'on-primary': '#ffffff',
+                'primary-container': '#2d5a27',
+                'on-primary-container': '#9dd090',
+                'secondary': '#456800',
+                'on-secondary': '#ffffff',
+                'secondary-container': '#bfef73',
+                'on-secondary-container': '#496d00',
+                'tertiary': '#52330f',
+                'on-tertiary': '#ffffff',
+                'tertiary-container': '#6c4924',
+                'on-tertiary-container': '#ebba8b',
+                'background': '#fbf9f4',
+                'on-background': '#1b1c19',
+                'surface': '#fbf9f4',
+                'on-surface': '#1b1c19',
+                'surface-variant': '#e4e2dd',
+                'on-surface-variant': '#42493e',
+                'outline-variant': '#c2c9bb',
+                'inverse-primary': '#a1d494',
+                'surface-container': '#f0eee9',
+                'surface-container-low': '#f5f3ee',
+                'surface-container-high': '#eae8e3',
+                'surface-container-lowest': '#ffffff',
+                'surface-container-highest': '#e4e2dd',
+                'surface-bright': '#fbf9f4',
+                'surface-dim': '#dbdad5',
+                'inverse-surface': '#30312e',
+                'inverse-on-surface': '#f2f1ec',
+                'on-tertiary-fixed': '#ffffff',
+                'tertiary-fixed': '#ffdcbd',
+                'on-tertiary-fixed-variant': '#61401b',
+                'tertiary-fixed-dim': '#eebd8e',
+                'tertiary-fixed-variant': '#61401b',
+                'on-tertiary-fixed': '#ffffff',
+                'secondary-fixed': '#c2f276',
+                'on-secondary-fixed': '#121f00',
+                'secondary-fixed-dim': '#a7d55d',
+                'on-secondary-fixed-variant': '#334f00',
+                'primary-fixed': '#bcf0ae',
+                'on-primary-fixed': '#002201',
+                'primary-fixed-dim': '#a1d494',
+                'on-primary-fixed-variant': '#23501e',
+                'outline': '#72796e',
+                'on-tertiary': '#ffffff',
             },
             borderRadius: {
-                DEFAULT: '0.5rem',
-                lg: '1rem',
+                DEFAULT: '0.25rem',
+                sm: '0.125rem',
+                md: '0.375rem',
+                lg: '0.5rem',
+                xl: '0.75rem',
+                full: '9999px',
+            },
+            spacing: {
+                base: '8px',
+                xs: '4px',
+                sm: '12px',
+                md: '24px',
+                lg: '40px',
+                xl: '64px',
+                gutter: '16px',
+                'margin-mobile': '20px',
             },
             boxShadow: {
                 leaf: '0 6px 20px -8px rgba(45, 90, 39, 0.18)',
@@ -76,5 +136,39 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        // Tambahkan utility class untuk Material Design & typography
+        function({ addUtilities }) {
+            const newUtilities = {
+                '.font-headline': { 
+                    'font-family': '"Be Vietnam Pro", sans-serif', 
+                    'font-weight': '700' 
+                },
+                '.font-body': { 
+                    'font-family': '"Be Vietnam Pro", sans-serif', 
+                    'font-weight': '400' 
+                },
+                '.font-label': { 
+                    'font-family': '"Work Sans", sans-serif', 
+                    'font-weight': '500' 
+                },
+                
+                // Material symbols sizing utilities
+                '.material-symbols-outlined': {
+                    'font-family': 'Material Symbols Outlined',
+                    'font-weight': 'normal',
+                    'font-style': 'normal',
+                    'font-size': '24px',
+                    'line-height': '1',
+                    'text-transform': 'none',
+                    'letter-spacing': 'normal',
+                    'word-wrap': 'nowrap',
+                    'white-space': 'nowrap',
+                    'display': 'inline-block',
+                },
+            }
+            addUtilities(newUtilities, ['responsive'])
+        }
+    ],
 };
