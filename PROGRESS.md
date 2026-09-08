@@ -14,16 +14,11 @@
 (`/mitra`), dan auth pages pembeli split-layout "Gotong Royong". Lihat section
 "🎨 Sinkronisasi Desain Stitch pt2" di bawah.
 
-**SESI LANJUTAN (2026-08-31, same day)**: ditambahkan **data dummy** (10 pembeli +
-8 pemilik UMKM via `DummyUsersSeeder`) dan **aset visual asli** — 22 foto produk
-+ 9 logo toki AI-generated (.png), menggantikan placeholder. Audit gambar produk
-juga menemukan & memperbaiki bug seeder (path DB vs file disk tidak konsisten).
-Lihat section "📊 Data Dummy & Aset Visual" di bawah.
+**SESI BARU (2026-09-08)**: Refactor `DatabaseSeeder` menjadi modular — pisahkan ke tiga seeders terpisah (`CategorySeeder`, `DemoAccountSeeder`, `DummyUsersSeeder`) untuk maintainability yang lebih baik. Perluas data dummy menjadi **10 toko UMKM** dengan **100 produk dummy** (10 produk per toko) dan **10 pembeli dummy**, cocok untuk testing UI/UX marketplace secara realistis.
 
-**SESI UPDATE (2026-09-08)**: refactor `DatabaseSeeder` untuk modular — pisahkan
-menjadi `CategorySeeder` + `DemoAccountSeeder` + `DummyUsersSeeder`. Perluas data
-dummy menjadi **10 toko UMKM** (9 active + 1 pending) dengan **100 produk dummy**
-di 8 kategori. Semua sudah di-test & di-push ke GitHub commit `7489f6c`.
+**SESI BARU (2026-09-08)**: Update tampilan login, registrasi, dan halaman mitra (`auth/*.blade.php`) sesuai desain Stitch part 2. Layout split-screen modern, toggle Email/HP, tombol Google, icon Material Symbols, footer minimalis, dan typography yang konsisten dengan design system.
+
+Lihat section "📊 Data Dummy & Aset Visual" di bawah.
 
 ---
 
