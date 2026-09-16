@@ -1,0 +1,94 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: pasar-id-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: plasaid
+      POSTGRES_PASSWORD: plasaid_secret_2026
+      POSTGRES_DB: plasaid_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - plasaid:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U plasaid"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: pasar-id-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./nestjs-backend
+      dockerfile: Dockerfile
+    container_name: pasar-id-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://plasaid:plasaid_secret_2026@db:5432/plasaid_dev
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: plasaid_jwt_secret_change_this_in_production
+      JWT_EXPIRATION: 15m
+      JWT_REFRESH_SECRET: plasaid_refresh_secret_change_this
+      NODE_ENV: development
+    command: sh -c "npx prisma generate && npm run start:dev"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./nestjs-backend/src:/app/src
+      - /app/node_modules
+
+  web:
+    build:
+      context: ./nextjs-web
+      dockerfile: Dockerfile
+    container_name: pasar-id-web
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+      NODE_ENV: development
+    depends_on:
+      - api
+    volumes:
+      - ./nextjs-web/src:/app/src
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: pasar-id-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: plasaid
+      PMA_PASSWORD: plasaid_secret_2026
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  plasaid:
+  redisdata:
