@@ -111,9 +111,9 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 ### 🔜 Phase 3 — Transaction
 - [x] Cart (multi-seller support — Context + localStorage)
 - [x] Checkout flow (`app/checkout/page.tsx`, `app/checkout/success/page.tsx`) — 3-step form, API integration
-- [ ] Address management
-- [ ] Order lifecycle (PENDING → CONFIRMED → PROCESSING → READY/SHIPPED → COMPLETED)
-- [ ] Payment abstraction (MVP: COD + Manual Transfer)
+- [x] Address management (checkout page: full address form with notes, shippingAddress stored in order)
+- [x] Order lifecycle (`GET /orders`, `GET /orders/:id`, `GET /orders/user/:userId`, `POST /orders`, `PUT /orders/:id/status` — supports PENDING → CONFIRMED → PROCESSING → READY/SHIPPED → COMPLETED)
+- [x] Payment abstraction (MVP: COD + Manual Transfer — status tracking, transfer instructions di success page)
 
 ### 🔜 Phase 4 — Seller
 - [ ] Seller dashboard (products, orders, stock, revenue)

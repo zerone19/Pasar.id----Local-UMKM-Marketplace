@@ -112,8 +112,8 @@ Pasar.ID adalah marketplace UMKM lokal yang menghubungkan pedagang pasar tradisi
 |-------|-------|--------|
 | **Phase 0** | Planning & Design | ✅ Selesai |
 | **Phase 1** | Foundation (Docker, Auth, DB, Frontend Pages, .env) | ✅ **Selesai (17 Sept 2026)** |
-| **Phase 2** | Marketplace (Category, Search, Store Profile) | 🔜 Selanjutnya |
-| **Phase 3** | Transaction (Address, Order Lifecycle, Payment) | 📋 Planned |
+<| **Phase 2** | Marketplace (Category CRUD, Search & Filter, Store Profile) | ✅ **Selesai** |
+| **Phase 3** | Transaction (Address, Order Lifecycle, Payment Abstraction) | ✅ **Selesai** |
 | **Phase 4** | Seller (Dashboard, Product Mgmt, Order Mgmt) | 📋 Planned |
 | **Phase 5** | Admin (Management, Moderation) | 📋 Planned |
 | **Phase 6** | Mobile (Flutter App) | 📋 Planned |
@@ -191,7 +191,7 @@ Pasar Id -- Marketplace UMKM Local/
 │   │   ├── app.module.ts
 │   │   ├── main.ts
 │   │   ├── config/
-│   │   ├── modules/{auth,users,stores,products,orders}
+│   │   ├── modules/{auth,users,stores,products,orders,categories}
 │   │   └── prisma/
 │   ├── prisma/
 │   │   ├── schema.prisma
@@ -206,6 +206,12 @@ Pasar Id -- Marketplace UMKM Local/
 │   │   │   ├── (products)/
 │   │   │   ├── (stores)/
 │   │   │   ├── (cart)/
+│   │   │   ├── checkout/
+│   │   │   │   ├── page.tsx
+│   │   │   │   └── success/page.tsx
+│   │   │   ├── auth/
+│   │   │   │   ├── login/page.tsx
+│   │   │   │   └── register/page.tsx
 │   │   │   ├── layout.tsx
 │   │   │   └── globals.css
 │   │   ├── components/
@@ -262,7 +268,8 @@ cp nextjs-web/.env.example nextjs-web/.env.local
 | **Users** | `GET /users`, `GET /users/:id`, `POST /users` |
 | **Stores** | `GET /stores`, `GET /stores/:id`, `GET /stores/slug/:slug`, `POST /stores` |
 | **Products** | `GET /products`, `GET /products/:id`, `GET /products/slug/:slug`, `POST /products` |
-| **Orders** | `GET /orders`, `GET /orders/:id`, `POST /orders` |
+| **Categories** | `GET /categories`, `GET /categories/:id`, `GET /categories/slug/:slug`, `POST /categories`, `PUT /categories/:id`, `DELETE /categories/:id` |
+| **Orders** | `GET /orders`, `GET /orders/:id`, `GET /orders/user/:userId`, `POST /orders`, `PUT /orders/:id/status` |
 
 ---
 
