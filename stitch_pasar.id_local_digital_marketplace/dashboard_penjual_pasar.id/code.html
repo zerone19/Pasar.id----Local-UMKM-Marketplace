@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard Seller - Pasar.ID</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&amp;family=Work+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcbd",
+                        "outline": "#72796e",
+                        "primary-fixed-dim": "#a1d494",
+                        "primary": "#154212",
+                        "on-tertiary-fixed": "#2c1600",
+                        "on-surface-variant": "#42493e",
+                        "inverse-primary": "#a1d494",
+                        "secondary-fixed-dim": "#a7d55d",
+                        "surface-container-high": "#eae8e3",
+                        "on-secondary-fixed": "#121f00",
+                        "on-primary-fixed-variant": "#23501e",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#eebd8e",
+                        "secondary-fixed": "#c2f276",
+                        "on-background": "#1b1c19",
+                        "surface-tint": "#3b6934",
+                        "outline-variant": "#c2c9bb",
+                        "surface-container": "#f0eee9",
+                        "primary-fixed": "#bcf0ae",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fbf9f4",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-tertiary-fixed-variant": "#61401b",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#30312e",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#ebba8b",
+                        "on-secondary": "#ffffff",
+                        "background": "#fbf9f4",
+                        "tertiary": "#52330f",
+                        "on-secondary-fixed-variant": "#334f00",
+                        "on-primary-fixed": "#002201",
+                        "surface-dim": "#dbdad5",
+                        "on-primary-container": "#9dd090",
+                        "on-secondary-container": "#496d00",
+                        "surface": "#fbf9f4",
+                        "secondary": "#456800",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#bfef73",
+                        "tertiary-container": "#6c4924",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container-low": "#f5f3ee",
+                        "on-surface": "#1b1c19",
+                        "primary-container": "#2d5a27"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Be Vietnam Pro"],
+                        "display": ["Be Vietnam Pro"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Work Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .font-label { font-family: 'Work Sans', sans-serif; }
+        /* Subtle woven texture overlay for cards */
+        .texture-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23154212' fill-opacity='0.02' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant p-4 gap-2 z-50">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container shrink-0">
+<img alt="Merchant Logo" class="w-full h-full object-cover" data-alt="A close up, well-lit photograph of a woven bamboo basket filled with fresh, vibrant green vegetables, sitting on a rustic wooden stall. Soft natural sunlight highlights the textures of the bamboo and leaves. The color palette is earthy with strong accents of forest green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ_Tz4tAlFrhC-_KE1w3CKfLRvmzh37zCIzHQsEtKGM0Zs9G-GtLBfIVKo31OOotTczAxwHmwysN1cyub8B9u-lwcJc4z3vAJNXrddQH-CVA_lkjCbrHbLy2_Q9uiD8RVKJfz_cgj4BlPKlPZ9W-2kHQ25uX_XyTJuGlyt9etyTeK-ndbfRB8p63wwD7uFV3M43btMoTcskOeHVEkKQ_hzoraZfEJR9CK1-kVnhkPkXWMhrMedBz0A"/>
+</div>
+<div>
+<h1 class="text-headline-sm font-headline font-bold text-primary leading-tight">Warung Hijau</h1>
+<p class="text-label-sm font-label text-outline">Verified Merchant</p>
+</div>
+</div>
+<div class="flex-grow flex flex-col gap-1">
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container rounded-lg font-bold hover:bg-primary-container/10 transition-all Active: scale-98 duration-150 group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-label-md font-label">Overview</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:bg-primary-container/10 transition-all group" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-label-md font-label group-hover:text-primary transition-colors">Products</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:bg-primary-container/10 transition-all group" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-label-md font-label group-hover:text-primary transition-colors">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:bg-primary-container/10 transition-all group" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-label-md font-label group-hover:text-primary transition-colors">Reports</span>
+</a>
+</div>
+<button class="mt-4 w-full bg-primary text-on-primary py-3 rounded-lg font-label font-bold text-label-md hover:scale-95 active:scale-98 transition-all flex justify-center items-center gap-2 shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-sm">add</span> Add New Product
+        </button>
+<div class="mt-8 pt-4 border-t border-outline-variant flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:bg-primary-container/10 transition-all group" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+<span class="text-label-sm font-label group-hover:text-primary transition-colors">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:bg-primary-container/10 transition-all group" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="text-label-sm font-label group-hover:text-primary transition-colors">Support</span>
+</a>
+</div>
+</nav>
+<!-- Mobile Header (Visible only on small screens) -->
+<header class="md:hidden fixed top-0 w-full bg-surface z-40 border-b border-outline-variant px-4 py-3 flex justify-between items-center">
+<h1 class="text-headline-md font-headline font-bold text-primary">Pasar.ID</h1>
+<button class="text-primary p-1">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-4 md:p-8 pt-20 md:pt-8 min-h-screen">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant pb-6">
+<div>
+<h2 class="text-headline-lg font-headline font-bold text-primary tracking-tight">Overview</h2>
+<p class="text-body-md text-on-surface-variant mt-1">Ringkasan performa toko Anda hari ini.</p>
+</div>
+<div class="flex gap-2">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container-high text-label-sm font-label text-on-surface-variant border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-secondary mr-2"></span> Toko Buka
+                    </span>
+<button class="bg-surface-container hover:bg-surface-container-high text-primary p-2 rounded border border-outline-variant transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">sync</span>
+</button>
+</div>
+</div>
+<!-- Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 texture-overlay flex flex-col relative overflow-hidden group hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="flex items-center text-label-sm font-label text-secondary bg-secondary/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span> +12%
+                        </span>
+</div>
+<p class="text-label-md font-label text-on-surface-variant mb-1">Total Penjualan</p>
+<h3 class="text-headline-lg font-headline font-bold text-primary tracking-tight">Rp 2.450.000</h3>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 texture-overlay flex flex-col relative overflow-hidden group hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded bg-tertiary-container/20 flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+</div>
+<span class="flex items-center text-label-sm font-label text-secondary bg-secondary/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span> +5%
+                        </span>
+</div>
+<p class="text-label-md font-label text-on-surface-variant mb-1">Pesanan Baru</p>
+<h3 class="text-headline-lg font-headline font-bold text-primary tracking-tight">24</h3>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-tertiary transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 texture-overlay flex flex-col relative overflow-hidden group hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded bg-secondary-container/50 flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<span class="flex items-center text-label-sm font-label text-error bg-error/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-sm mr-1">trending_down</span> -2%
+                        </span>
+</div>
+<p class="text-label-md font-label text-on-surface-variant mb-1">Pengunjung Hari Ini</p>
+<h3 class="text-headline-lg font-headline font-bold text-primary tracking-tight">342</h3>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary-container transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></div>
+</div>
+</div>
+<!-- Charts and Action Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Chart Area -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 texture-overlay">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-md font-headline font-bold text-primary">Tren Penjualan</h3>
+<select class="bg-surface-container border-outline-variant text-label-sm font-label rounded p-1 text-on-surface focus:ring-primary focus:border-primary">
+<option>7 Hari Terakhir</option>
+<option>30 Hari Terakhir</option>
+</select>
+</div>
+<!-- Placeholder for Chart -->
+<div class="w-full h-64 bg-surface-container rounded-lg border border-outline-variant/50 flex items-end p-4 gap-2 relative">
+<!-- Simulated Bar Chart -->
+<div class="flex-1 bg-primary/20 rounded-t-sm h-1/3 hover:bg-primary/40 transition-colors relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-label-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Sen</div>
+</div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-1/2 hover:bg-primary/40 transition-colors"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-2/5 hover:bg-primary/40 transition-colors"></div>
+<div class="flex-1 bg-primary-container rounded-t-sm h-4/5 hover:bg-primary transition-colors shadow-[0_-2px_10px_rgba(45,90,39,0.2)]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-3/5 hover:bg-primary/40 transition-colors"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-2/3 hover:bg-primary/40 transition-colors"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-1/4 hover:bg-primary/40 transition-colors"></div>
+</div>
+</div>
+<!-- Needs Processing List -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-0 flex flex-col overflow-hidden">
+<div class="p-4 border-b border-outline-variant bg-surface-container/30 flex justify-between items-center">
+<h3 class="text-headline-md font-headline font-bold text-primary">Perlu Diproses</h3>
+<span class="bg-error text-on-error text-label-sm font-label px-2 py-0.5 rounded-full">5</span>
+</div>
+<div class="flex-1 overflow-y-auto divide-y divide-outline-variant/30">
+<!-- Order Item 1 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="text-label-sm font-label text-outline">ORD-2489-A</span>
+<span class="text-label-sm font-label text-on-surface-variant">2 jam lalu</span>
+</div>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Kopi Robusta Lampung (250g)</h4>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-container/30 flex items-center justify-center text-xs text-tertiary font-bold">AJ</div>
+<span class="text-body-sm text-on-surface-variant">Bpk. Agus J.</span>
+</div>
+<button class="text-primary font-label text-label-sm group-hover:underline">Proses</button>
+</div>
+</div>
+<!-- Order Item 2 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="text-label-sm font-label text-outline">ORD-2488-B</span>
+<span class="text-label-sm font-label text-on-surface-variant">4 jam lalu</span>
+</div>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Kerajinan Anyaman Bambu Set</h4>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-container/30 flex items-center justify-center text-xs text-tertiary font-bold">SR</div>
+<span class="text-body-sm text-on-surface-variant">Ibu Siti R.</span>
+</div>
+<button class="text-primary font-label text-label-sm group-hover:underline">Proses</button>
+</div>
+</div>
+<!-- Order Item 3 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="text-label-sm font-label text-outline">ORD-2487-C</span>
+<span class="text-label-sm font-label text-on-surface-variant">5 jam lalu</span>
+</div>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Madu Hutan Liar (500ml)</h4>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-container/30 flex items-center justify-center text-xs text-tertiary font-bold">DW</div>
+<span class="text-body-sm text-on-surface-variant">Dedi W.</span>
+</div>
+<button class="text-primary font-label text-label-sm group-hover:underline">Proses</button>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-outline-variant text-center bg-surface-container/30">
+<a class="text-primary font-label text-label-sm hover:underline" href="#">Lihat Semua Pesanan (24)</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

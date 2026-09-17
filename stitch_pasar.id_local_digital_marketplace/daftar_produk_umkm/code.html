@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Kategori Produk - Pasar.ID</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&amp;family=Work+Sans:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#154212",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#30312e",
+                        "primary-fixed-dim": "#a1d494",
+                        "surface": "#fbf9f4",
+                        "primary-fixed": "#bcf0ae",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "secondary": "#456800",
+                        "on-secondary-fixed-variant": "#334f00",
+                        "inverse-primary": "#a1d494",
+                        "on-primary-fixed": "#002201",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-secondary-container": "#496d00",
+                        "background": "#fbf9f4",
+                        "secondary-container": "#bfef73",
+                        "on-primary-fixed-variant": "#23501e",
+                        "secondary-fixed": "#c2f276",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#121f00",
+                        "secondary-fixed-dim": "#a7d55d",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#2d5a27",
+                        "on-surface-variant": "#42493e",
+                        "tertiary-container": "#6c4924",
+                        "on-tertiary-container": "#ebba8b",
+                        "surface-container": "#f0eee9",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#2c1600",
+                        "on-tertiary-fixed-variant": "#61401b",
+                        "surface-container-low": "#f5f3ee",
+                        "outline": "#72796e",
+                        "on-background": "#1b1c19",
+                        "on-primary-container": "#9dd090",
+                        "surface-dim": "#dbdad5",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e4e2dd",
+                        "tertiary-fixed": "#ffdcbd",
+                        "surface-container-high": "#eae8e3",
+                        "outline-variant": "#c2c9bb",
+                        "on-surface": "#1b1c19",
+                        "surface-tint": "#3b6934",
+                        "tertiary": "#52330f",
+                        "surface-bright": "#fbf9f4",
+                        "tertiary-fixed-dim": "#eebd8e"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        xs: "4px",
+                        xl: "64px",
+                        sm: "12px",
+                        lg: "40px",
+                        base: "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "auto",
+                        gutter: "16px",
+                        md: "24px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Be Vietnam Pro"],
+                        "headline-lg-mobile": ["Be Vietnam Pro"],
+                        "label-md": ["Work Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-sm": ["Work Sans"],
+                        "headline-xl": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-lg": ["Be Vietnam Pro"]
+                    },
+                    fontSize: {
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+                        "label-md": ["14px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "14px", letterSpacing: "0.02em", fontWeight: "500" }],
+                        "headline-xl": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .woven-texture {
+            background-image: linear-gradient(45deg, rgba(228, 226, 221, 0.4) 25%, transparent 25%, transparent 75%, rgba(228, 226, 221, 0.4) 75%, rgba(228, 226, 221, 0.4)), 
+                              linear-gradient(45deg, rgba(228, 226, 221, 0.4) 25%, transparent 25%, transparent 75%, rgba(228, 226, 221, 0.4) 75%, rgba(228, 226, 221, 0.4));
+            background-size: 10px 10px;
+            background-position: 0 0, 5px 5px;
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 6px -1px rgba(45, 90, 39, 0.05), 0 2px 4px -1px rgba(45, 90, 39, 0.03);
+        }
+        .hover-border:hover {
+            border-color: #154212;
+            transition: border-color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface-dim full-width top-0 z-50 border-b border-outline-variant dark:border-outline flat no shadows sticky"><div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-7xl mx-auto"><div class="flex items-center gap-sm"><img alt="Pasar.ID Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD57_WHjt5xpbENYUfWO0HsE4BZf93ZYkE1eukBoUp1y21HmFEhEO-K3LC-qhVomoUWOhXsr5y2-nIGic5gYtuI2DrxuI91pNnNw36Y7w8jAyW9XAwES2xrDjjz0ZjEpa1NABx8qPfSpBZ8Oe3yOU7IPmTFIZIZ0ZD8VfQVKvMouTIrJO1_MlJ6ElBtXdbWLFPYQtstg_K9cz77VDjV-WoAWDltmz5-JdtC6e738-5BaJtfl9kf-RupooTl08Sf68kk9w"><span class="font-headline-lg text-headline-lg text-primary tracking-tight hidden md:block">Pasar.ID</span></div><ul class="hidden md:flex items-center gap-md"><li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Pasar</a></li><li class=""><a class="text-primary font-bold border-b-2 border-primary pb-1 text-label-md font-label-md" href="#">Kategori</a></li><li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">UMKM Terdekat</a></li><li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Tentang Kami</a></li></ul><div class="flex items-center gap-sm"><div class="relative hidden md:block"><input class="pl-10 pr-4 py-2 rounded-full border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-sm font-body-sm text-on-surface w-64 placeholder-on-surface-variant" placeholder="Cari produk lokal..." type="text"><span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant">search</span></div><button aria-label="Location" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full scale-98 active:scale-95 transition-transform"><span class="material-symbols-outlined">location_on</span></button><button aria-label="Shopping Basket" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full scale-98 active:scale-95 transition-transform relative"><span class="material-symbols-outlined">shopping_basket</span><span class="absolute top-1 right-1 bg-error text-on-error text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">2</span></button><button aria-label="Account" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full scale-98 active:scale-95 transition-transform hidden md:block"><span class="material-symbols-outlined">account_circle</span></button><button aria-label="Menu" class="md:hidden p-2 text-on-surface-variant"><span class="material-symbols-outlined">menu</span></button></div></div></nav>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-lg flex flex-col md:flex-row gap-lg">
+<!-- Sidebar Filters (Web) / Top Filters (Mobile) -->
+<aside class="w-full md:w-64 flex-shrink-0 flex flex-col gap-md">
+<div class="flex justify-between items-center md:hidden">
+<h2 class="font-headline-md text-headline-md text-primary">Filter</h2>
+<button class="flex items-center gap-xs text-on-surface-variant border border-outline-variant px-sm py-xs rounded-full">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span class="font-label-sm text-label-sm">Filter</span>
+</button>
+</div>
+<div class="hidden md:flex flex-col gap-lg bg-surface-container-lowest p-md rounded-xl border border-outline-variant soft-shadow">
+<!-- Kategori -->
+<div class="flex flex-col gap-sm">
+<h3 class="font-label-md text-label-md text-on-surface">Kategori</h3>
+<div class="flex flex-col gap-xs">
+<label class="flex items-center gap-sm cursor-pointer">
+<input checked="" class="form-checkbox text-primary rounded-sm focus:ring-primary" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Semua Kategori</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer">
+<input class="form-checkbox text-primary rounded-sm focus:ring-primary" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sayur &amp; Buah Segar</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer">
+<input class="form-checkbox text-primary rounded-sm focus:ring-primary" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Bumbu Dapur</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer">
+<input class="form-checkbox text-primary rounded-sm focus:ring-primary" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kerajinan Tangan</span>
+</label>
+</div>
+</div>
+<hr class="border-outline-variant opacity-50">
+<!-- Lokasi Pasar -->
+<div class="flex flex-col gap-sm">
+<h3 class="font-label-md text-label-md text-on-surface">Lokasi Pasar</h3>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">location_on</span>
+<input class="w-full pl-8 pr-2 py-1.5 bg-surface border border-outline-variant rounded-md font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary" placeholder="Cari wilayah..." type="text">
+</div>
+<div class="flex flex-wrap gap-xs mt-xs">
+<span class="px-sm py-xs bg-tertiary-container text-on-tertiary-container rounded-full font-label-sm text-label-sm cursor-pointer hover:opacity-90">Jakarta</span>
+<span class="px-sm py-xs bg-surface-container-highest text-on-surface-variant rounded-full font-label-sm text-label-sm cursor-pointer hover:bg-surface-variant">Bandung</span>
+<span class="px-sm py-xs bg-surface-container-highest text-on-surface-variant rounded-full font-label-sm text-label-sm cursor-pointer hover:bg-surface-variant">Surabaya</span>
+</div>
+</div>
+<hr class="border-outline-variant opacity-50">
+<!-- Rentang Harga -->
+<div class="flex flex-col gap-sm">
+<h3 class="font-label-md text-label-md text-on-surface">Rentang Harga</h3>
+<div class="flex items-center gap-sm">
+<input class="w-full px-2 py-1.5 bg-surface border border-outline-variant rounded-md font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary" placeholder="Min" type="number">
+<span class="text-on-surface-variant">-</span>
+<input class="w-full px-2 py-1.5 bg-surface border border-outline-variant rounded-md font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary" placeholder="Max" type="number">
+</div>
+<button class="w-full bg-surface-container-highest text-on-surface font-label-md text-label-md py-2 rounded-md hover:bg-surface-variant transition-colors mt-xs border border-outline-variant">Terapkan Filter</button>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<section class="flex-1 flex flex-col gap-md">
+<div class="flex justify-between items-end mb-sm">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-primary hidden md:block">Eksplorasi Produk</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Menampilkan 124 produk lokal berkualitas.</p>
+</div>
+<div class="hidden md:flex items-center gap-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Urutkan:</span>
+<select class="bg-surface border border-outline-variant rounded-md font-body-sm text-body-sm px-sm py-1.5 focus:outline-none focus:border-primary text-on-surface">
+<option>Terpopuler</option>
+<option>Terbaru</option>
+<option>Harga Terendah</option>
+<option>Harga Tertinggi</option>
+</select>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-sm md:gap-md">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col soft-shadow hover-border relative group">
+<div class="aspect-square w-full relative overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A beautifully hand-woven bamboo basket, traditional Indonesian craft, photographed in bright warm light on a simple cream background. The texture of the bamboo is highly detailed, highlighting the organic, handcrafted quality suitable for a local market e-commerce listing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk14BNQ7KDF9uXm_wrHN88uUonprwgCnrB_03gtoGhwKNNilNhdb6XQQ2uYBVxpoaknn996BUXMQptG2XGpoAfeEboQyPiv4vZADIeP5edLjeLoOVWu-mq31D-srngTkhIt28Nt62otYjynyI3zHuymAUylHNGQsP52bk9l7Yf8rSRRIedggjcyprC-WCnVkB9kaSAiy4XnzSh7atDYJiZszCzeN2lXRMKdLhj92782E1jq0li1apd">
+<div class="absolute top-2 right-2 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.8</span>
+</div>
+</div>
+<div class="p-sm flex flex-col gap-xs flex-1 woven-texture">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Kerajinan</span>
+<h3 class="font-body-md text-body-md text-on-surface font-medium line-clamp-2 leading-tight">Keranjang Bambu Anyam Tradisional Serbaguna</h3>
+<div class="mt-auto pt-xs">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+<span class="font-label-sm text-label-sm truncate">UMKM Makmur Jaya</span>
+</div>
+<div class="font-headline-md text-headline-md text-primary">Rp 45.000</div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col soft-shadow hover-border relative group">
+<div class="aspect-square w-full relative overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Fresh organic green vegetables, crisp and vibrant, arranged neatly on a woven banana leaf mat. Shot from above with soft, natural daylight emphasizing the freshness and organic nature of the produce, fitting for a local farmer's market online store." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdS2D62Yf6-UjFOwLfxNNKG6na2AUh9qlPgSZPmefW3aN9ueO7fFOkg47EcEmPDakyrWVREe2k7D_-f98tvAyZlENoBrsDAtdNhSj8q9rLgHDb9Dqn846lWgef1mDS1dXG4ND7fbREoaHNUnDrZYX8XxraKXMrpZBbJ6_jhn0lLCyP4lKec42QB0c-Zx5PP-C4vTtmF3hXQcTgP5MyAtPL8vFv2L_byIQd3GIPCMAgoUI9U0R-qA_I">
+<div class="absolute top-2 right-2 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.9</span>
+</div>
+</div>
+<div class="p-sm flex flex-col gap-xs flex-1 woven-texture">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Sayur Segar</span>
+<h3 class="font-body-md text-body-md text-on-surface font-medium line-clamp-2 leading-tight">Paket Sayur Organik Hijau Campur (500g)</h3>
+<div class="mt-auto pt-xs">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+<span class="font-label-sm text-label-sm truncate">Kebun Mbah Min</span>
+</div>
+<div class="font-headline-md text-headline-md text-primary">Rp 15.000</div>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col soft-shadow hover-border relative group">
+<div class="aspect-square w-full relative overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A jar of dark, rich traditional Indonesian sambal (chili paste) placed next to fresh red chilies and garlic on a wooden table. Warm, inviting lighting highlights the homemade, authentic quality of the culinary product for an e-commerce platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf-nOUeu_aBxHqLjiFXCj5fyReC_182sKHvQU7m3v82NvUI4Ssm-Pw_K7NbmDj8w0IMUHR5zi0n3kEVME_si7qn0eOeUw0ctswsLls_GIJW2WHAM9qNeYRzP9R6PujBhb1nNubP-AxNBED3U_aCN3jeiAp2uns5XJ_-u_RueiL5QTouwFzNWoi0PIcACN9qHCM72qHUZri4DyWG4PW3XXria7AQhSc2veQhM_3dvhKr11ijCldZfZv">
+<div class="absolute top-2 right-2 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.7</span>
+</div>
+</div>
+<div class="p-sm flex flex-col gap-xs flex-1 woven-texture">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Bumbu Dapur</span>
+<h3 class="font-body-md text-body-md text-on-surface font-medium line-clamp-2 leading-tight">Sambal Bawang Ekstra Pedas Resep Kuno (200g)</h3>
+<div class="mt-auto pt-xs">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+<span class="font-label-sm text-label-sm truncate">Dapur Ibu Tini</span>
+</div>
+<div class="font-headline-md text-headline-md text-primary">Rp 28.500</div>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col soft-shadow hover-border relative group">
+<div class="aspect-square w-full relative overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Handmade batik fabric with intricate traditional patterns in earthy brown and indigo tones, folded neatly. Captured with sharp detail to show the fabric's texture and dye quality, representing local Indonesian heritage fashion on a light cream background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbTHrvdN_ORSXIKqe-z6LV9KTb0xutdsMnSP2LjNZRHuwQg4y_ey8PNBevvC3Z78P92IJFnAacXoG8391jj5otpIO7jdL1VLf24oK36mQgFbYY2j47wMtquQGUAgV723Pr-miMT3zajTE2WaIV6DUo080niviI1wxYMTFqZJC3sY8MCM7Di3TywO16oxm1WBliDjK-JlrfDrukcpaJVY-C6VJEu6OroUIRCn8to0j-XqtxUyQMjSoq">
+<div class="absolute top-2 right-2 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">5.0</span>
+</div>
+</div>
+<div class="p-sm flex flex-col gap-xs flex-1 woven-texture">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Kain Tradisional</span>
+<h3 class="font-body-md text-body-md text-on-surface font-medium line-clamp-2 leading-tight">Kain Batik Tulis Motif Parang Asli Pekalongan</h3>
+<div class="mt-auto pt-xs">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+<span class="font-label-sm text-label-sm truncate">Batik Nusantara Jaya</span>
+</div>
+<div class="font-headline-md text-headline-md text-primary">Rp 150.000</div>
+</div>
+</div>
+</div>
+<!-- Repeat for filler content to show grid -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col soft-shadow hover-border relative group">
+<div class="aspect-square w-full relative overflow-hidden bg-surface-variant">
+<div class="w-full h-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-4xl opacity-50">image</span>
+</div>
+</div>
+<div class="p-sm flex flex-col gap-xs flex-1 woven-texture">
+<span class="bg-surface-container w-1/2 h-3 rounded-full mb-1"></span>
+<div class="w-full h-4 bg-surface-container rounded-full mb-1"></div>
+<div class="w-3/4 h-4 bg-surface-container rounded-full mb-2"></div>
+<div class="mt-auto pt-xs">
+<div class="w-1/2 h-3 bg-surface-container rounded-full mb-1"></div>
+<div class="w-1/3 h-6 bg-surface-container rounded-md"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col soft-shadow hover-border relative group">
+<div class="aspect-square w-full relative overflow-hidden bg-surface-variant">
+<div class="w-full h-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-4xl opacity-50">image</span>
+</div>
+</div>
+<div class="p-sm flex flex-col gap-xs flex-1 woven-texture">
+<span class="bg-surface-container w-1/2 h-3 rounded-full mb-1"></span>
+<div class="w-full h-4 bg-surface-container rounded-full mb-1"></div>
+<div class="w-3/4 h-4 bg-surface-container rounded-full mb-2"></div>
+<div class="mt-auto pt-xs">
+<div class="w-1/2 h-3 bg-surface-container rounded-full mb-1"></div>
+<div class="w-1/3 h-6 bg-surface-container rounded-md"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-xs mt-lg">
+<button class="p-2 border border-outline-variant rounded-md text-on-surface-variant hover:bg-surface-container-highest transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-md bg-primary text-on-primary font-label-md flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-md border border-outline-variant text-on-surface font-label-md flex items-center justify-center hover:bg-surface-container-highest transition-colors">2</button>
+<button class="w-8 h-8 rounded-md border border-outline-variant text-on-surface font-label-md flex items-center justify-center hover:bg-surface-container-highest transition-colors">3</button>
+<span class="text-on-surface-variant font-label-md">...</span>
+<button class="p-2 border border-outline-variant rounded-md text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface full-width py-lg border-t border-outline-variant dark:border-outline flat no shadows mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto gap-md">
+<div class="flex flex-col items-center md:items-start gap-sm">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">Pasar.ID</div>
+<div class="text-on-surface dark:text-inverse-on-surface font-body-sm text-body-sm text-center md:text-left">
+                    © 2024 Pasar.ID - Gotong Royong Memajukan UMKM Indonesia
+                </div>
+</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-secondary underline transition-all opacity-80 hover:opacity-100 transition-opacity" href="#">Misi Komunitas</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-secondary underline transition-all opacity-80 hover:opacity-100 transition-opacity" href="#">Daftar Jadi Penjual</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-secondary underline transition-all opacity-80 hover:opacity-100 transition-opacity" href="#">Pusat Bantuan</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-secondary underline transition-all opacity-80 hover:opacity-100 transition-opacity" href="#">Syarat &amp; Ketentuan</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Transaction History - Pasar.ID</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&amp;family=Work+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcbd",
+                        "outline": "#72796e",
+                        "primary-fixed-dim": "#a1d494",
+                        "primary": "#154212",
+                        "on-tertiary-fixed": "#2c1600",
+                        "on-surface-variant": "#42493e",
+                        "inverse-primary": "#a1d494",
+                        "secondary-fixed-dim": "#a7d55d",
+                        "surface-container-high": "#eae8e3",
+                        "on-secondary-fixed": "#121f00",
+                        "on-primary-fixed-variant": "#23501e",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#eebd8e",
+                        "secondary-fixed": "#c2f276",
+                        "on-background": "#1b1c19",
+                        "surface-tint": "#3b6934",
+                        "outline-variant": "#c2c9bb",
+                        "surface-container": "#f0eee9",
+                        "primary-fixed": "#bcf0ae",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fbf9f4",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-tertiary-fixed-variant": "#61401b",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#30312e",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#ebba8b",
+                        "on-secondary": "#ffffff",
+                        "background": "#fbf9f4",
+                        "tertiary": "#52330f",
+                        "on-secondary-fixed-variant": "#334f00",
+                        "on-primary-fixed": "#002201",
+                        "surface-dim": "#dbdad5",
+                        "on-primary-container": "#9dd090",
+                        "on-secondary-container": "#496d00",
+                        "surface": "#fbf9f4",
+                        "secondary": "#456800",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#bfef73",
+                        "tertiary-container": "#6c4924",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container-low": "#f5f3ee",
+                        "on-surface": "#1b1c19",
+                        "primary-container": "#2d5a27"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Be Vietnam Pro"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Work Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .label-text { font-family: 'Work Sans', sans-serif; }
+        .woven-texture {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(45, 90, 39, 0.02) 10px, rgba(45, 90, 39, 0.02) 20px);
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 6px -1px rgba(45, 90, 39, 0.05), 0 2px 4px -1px rgba(45, 90, 39, 0.03);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant p-4 gap-2 z-50">
+<div class="mb-8 px-4 flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A small, stylized logo for a traditional Indonesian market stall (warung) featuring abstract leaf motifs in deep forest green and warm burlap brown. The design is simple, modern, yet rooted in local culture, set against a cream background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoygNjWvKPbtQ-cNpudRJMpNG_d4E7pLMElvCptzT_9PX2-BDyKcl2NkGRATw1BZbqWjvXrbGFkdWdCQWxhMlUYEZFYQ74HZEWLfnGbECFShiKQROKTEHxvIZ5FVFEQKoc_A1yffzB6dgAElffDKVOnVW-tzqx_5ULf345Eh8pkX-7f32kVXIO0shX0QbhfeGIEPMxQ8UuuTVOKt7XXhK1cqYY7VDZfyPfA9FaNdDtM1ckwwDzqp0o"/>
+<div>
+<h1 class="text-headline-md font-extrabold text-primary tracking-tight">Warung Hijau</h1>
+<p class="text-label-sm text-on-surface-variant label-text">Verified Merchant</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:bg-primary-container/10 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="text-label-md font-semibold label-text">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:bg-primary-container/10 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+<span class="text-label-md font-semibold label-text">Products</span>
+</a>
+<!-- Active State for Orders -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold scale-98 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="text-label-md font-semibold label-text">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:bg-primary-container/10 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">analytics</span>
+<span class="text-label-md font-semibold label-text">Reports</span>
+</a>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-semibold hover:scale-95 transition-transform flex items-center justify-center gap-2 mt-4 shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span> Add New Product
+        </button>
+<div class="mt-8 pt-4 border-t border-outline-variant flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+<span class="text-label-sm label-text">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="text-label-sm label-text">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-4 md:p-8 lg:p-10 max-w-7xl mx-auto w-full">
+<!-- Header -->
+<header class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div>
+<h2 class="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-1">Riwayat Transaksi</h2>
+<p class="text-on-surface-variant text-body-md">Kelola dan pantau semua pesanan masuk Anda.</p>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap items-center gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">calendar_month</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary w-full md:w-auto" type="date" value="2023-10-01"/>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">filter_list</span>
+<select class="pl-10 pr-8 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary appearance-none cursor-pointer">
+<option value="all">Semua Status</option>
+<option value="selesai">Selesai</option>
+<option value="dikirim">Dikirim</option>
+<option value="menunggu">Menunggu Pembayaran</option>
+</select>
+</div>
+</div>
+</header>
+<!-- Orders Table / List View -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden soft-shadow">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant text-label-md label-text text-on-surface-variant">
+<th class="p-4 font-semibold">No. Pesanan</th>
+<th class="p-4 font-semibold">Tanggal</th>
+<th class="p-4 font-semibold">Pembeli</th>
+<th class="p-4 font-semibold text-right">Total Harga</th>
+<th class="p-4 font-semibold text-center">Status</th>
+<th class="p-4 font-semibold text-center">Aksi</th>
+</tr>
+</thead>
+<tbody class="text-body-md divide-y divide-outline-variant/50">
+<!-- Row 1: Selesai -->
+<tr class="hover:bg-surface-container/30 transition-colors group">
+<td class="p-4 font-semibold text-primary">#ORD-0921A</td>
+<td class="p-4 text-on-surface-variant">12 Okt 2023, 14:30</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-sm">BS</div>
+                                    Budi Santoso
+                                </div>
+</td>
+<td class="p-4 text-right font-semibold">Rp 250.000</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container text-label-sm label-text">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Selesai
+                                </span>
+</td>
+<td class="p-4 text-center">
+<button class="text-primary hover:text-primary-container p-2 rounded-full hover:bg-surface-container transition-colors" title="Lihat Detail">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Dikirim -->
+<tr class="hover:bg-surface-container/30 transition-colors group">
+<td class="p-4 font-semibold text-primary">#ORD-0922B</td>
+<td class="p-4 text-on-surface-variant">12 Okt 2023, 09:15</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-sm">SW</div>
+                                    Siti Wijaya
+                                </div>
+</td>
+<td class="p-4 text-right font-semibold">Rp 1.150.000</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-label-sm label-text">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span> Dikirim
+                                </span>
+</td>
+<td class="p-4 text-center">
+<button class="text-primary hover:text-primary-container p-2 rounded-full hover:bg-surface-container transition-colors" title="Lihat Detail">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Menunggu Pembayaran -->
+<tr class="hover:bg-surface-container/30 transition-colors group bg-surface-container-high/20">
+<td class="p-4 font-semibold text-primary">#ORD-0923C</td>
+<td class="p-4 text-on-surface-variant">13 Okt 2023, 08:00</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-sm">AP</div>
+                                    Agus Pratama
+                                </div>
+</td>
+<td class="p-4 text-right font-semibold">Rp 75.500</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-variant text-on-surface-variant border border-outline-variant text-label-sm label-text">
+<span class="material-symbols-outlined text-[14px]">pending_actions</span> Menunggu
+                                </span>
+</td>
+<td class="p-4 text-center">
+<button class="text-primary hover:text-primary-container p-2 rounded-full hover:bg-surface-container transition-colors" title="Lihat Detail">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-4 border-t border-outline-variant flex items-center justify-between bg-surface-bright woven-texture">
+<span class="text-label-sm text-on-surface-variant label-text">Menampilkan 1-3 dari 45 pesanan</span>
+<div class="flex gap-1">
+<button class="p-2 rounded hover:bg-surface-container text-outline disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center text-label-sm font-bold">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container text-on-surface flex items-center justify-center text-label-sm">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container text-on-surface flex items-center justify-center text-label-sm">3</button>
+<button class="p-2 rounded hover:bg-surface-container text-outline">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Navigation (Hidden on md+) -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface border-t border-outline-variant flex justify-around p-2 pb-safe z-50">
+<a class="flex flex-col items-center p-2 text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] mt-1 font-medium">Overview</span>
+</a>
+<a class="flex flex-col items-center p-2 text-primary font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="text-[10px] mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center p-2 text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-[10px] mt-1 font-medium">Products</span>
+</a>
+<a class="flex flex-col items-center p-2 text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] mt-1 font-medium">Settings</span>
+</a>
+</nav>
+</body></html>

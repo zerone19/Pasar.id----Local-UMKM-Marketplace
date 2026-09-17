@@ -1,97 +1,114 @@
 # Pasar.ID — Project Progress Tracker
 
 ## Project Overview
-Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce yang menghubungkan pedagang pasar tradisional, UMKM, dan pembeli dalam satu ekosistem digital.
+Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 
 **Tagline:** "Gotong Royong Memajukan UMKM Indonesia"
 
 ## Tech Stack
-- **Web Frontend:** Next.js + TypeScript + React + Tailwind CSS
-- **Mobile:** Flutter + Dart (Android/iOS)
 - **Backend:** NestJS + TypeScript (REST API)
+- **Frontend:** Next.js 15 + TypeScript + React + Tailwind CSS
+- **Mobile (planned):** Flutter + Dart
 - **Database:** PostgreSQL + Prisma ORM
-- **Cache/Queue:** Redis + BullMQ
-- **Storage:** S3-compatible object storage
+- **Cache:** Redis
 - **Auth:** JWT access + refresh token
 - **Infra:** Docker + Docker Compose
-- **Design:** Pasar.ID Design System (Material Symbols + Tailwind)
 
-## Current Phase: Phase 1 — Foundation ✅
+## 📊 Status Terkini
 
-### ✅ Completed (Phase 0)
+### Backend — NestJS API (port 3000) ✅
+- Docker Compose running
+- PostgreSQL + Prisma migrations applied (8 tables)
+- Modul: Auth, Users, Stores, Products, Orders
+- ValidationPipe + DTOs aktif
+- CORS untuk localhost:3001
+
+### Frontend — Next.js (port 3001) ⚠️
+- Docker container running
+- Tailwind CSS terpasan
+- **BELUM ADA HALAMAN** — butuh implementasi pages
+
+### Issues
+- `.env` file tidak ada (pakai fallback config)
+
+## 📋 Phase & Milestone Breakdown
+
+### ✅ Phase 0 — Planning & Dokumen (SELESAI)
 - [x] 01-Planning-PasarID.md — Gambaran umum, target platform, roadmap
 - [x] 02-PRD-PasarID.md — Product requirements document
 - [x] 03-MVP-PasarID.md — Minimum viable product definition
 - [x] 04-Feature-Brief-PasarID.md — Ringkasan modul & fitur
 - [x] 05-Arsitektur-Brief-PasarID.md — Arsitektur cross-platform
-- [x] 06-Teknologi-Brief-PasarID.md — Technology stack & alasan pemilihan
+- [x] 06-Teknologi-Brief-PasarID.md — Technology stack & alasan
 - [x] Pasar.ID Design System (DESIGN.md)
-- [x] 15 halaman mockup HTML (Tailwind CSS) — `stitch_pasar.id_local_digital_marketplace/`
-- [x] Git repo initialized & initial commit
-- [x] progress.md
-- [x] README.md
-- [x] GitHub repo created & pushed to `main` branch
+- [x] 15 halaman mockup HTML (Tailwind CSS)
+- [x] Git repo + GitHub push
 
-### ✅ Phase 1 — Foundation (Completed)
+### ✅ Phase 1a — Backend Foundation (SELESAI)
 - [x] Docker Compose setup (api, web, db, redis, phpmyadmin)
 - [x] PostgreSQL database with schema migrations
-- [x] Redis cache/queue
-- [x] NestJS API server (port 3000) with 5 modules:
+- [x] Redis cache
+- [x] NestJS API server (port 3000)
   - [x] Auth (JWT, register, login)
   - [x] Users (CRUD)
   - [x] Stores (CRUD)
   - [x] Products (CRUD)
   - [x] Orders (CRUD)
 - [x] Prisma ORM with schema & migrations
-- [x] Next.js Web frontend (port 3001)
-  - [x] Home page
-  - [x] Products page
-  - [x] Stores page
-  - [x] Cart page
-- [x] Dockerfiles for API and Web
-- [x] Shared types
-- [x] DTOs for validation
-- [x] phpMyAdmin (port 8080)
-- [x] GitHub push completed
+- [x] ValidationPipe with DTOs
+- [x] Swagger (di dependencies)
+- [x] CORS configured untuk localhost:3001
+- [x] Semua database tables created & migrations applied
 
-### 🔜 Upcoming Phases
+### ✅ Phase 1b — Frontend Foundation (SELESAI)
+- [x] Next.js 15 project initialized
+- [x] Tailwind CSS configured
+- [x] Docker container running (port 3001)
 
-#### Phase 2 — Marketplace
-- [ ] Setup Docker Compose (NestJS API, Next.js Web, PostgreSQL, Redis)
-- [ ] Initialize Prisma schema & migrations
-- [ ] Setup authentication module (JWT, roles)
-- [ ] Project scaffolding (modules: Auth, Users, Stores, Products, Orders, etc.)
+### 🚧 Phase 1c — Frontend Pages (SEDANG KERJA)
+- [ ] Home page (`app/page.tsx`)
+- [ ] Products listing (`app/products/page.tsx`)
+- [ ] Stores listing (`app/stores/page.tsx`)
+- [ ] Cart (`app/cart/page.tsx`)
+- [ ] Product detail (`app/products/[id]/page.tsx`)
+- [ ] Login/Register (`app/auth/login/page.tsx`, `app/auth/register/page.tsx`)
 
-#### Phase 2 — Marketplace
-- [ ] Product CRUD API
+### 🔜 .env Setup
+- [ ] Buat file `.env` untuk NestJS backend
+- [ ] Konfigurasi DATABASE_URL, JWT_SECRET, REDIS_URL
+- [ ] Buat file `.env.local` untuk Next.js
+- [ ] Pastikan koneksi database stabil
+
+### 🔜 Phase 2 — Marketplace
+- [ ] Product CRUD API (endpoint tambahan)
 - [ ] Category management
-- [ ] Search & filter
+- [ ] Search & filter API
 - [ ] Store/profile management
-- [ ] Homepage & category pages (Next.js)
+- [ ] Integrasi API → Frontend (semua pages di atas)
 
-#### Phase 3 — Transaction
+### 🔜 Phase 3 — Transaction
 - [ ] Cart (multi-seller support)
 - [ ] Checkout flow
 - [ ] Address management
 - [ ] Order lifecycle (PENDING → CONFIRMED → PROCESSING → READY/SHIPPED → COMPLETED)
 - [ ] Payment abstraction (MVP: COD + Manual Transfer)
 
-#### Phase 4 — Seller
+### 🔜 Phase 4 — Seller
 - [ ] Seller dashboard (products, orders, stock, revenue)
 - [ ] Order management
 - [ ] Store management
 
-#### Phase 5 — Admin
+### 🔜 Phase 5 — Admin
 - [ ] Admin dashboard
 - [ ] User/seller management
 - [ ] Product moderation
 - [ ] Order monitoring
 
-#### Phase 6 — Mobile
+### 🔜 Phase 6 — Mobile
 - [ ] Flutter customer app
 - [ ] Shared API integration
 
-#### Phase 7 — Growth
+### 🔜 Phase 7 — Growth
 - [ ] Notifications
 - [ ] Reviews & ratings
 - [ ] Vouchers & promotions
@@ -132,54 +149,54 @@ Pasar Id -- Marketplace UMKM Local/
 ├── 06-Teknologi-Brief-PasarID.md
 ├── progress.md
 ├── README.md
+├── docker-compose.yml
 ├── stitch_pasar.id_local_digital_marketplace/
-│   ├── pasar.id_design_system/
-│   │   └── DESIGN.md
-│   ├── beranda_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── daftar_produk_umkm/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── daftar_mitra_umkm_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── daftar_pembeli_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── masuk_daftar_pembeli_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── detail_produk_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── keranjang_belanja_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── dashboard_penjual_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── profil_umkm_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── manajemen_produk_umkm_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   ├── riwayat_transaksi_penjual_pasar.id/
-│   │   ├── code.html
-│   │   └── screen.png
-│   └── logo_pasar_id.png/
-│       └── screen.png
+│   └── (mockup HTML + DESIGN.md)
+├── nestjs-backend/
+│   ├── src/
+│   │   ├── app.module.ts
+│   │   ├── main.ts
+│   │   ├── config/
+│   │   ├── modules/{auth,users,stores,products,orders}/
+│   │   └── prisma/
+│   ├── prisma/
+│   │   ├── schema.prisma
+│   │   ├── migrations/
+│   │   └── seed.{ts,js}
+│   ├── package.json
+│   └── Dockerfile
+├── nextjs-web/
+│   ├── src/
+│   ├── package.json
+│   ├── Dockerfile
+│   └── tailwind.config.ts
 └── .git/
 ```
+
+## Environment
+- Docker Compose running:
+  - pasar-id-api (NestJS, port 3000)
+  - pasar-id-web (Next.js, port 3001)
+  - pasar-id-db (PostgreSQL 16, port 5432)
+  - pasar-id-redis (Redis 7, port 6379)
+  - pasar-id-phpmyadmin (port 8080)
+- Database: plasaid_dev
+  - User: plasaid (superuser)
+  - Tables: users, stores, products, categories, orders, order_items, refresh_tokens, _prisma_migrations
+- API routes: base URL http://localhost:3000 (no /api prefix)
+  - Auth: /auth/register, /auth/login
+- .env file: NOT FOUND (runtime using fallback config values)
 
 ## Notes
 - All mockup HTML files use Tailwind CSS CDN and are standalone static pages
 - Screenshots accompany each page in `screen.png` files
-- Design system is documented in `DESIGN.md` under `pasar.id_design_system/`
+- Design system is documented in `DESIGN.md` under `stitch_pasar.id_local_digital_marketplace/`
 - Project follows Modular Monolith architecture pattern
 - One backend (NestJS), multiple clients (Next.js Web + Flutter Mobile)
+- Database migrations completed, all tables created
+- Next.js frontend initialized but no pages implemented yet
+- .env file missing, using fallback configuration values
 
 ---
-*Last updated: September 16, 2026*
+*Last updated: September 17, 2026*
 *Project owner: Ascjul Opreker (Ascjul Zerone)*

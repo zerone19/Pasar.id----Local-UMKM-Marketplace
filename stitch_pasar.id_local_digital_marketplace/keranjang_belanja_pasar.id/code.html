@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Keranjang Belanja - Pasar.ID</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#154212",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#30312e",
+                      "primary-fixed-dim": "#a1d494",
+                      "surface": "#fbf9f4",
+                      "primary-fixed": "#bcf0ae",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "secondary": "#456800",
+                      "on-secondary-fixed-variant": "#334f00",
+                      "inverse-primary": "#a1d494",
+                      "on-primary-fixed": "#002201",
+                      "inverse-on-surface": "#f2f1ec",
+                      "on-secondary-container": "#496d00",
+                      "background": "#fbf9f4",
+                      "secondary-container": "#bfef73",
+                      "on-primary-fixed-variant": "#23501e",
+                      "secondary-fixed": "#c2f276",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed": "#121f00",
+                      "secondary-fixed-dim": "#a7d55d",
+                      "on-secondary": "#ffffff",
+                      "surface-variant": "#e4e2dd",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#2d5a27",
+                      "on-surface-variant": "#42493e",
+                      "tertiary-container": "#6c4924",
+                      "on-tertiary-container": "#ebba8b",
+                      "surface-container": "#f0eee9",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed": "#2c1600",
+                      "on-tertiary-fixed-variant": "#61401b",
+                      "surface-container-low": "#f5f3ee",
+                      "outline": "#72796e",
+                      "on-background": "#1b1c19",
+                      "on-primary-container": "#9dd090",
+                      "surface-dim": "#dbdad5",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#e4e2dd",
+                      "tertiary-fixed": "#ffdcbd",
+                      "surface-container-high": "#eae8e3",
+                      "outline-variant": "#c2c9bb",
+                      "on-surface": "#1b1c19",
+                      "surface-tint": "#3b6934",
+                      "tertiary": "#52330f",
+                      "surface-bright": "#fbf9f4",
+                      "tertiary-fixed-dim": "#eebd8e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "xl": "64px",
+                      "sm": "12px",
+                      "lg": "40px",
+                      "base": "8px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "auto",
+                      "gutter": "16px",
+                      "md": "24px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-lg-mobile": [
+                              "Be Vietnam Pro"
+                      ],
+                      "label-md": [
+                              "Work Sans"
+                      ],
+                      "body-md": [
+                              "Be Vietnam Pro"
+                      ],
+                      "label-sm": [
+                              "Work Sans"
+                      ],
+                      "headline-xl": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-sm": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-lg": [
+                              "Be Vietnam Pro"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .woven-texture {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(108, 73, 36, 0.03) 10px, rgba(108, 73, 36, 0.03) 20px), repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(108, 73, 36, 0.03) 10px, rgba(108, 73, 36, 0.03) 20px);
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar (Nav suppressed for Transactional/Checkout flow focus, keeping only brand and back action) -->
+<header class="bg-surface sticky full-width top-0 z-50 border-b border-outline-variant py-4 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto flex justify-between items-center w-full">
+<div class="flex items-center gap-md">
+<button aria-label="Kembali" class="p-2 hover:bg-surface-container-low rounded-full transition-all text-on-surface-variant hover:text-primary">
+<span aria-hidden="true" class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex items-center gap-sm">
+<img alt="Pasar.ID Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwl8-b8bTbztcrrtcQv-7rh7zZX7qke-xJKB4T3JyZ4FFtAt9Rg3_TX9X4oUz0vsvWcgzBBCdijSHwi0s2MOcUDQGeoxiLhTbpliYJHoB8YESwylfXLuNN91U-7g8IGi2jKai8dlyYgt8cqv6voDlSQ8e33ZQETmltlCsMO2XMxq2nxuBrTMMVSYG1xA-LdLExmZazeCpfJrVrS-W1DsiYd48pTeB2euDg4XXMaG90UntRtt2tiswHfEVPPWkbT68fGA"/>
+<span class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">Pasar.ID</span>
+</div>
+</div>
+<div class="font-headline-md text-headline-md text-primary hidden md:block">
+            Keranjang Belanja
+        </div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto py-lg md:py-xl grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl">
+<!-- Cart Items Section (Left Column) -->
+<section class="lg:col-span-8 flex flex-col gap-lg">
+<h1 class="font-headline-lg-mobile md:font-headline-xl text-headline-lg-mobile md:text-headline-xl text-primary md:hidden mb-sm">Keranjang Belanja</h1>
+<!-- Seller Group 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+<!-- Seller Header -->
+<div class="bg-surface-container-low px-md py-sm flex items-center justify-between border-b border-outline-variant/30 woven-texture">
+<div class="flex items-center gap-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-primary">storefront</span>
+<h2 class="font-headline-md text-headline-md text-primary-container">Warung Sayur Bu Nengsih</h2>
+</div>
+<span class="bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm px-2 py-1 rounded-full border border-tertiary/20">Pasar Induk Kramat Jati</span>
+</div>
+<!-- Product List -->
+<div class="p-md flex flex-col gap-md">
+<!-- Product Item 1 -->
+<div class="flex flex-col sm:flex-row gap-md items-start sm:items-center pb-md border-b border-outline-variant/20 last:border-0 last:pb-0">
+<img class="w-24 h-24 object-cover rounded-lg border border-outline-variant/30" data-alt="Tiga ikat bayam segar organik dengan daun hijau pekat yang lebar, baru saja dipanen, dengan sedikit sisa tanah di akarnya, diikat dengan tali bambu tradisional. Cahaya pagi alami menyinari embun di daunnya, menonjolkan kesegaran produk UMKM lokal, dengan latar belakang anyaman bambu yang hangat." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGXmiE883p4GU-cvRh5PoWxdoQyqFNkcFGKkds7r570PkJEURdjgMG5CvM0B3WEO3rd6xYoairgbgvQeFg3jZgHVfstI74CPFemsJ-jSk_cDWmqN2nTCbNe8rXEapdOYWDS_5LiZm10nJs0wWrRtSyYpJLHU7fxuCphURWM9qLvKRHzfcEnry6ZW4DwmRYFFoS-tomf2q3spxGt3qb2lvVf18bhCc08FRQ-RxVWn5nrI5eq5zIkgsV"/>
+<div class="flex-grow">
+<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">Bayam Segar Organik (Ikat)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Kategori: Sayuran Segar</p>
+<p class="font-label-md text-label-md text-primary mt-sm">Rp 4.500 <span class="font-body-sm text-on-surface-variant font-normal">/ ikat</span></p>
+</div>
+<div class="flex items-center justify-between sm:justify-end w-full sm:w-auto mt-4 sm:mt-0 gap-md">
+<div class="flex items-center border border-outline-variant rounded-full bg-surface">
+<button aria-label="Kurangi jumlah" class="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low rounded-l-full">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md">3</span>
+<button aria-label="Tambah jumlah" class="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low rounded-r-full">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<button aria-label="Hapus item" class="text-error hover:bg-error-container/20 p-2 rounded-full transition-colors flex items-center">
+<span aria-hidden="true" class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="flex flex-col sm:flex-row gap-md items-start sm:items-center">
+<img class="w-24 h-24 object-cover rounded-lg border border-outline-variant/30" data-alt="Satu kilogram tomat merah segar dan berkilau, dengan berbagai ukuran, menumpuk indah di keranjang bambu kecil. Cahaya terang menyoroti tekstur kulit tomat yang kencang dan warna merah cerah, menyampaikan kesan organik dan baru dipetik dari kebun petani lokal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUrjz3TUbjmo9TyJLa0aA5WRcRKutyOduPVizDT2WVxcHFHphBjFvhW5hC6uI_cJitEXvmq4tP1vyuSb9NkrXaqaciSl4EB_c91kWkoIzg24HGNS0Rrw2gWZvWCsky7JuMAZ2P6picOTARXvzvvvYTV1L6VGsYkvHNmHQm95Y2kpe1UE9xmkhM9kxcC3eryFmnaxGTkgxW11yRT6hUpsJczNfRhFukGYramJTZA_4sEoURs_sgr1pI"/>
+<div class="flex-grow">
+<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">Tomat Merah Lokal (Kg)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Kategori: Sayuran Buah</p>
+<p class="font-label-md text-label-md text-primary mt-sm">Rp 12.000 <span class="font-body-sm text-on-surface-variant font-normal">/ kg</span></p>
+</div>
+<div class="flex items-center justify-between sm:justify-end w-full sm:w-auto mt-4 sm:mt-0 gap-md">
+<div class="flex items-center border border-outline-variant rounded-full bg-surface">
+<button aria-label="Kurangi jumlah" class="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low rounded-l-full">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md">1</span>
+<button aria-label="Tambah jumlah" class="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low rounded-r-full">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<button aria-label="Hapus item" class="text-error hover:bg-error-container/20 p-2 rounded-full transition-colors flex items-center">
+<span aria-hidden="true" class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Shipping Options for this Seller -->
+<div class="bg-surface-container-low/50 px-md py-sm border-t border-outline-variant/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-sm">
+<div class="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">local_shipping</span>
+<span>Opsi Pengiriman:</span>
+</div>
+<select class="form-select w-full sm:w-auto text-sm border-outline-variant rounded-lg bg-surface text-on-surface focus:ring-primary focus:border-primary py-1 pl-3 pr-8">
+<option>Kurir Pasar (Rp 8.000)</option>
+<option>Ambil di Tempat (Gratis)</option>
+</select>
+</div>
+</div>
+<!-- Seller Group 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+<div class="bg-surface-container-low px-md py-sm flex items-center justify-between border-b border-outline-variant/30 woven-texture">
+<div class="flex items-center gap-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-primary">storefront</span>
+<h2 class="font-headline-md text-headline-md text-primary-container">Kriya Bambu Lestari</h2>
+</div>
+<span class="bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm px-2 py-1 rounded-full border border-tertiary/20">Pengrajin Bantul</span>
+</div>
+<div class="p-md flex flex-col gap-md">
+<div class="flex flex-col sm:flex-row gap-md items-start sm:items-center">
+<img class="w-24 h-24 object-cover rounded-lg border border-outline-variant/30" data-alt="Sebuah tampah bambu tradisional anyaman tangan yang rapi dan halus, dengan detail pola anyaman yang khas. Tergeletak di atas meja kayu solid dengan pencahayaan hangat dan natural yang menonjolkan tekstur alami bambu dan karya kerajinan autentik dari UMKM lokal Indonesia." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV5l_EHO7NSKaTi-Jyg4VY3ztT02eAwe5Wr13qlpIjYwE77dy2JZRIqqTHfqH-7vBpfFZxFodeG0uy9ZDshwUAhy9OeBi_QwKYJ9bPjM2CbPIU4VbaqNLHfctAOUpUtqulM78hoUwnEV6v-TB_iRESM3nUsKr9tGmjj5CikABU0hFpKPQ2hHBzdxmUkhWosKpKlQyn7sIGOKL0FvYl4OQ_BHntCoR1-Ay2KaIeCocxQDiUclcX9bvW"/>
+<div class="flex-grow">
+<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">Tampah Bambu Anyaman Halus (Ukuran Sedang)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Kategori: Kerajinan Tangan</p>
+<p class="font-label-md text-label-md text-primary mt-sm">Rp 35.000 <span class="font-body-sm text-on-surface-variant font-normal">/ buah</span></p>
+</div>
+<div class="flex items-center justify-between sm:justify-end w-full sm:w-auto mt-4 sm:mt-0 gap-md">
+<div class="flex items-center border border-outline-variant rounded-full bg-surface">
+<button aria-label="Kurangi jumlah" class="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low rounded-l-full">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md">2</span>
+<button aria-label="Tambah jumlah" class="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low rounded-r-full">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<button aria-label="Hapus item" class="text-error hover:bg-error-container/20 p-2 rounded-full transition-colors flex items-center">
+<span aria-hidden="true" class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low/50 px-md py-sm border-t border-outline-variant/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-sm">
+<div class="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">local_shipping</span>
+<span>Opsi Pengiriman:</span>
+</div>
+<select class="form-select w-full sm:w-auto text-sm border-outline-variant rounded-lg bg-surface text-on-surface focus:ring-primary focus:border-primary py-1 pl-3 pr-8">
+<option>Reguler (Rp 15.000)</option>
+<option>Kargo (Rp 25.000)</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Order Summary Section (Right Column) -->
+<section class="lg:col-span-4">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm p-md sticky top-[100px]">
+<h2 class="font-headline-md text-headline-md text-primary border-b border-outline-variant/30 pb-sm mb-md">Ringkasan Belanja</h2>
+<div class="space-y-sm font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex justify-between">
+<span>Total Harga Produk (4 barang)</span>
+<span class="font-label-md text-on-surface">Rp 95.500</span>
+</div>
+<div class="flex justify-between">
+<span>Total Ongkos Kirim</span>
+<span class="font-label-md text-on-surface">Rp 23.000</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>Diskon Gotong Royong</span>
+<span class="font-label-md">- Rp 5.000</span>
+</div>
+</div>
+<div class="border-t border-outline-variant/30 mt-md pt-md mb-lg">
+<div class="flex justify-between items-end">
+<span class="font-headline-md text-body-lg font-semibold text-on-surface">Total Tagihan</span>
+<span class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Rp 113.500</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 px-4 rounded-full flex items-center justify-center gap-sm hover:bg-primary-container hover:shadow-[0_4px_12px_rgba(45,90,39,0.15)] active:scale-98 transition-all">
+<span aria-hidden="true" class="material-symbols-outlined">shopping_cart_checkout</span>
+                    Lanjutkan ke Pembayaran
+                </button>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant mt-sm mt-4 flex items-center justify-center gap-xs">
+<span aria-hidden="true" class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+                    Transaksi aman dan mendukung UMKM lokal
+                </p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface full-width py-lg border-t border-outline-variant dark:border-outline mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto gap-md">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed flex items-center gap-sm">
+<img alt="Pasar.ID Logo" class="h-6 w-auto opacity-80 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTzSUS6_SOuFlyEP3H9n2V7QeaEwQN5RzCn471Q-11Wn70yNTROCpbDiQqoAcSkzQTYGjHpzpYVe1vovJDRSpnwdvzWa546dw2iZqPX4MQmVgQhIUhVqaoQrVzeFftWLpLlQhlhtXxjq_JD_pW5-Nsx8iiaEYYuO_9v7QoV2yWjFvPVsyixIzrA-drzwYR0U_dMeSUQ3EkZSeDocbf7bzOJBZp8_cBymblFvPJBu2vnHLx1_KjWU1zdDWIeBwcSmrh3A"/>
+<span>Pasar.ID</span>
+</div>
+<nav aria-label="Footer Navigation">
+<ul class="flex flex-wrap justify-center gap-md font-body-sm text-body-sm text-on-surface-variant">
+<li><a class="hover:text-secondary underline transition-all opacity-80 hover:opacity-100" href="#">Misi Komunitas</a></li>
+<li><a class="hover:text-secondary underline transition-all opacity-80 hover:opacity-100" href="#">Daftar Jadi Penjual</a></li>
+<li><a class="hover:text-secondary underline transition-all opacity-80 hover:opacity-100" href="#">Pusat Bantuan</a></li>
+<li><a class="hover:text-secondary underline transition-all opacity-80 hover:opacity-100" href="#">Syarat &amp; Ketentuan</a></li>
+</ul>
+</nav>
+<div class="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface opacity-80">
+                © 2024 Pasar.ID - Gotong Royong Memajukan UMKM Indonesia
+            </div>
+</div>
+</footer>
+</body></html>
