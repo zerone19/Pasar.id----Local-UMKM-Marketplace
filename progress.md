@@ -7,7 +7,7 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 
 ## Tech Stack
 - **Backend:** NestJS + TypeScript (REST API)
-- **Frontend:** Next.js 15 + TypeScript + React + Tailwind CSS
+- **Frontend:** Next.js 14 + TypeScript + React + Tailwind CSS
 - **Mobile (planned):** Flutter + Dart
 - **Database:** PostgreSQL + Prisma ORM
 - **Cache:** Redis
@@ -23,10 +23,13 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - ValidationPipe + DTOs aktif
 - CORS untuk localhost:3001
 
-### Frontend — Next.js (port 3001) ⚠️
+### Frontend — Next.js (port 3001) ✅
 - Docker container running
 - Tailwind CSS terpasan
-- **BELUM ADA HALAMAN** — butuh implementasi pages
+- Next.js 14 + App Router
+- **Home page sudah ter-implement**: Hero section, Categories, Featured UMKM
+- Header & Footer components siap pakai
+- **BELUM ada**: Product listing, Store listing, Cart, Product detail, Auth pages
 
 ### Issues
 - `.env` file tidak ada (pakai fallback config)
@@ -65,8 +68,10 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - [x] Tailwind CSS configured
 - [x] Docker container running (port 3001)
 
-### 🚧 Phase 1c — Frontend Pages (SEDANG KERJA)
-- [ ] Home page (`app/page.tsx`)
+### ✅ Phase 1c — Frontend Pages (HOMPAGE SELESAI)
+- [x] Home page (`app/page.tsx`) — HERO, Categories, Featured UMKM
+- [x] Header component (`components/Header.tsx`) — design system compliant
+- [x] Footer component (`components/Footer.tsx`) — full footer
 - [ ] Products listing (`app/products/page.tsx`)
 - [ ] Stores listing (`app/stores/page.tsx`)
 - [ ] Cart (`app/cart/page.tsx`)
@@ -194,7 +199,8 @@ Pasar Id -- Marketplace UMKM Local/
 - Project follows Modular Monolith architecture pattern
 - One backend (NestJS), multiple clients (Next.js Web + Flutter Mobile)
 - Database migrations completed, all tables created
-- Next.js frontend initialized but no pages implemented yet
+- Next.js 14 frontend: Home page sudah terdeploy di http://localhost:3001
+- Header & Footer components sudah siap pakai
 - .env file missing, using fallback configuration values
 
 ---
