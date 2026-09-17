@@ -103,9 +103,9 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 
 ### 🔜 Phase 2 — Marketplace
 - [x] Product CRUD API (sudah ada)
-- [ ] Category management
-- [ ] Search & filter API
-- [ ] Store/profile management
+- [x] Category management (`GET /categories`, `GET /categories/:id`, `GET /categories/slug/:slug`, `POST /categories`, `PUT /categories/:id`, `DELETE /categories/:id`)
+- [x] Search & filter API (`GET /products?search=&category=&minPrice=&maxPrice=&sortBy=&sortOrder=&page=&limit=`)
+- [x] Store/profile management (`GET /stores/:id` — includes owner + products, `PUT /stores/:id`)
 - [x] Integrasi API → Frontend (products, stores, cart pages sudah jalan)
 
 ### 🔜 Phase 3 — Transaction
