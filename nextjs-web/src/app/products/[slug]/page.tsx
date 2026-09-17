@@ -28,6 +28,7 @@ interface Product {
   description: string;
   images: string[];
   isActive: boolean;
+  stock: number;
   createdAt: string;
   category: Category;
   seller: Seller;

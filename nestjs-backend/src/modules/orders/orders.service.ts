@@ -9,6 +9,15 @@ export class OrdersService {
   async findAll() {
     return this.prisma.order.findMany({
       include: { user: true, items: { include: { product: true } } },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  async findByUser(userId: string) {
+    return this.prisma.order.findMany({
+      where: { userId },
+      include: { user: true, items: { include: { product: true } } },
+      orderBy: { createdAt: 'desc' },
     });
   }
 
@@ -19,6 +28,20 @@ export class OrdersService {
     });
     if (!order) throw new NotFoundException('Order tidak ditemukan');
     return order;
+  }
+
+  async updateStatus(id: string, status: OrderStatus, paymentStatus?: string, notes?: string) {
+    const order = await this.prisma.order.findUnique({ where: { id } });
+    if (!order) throw new NotFoundException('Order tidak ditemukan');
+
+    return this.prisma.order.update({
+      where: { id },
+      data: {
+        status,
+        paymentStatus: paymentStatus ?? order.paymentStatus,
+      },
+      include: { user: true, items: { include: { product: true } } },
+    });
   }
 
   async create(dto: { userId: string; items: { productId: string; quantity: number }[]; shippingAddress: string; paymentMethod?: string }) {

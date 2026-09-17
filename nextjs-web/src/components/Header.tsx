@@ -1,12 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
+import { getUserRole } from '@/lib/auth';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
   const { itemCount } = useCart();
+
+  useEffect(() => {
+    setUserRole(getUserRole());
+  }, []);
 
   return (
     <nav className="bg-surface full-width top-0 z-50 border-b border-outline-variant sticky transition-all duration-300">
@@ -52,6 +58,16 @@ export default function Header() {
               Tentang Kami
             </Link>
           </li>
+          {(userRole === 'SELLER' || userRole === 'ADMIN') && (
+            <li>
+              <Link
+                href="/seller"
+                className="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md"
+              >
+                Seller Dashboard
+              </Link>
+            </li>
+          )}
         </ul>
 
         {/* Trailing Icons / Actions */}
@@ -134,6 +150,14 @@ export default function Header() {
           >
             Tentang Kami
           </Link>
+          {(userRole === 'SELLER' || userRole === 'ADMIN') && (
+            <Link
+              href="/seller"
+              className="block text-on-surface-variant hover:text-primary transition-colors py-2"
+            >
+              Seller Dashboard
+            </Link>
+          )}
         </div>
       )}
     </nav>

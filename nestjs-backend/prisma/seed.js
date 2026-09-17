@@ -1,40 +1,20 @@
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
-
-async function main() {
-  // Create sample categories
-  const categories = await Promise.all([
-    prisma.category.upsert({
-      where: { slug: 'sayur-segar' },
-      update: {},
-      create: { name: 'Sayur Segar', slug: 'sayur-segar', description: 'Sayuran segar lokal' },
-    }),
-    prisma.category.upsert({
-      where: { slug: 'jajanan-pasar' },
-      update: {},
-      create: { name: 'Jajanan Pasar', slug: 'jajanan-pasar', description: 'Kue dan jajanan tradisional' },
-    }),
-    prisma.category.upsert({
-      where: { slug: 'kerajinan-lokal' },
-      update: {},
-      create: { name: 'Kerajinan Lokal', slug: 'kerajinan-lokal', description: 'Kerajinan tangan lokal' },
-    }),
-    prisma.category.upsert({
-      where: { slug: 'daging-ikan' },
-      update: {},
-      create: { name: 'Daging & Ikan', slug: 'daging-ikan', description: 'Daging dan ikan segar' },
-    }),
-  ]);
-
-  console.log('Seed data created successfully');
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = Home;
+const Footer_1 = __importDefault(require("@/components/Footer"));
+const CategorySection_1 = __importDefault(require("@/components/CategorySection"));
+function Home() {
+    return (/>
+        < main);
+    className = "min-h-screen bg-[#fbf9f4]" >
+        />
+        < CategorySection_1.default /  >
+        />
+        < /main>
+        < Footer_1.default /  >
+        />;
+    ;
 }
-
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });

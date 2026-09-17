@@ -25,8 +25,9 @@ export default function LoginPage() {
         `${apiUrl}/auth/login`,
         { email, password },
       );
-      const { accessToken } = response.data;
-      localStorage.setItem('accessToken', accessToken);
+      const { accessToken, user } = response.data;
+      localStorage.setItem('token', accessToken);
+      localStorage.setItem('user', JSON.stringify(user));
       // Jika butuh redirect ke halaman sebelumnya atau ke /
       const redirectTo = (new URLSearchParams(window.location.search)).get('redirect') || '/';
       router.push(redirectTo);

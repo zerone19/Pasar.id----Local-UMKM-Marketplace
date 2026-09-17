@@ -116,9 +116,19 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - [x] Payment abstraction (MVP: COD + Manual Transfer — status tracking, transfer instructions di success page)
 
 ### 🔜 Phase 4 — Seller
-- [ ] Seller dashboard (products, orders, stock, revenue)
-- [ ] Order management
-- [ ] Store management
+- [x] Seller module di backend (SellerModule, SellerController, SellerService)
+- [x] Role guard + JWT auth
+- [x] Seller dashboard API (`GET /seller/dashboard` — stats: totalProducts, totalStock, totalOrders, totalRevenue, totalSold, lowStock)
+- [x] Product management API (`GET /seller/products`, `POST /seller/products`, `PUT /seller/products/:id`, `DELETE /seller/products/:id`)
+- [x] Order management API (`GET /seller/orders`, `GET /seller/orders/:id`, `PUT /seller/orders/:id/status`)
+- [x] Store management API (`GET /seller/store`, `POST /seller/store`, `PUT /seller/store/:id`)
+- [x] Seller dashboard frontend (`app/seller/page.tsx` — stats grid, quick actions)
+- [x] Seller products frontend (`app/seller/products/page.tsx` — table, toggle status, delete)
+- [x] Seller orders frontend (`app/seller/orders/page.tsx` — list, status update dropdown)
+- [x] Seller store frontend (`app/seller/store/page.tsx` — create/update form)
+- [x] Auth helper (`src/lib/auth.ts` — token/user management)
+- [x] Header updated — Seller Dashboard link (conditional for SELLER/ADMIN role)
+- [x] Login page updated — save user data to localStorage
 
 ### 🔜 Phase 5 — Admin
 - [ ] Admin dashboard
