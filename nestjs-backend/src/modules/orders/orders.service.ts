@@ -26,6 +26,7 @@ export class OrdersService {
     const orderNumber = `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
 
     return this.prisma.$transaction(async (tx) => {
+      // First create the order without items
       const order = await tx.order.create({
         data: {
           orderNumber,
@@ -35,16 +36,23 @@ export class OrdersService {
           paymentStatus: 'PENDING',
           userId: dto.userId,
           shippingAddress: dto.shippingAddress,
-          items: {
-            create: dto.items.map((item) => ({
-              quantity: item.quantity,
-              price: 0,
-              productId: item.productId,
-            })),
-          },
         },
       });
 
+      // Then create order items with correct prices
+      for (const item of dto.items) {
+        const product = await tx.product.findUnique({ where: { id: item.productId } });
+        await tx.orderItem.create({
+          data: {
+            orderId: order.id,
+            quantity: item.quantity,
+            price: product ? Number(product.price) : 0,
+            productId: item.productId,
+          },
+        });
+      }
+
+      // Update stock
       for (const item of dto.items) {
         await tx.product.update({
           where: { id: item.productId },
@@ -52,7 +60,11 @@ export class OrdersService {
         });
       }
 
-      return order;
+      // Return order with items
+      return tx.order.findUnique({
+        where: { id: order.id },
+        include: { user: true, items: { include: { product: true } } },
+      });
     });
   }
 

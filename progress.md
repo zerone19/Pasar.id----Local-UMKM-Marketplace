@@ -16,6 +16,8 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - ValidationPipe + DTOs aktif
 - CORS untuk localhost:3001 — sudah diverifikasi
 - **Fix kritis:** Hapus @nestjs/swagger v12 yang crash (loadPackageSync mismatch)
+- **Fix:** UsersController registered di UsersModule (CRUD users aktif)
+- **Fix:** OrdersService price bug — order items store correct product prices
 - Seeder jalan — 4 products, 3 users (admin/seller/buyer), 3 categories, 1 store
 - Endpoint baru: `GET /products/slug/:slug`, `GET /stores/slug/:slug`
 
@@ -31,15 +33,16 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
   - `/products/[slug]` — Product detail (gallery, deskripsi, AddToCartButton)
   - `/stores` — Stores listing (fetch ke API, grid cards)
   - `/cart` — Cart page (Context + localStorage, qty adjust, clear, checkout CTA)
-- **Header** — sudah update: link ke rute nyata, cart badge dinamis via CartContext
+  - `/checkout` — Checkout page (3-step: alamat → pembayaran → review, order API)
+  - `/checkout/success` — Success page (detail pesanan, instruksi COD/transfer)
+  - `/auth/login` — Login page (form validasi, JWT simpan, redirect)
+  - `/auth/register` — Register page (role BUYER/SELLER, validasi, redirect)
+- **Header** — sudah update: link ke rute nyata, cart badge dinamis via CartContext, auth links
 - AddToCartButton komponen — quantity picker + dynamic state
 - CartContext — React Context + useReducer + localStorage persistence
 
 ### Issues / yang perlu diperhatikan
-- `.env` file backend masih pakai fallback config (bukan critical — runtime via Docker env vars)
 - `nestjs-backend/src/prisma/seed.ts` (file anomali) sudah dihapus
-- Frontend: auth pages (login/register) belum ada — ada stub route di header
-- Checkout flow (order creation) belum terintegrasi
 
 ---
 
@@ -90,13 +93,13 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - [x] CartContext (`src/contexts/CartContext.tsx`) — localStorage persistence
 - [x] AddToCartButton (`components/AddToCartButton.tsx`) — quantity picker + dynamic state
 - [x] Login/Register (`app/auth/login/page.tsx`, `app/auth/register/page.tsx`) — full API integration
-- [ ] Checkout flow
+- [x] Checkout flow (`app/checkout/page.tsx`, `app/checkout/success/page.tsx`) — 3-step form, API integration
 
-### 🔜 .env Setup
-- [ ] Buat file `.env` untuk NestJS backend
-- [ ] Konfigurasi DATABASE_URL, JWT_SECRET, REDIS_URL
-- [ ] Buat file `.env.local` untuk Next.js
-- [ ] Pastikan koneksi database stabil
+### ✅ .env Setup (SELESAI — 17 Sept 2026)
+- [x] Buat file `.env` untuk NestJS backend
+- [x] Konfigurasi DATABASE_URL, JWT_SECRET, REDIS_URL
+- [x] Buat file `.env.local` untuk Next.js
+- [x] Koneksi database stabil (sudah jalan via Docker)
 
 ### 🔜 Phase 2 — Marketplace
 - [x] Product CRUD API (sudah ada)
@@ -107,7 +110,7 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 
 ### 🔜 Phase 3 — Transaction
 - [x] Cart (multi-seller support — Context + localStorage)
-- [ ] Checkout flow
+- [x] Checkout flow (`app/checkout/page.tsx`, `app/checkout/success/page.tsx`) — 3-step form, API integration
 - [ ] Address management
 - [ ] Order lifecycle (PENDING → CONFIRMED → PROCESSING → READY/SHIPPED → COMPLETED)
 - [ ] Payment abstraction (MVP: COD + Manual Transfer)
@@ -227,7 +230,7 @@ Pasar Id -- Marketplace UMKM Local/
   - Auth: /auth/register, /auth/login
   - Products: GET /products, GET /products/:id, GET /products/slug/:slug
   - Stores: GET /stores, GET /stores/:id
-- .env file: NOT FOUND (runtime using fallback / Docker env vars)
+- .env file: CREATED (nestjs-backend/.env, nextjs-web/.env.local) — runtime using Docker env vars + local .env
 
 ---
 
@@ -238,11 +241,12 @@ Pasar Id -- Marketplace UMKM Local/
 - Project follows Modular Monolith architecture pattern
 - One backend (NestJS), multiple clients (Next.js Web + Flutter Mobile)
 - Database migrations completed, all tables created
-- Next.js frontend: product listing, detail, stores, cart pages sudah deployed di http://localhost:3001
+- Next.js frontend: product listing, detail, stores, cart, checkout, auth pages sudah deployed di http://localhost:3001
 - Header & Footer components sudah siap pakai
-- .env file missing, using fallback configuration values
+- .env file: CREATED (nestjs-backend/.env, nextjs-web/.env.local)
 - **GitHub repo:** github.com/zerone19/Pasar.id----Local-UMKM-Marketplace
 - **Latest commit:** 549a076 — feat: cart system, product detail, stores listing, header fix
+- **Latest fix:** OrdersService price bug fixed — order items now store correct product prices
 
 ---
 *Last updated: September 17, 2026*
