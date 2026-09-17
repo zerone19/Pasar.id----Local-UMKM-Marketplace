@@ -4,19 +4,31 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
+
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+interface Seller {
+  id: string;
+  fullName: string;
+  email: string;
+}
 
 interface Product {
   id: string;
   name: string;
-  price: string;
+  slug: string;
+  price: number;
   description: string;
   images: string[];
   isActive: boolean;
   createdAt: string;
-  store?: {
-    id: string;
-    name: string;
-  };
+  category: Category;
+  seller: Seller;
 }
 
 export default function ProductsPage() {
@@ -40,6 +52,10 @@ export default function ProductsPage() {
       setError('Gagal memuat produk. Silakan coba lagi.');
       setLoading(false);
     }
+  };
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('id-ID').format(price);
   };
 
   if (loading) {
@@ -118,31 +134,40 @@ export default function ProductsPage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((product) => (
-                <div
+                <Link
                   key={product.id}
+                  href={`/products/${product.slug}`}
                   className="group relative bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm hover:shadow-organic hover:border-primary transition-all overflow-hidden"
                 >
                   <div className="aspect-square h-48 bg-surface-container-high rounded-t-xl overflow-hidden">
-                    <div className="w-full h-full flex items-center justify-center bg-primary/10">
-                      <span className="material-icons text-4xl text-primary">
-                        image
-                      </span>
-                    </div>
+                    {product.images && product.images.length > 0 ? (
+                      <img
+                        src={product.images[0]}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-primary/10">
+                        <span className="material-icons text-4xl text-primary">
+                          image
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div className="p-4">
                     <h3 className="font-headline-md text-base text-on-surface group-hover:text-primary transition-colors line-clamp-1">
                       {product.name}
                     </h3>
-                    {product.store && (
+                    {product.seller && (
                       <p className="font-body-sm text-xs text-on-surface-variant mt-1">
-                        Dari {product.store.name}
+                        Dari {product.seller.fullName}
                       </p>
                     )}
                     <p className="font-label-md text-sm text-primary mt-2">
-                      Rp {new Intl.NumberFormat('id-ID').format(parseFloat(product.price))}
+                      Rp {formatPrice(product.price)}
                     </p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
