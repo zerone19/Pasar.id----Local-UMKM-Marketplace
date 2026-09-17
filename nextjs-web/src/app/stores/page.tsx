@@ -4,25 +4,26 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import StoreCard from '@/components/StoreCard';
+import Link from 'next/link';
 
 interface User {
   id: string;
-  email: string;
   fullName: string;
-  role: string;
+  email: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
 }
 
 interface Store {
   id: string;
   name: string;
   slug: string;
-  description?: string;
-  ownerId: string;
+  description: string;
   owner: User;
-  products: { id: string }[];
-  createdAt: string;
-  updatedAt: string;
+  products: Product[];
 }
 
 export default function StoresPage() {
@@ -53,19 +54,12 @@ export default function StoresPage() {
         <Header />
         <main className="min-h-screen bg-cream pb-16">
           <div className="px-5 md:px-8 max-w-7xl mx-auto py-12">
-            <h1 className="font-headline-md text-2xl text-primary mb-2">Daftar Toko</h1>
-            <p className="font-body-sm text-sm text-on-surface-variant mb-8">
-              Temukan UMKM lokal pilihan
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-sm animate-pulse">
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="w-10 h-10 bg-surface-container-high rounded-full"></div>
-                    <div className="h-5 bg-surface-container-high rounded-full w-16"></div>
-                  </div>
-                  <div className="h-5 bg-surface-container-high rounded mb-2"></div>
-                  <div className="h-4 bg-surface-container-high rounded mb-2 w-3/4"></div>
+            <h1 className="font-headline-md text-2xl text-primary mb-8">UMKM Terdaftar</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 animate-pulse">
+                  <div className="h-6 bg-surface-container-high rounded mb-3"></div>
+                  <div className="h-4 bg-surface-container-high rounded w-3/4 mb-2"></div>
                   <div className="h-4 bg-surface-container-high rounded w-1/2"></div>
                 </div>
               ))}
@@ -82,17 +76,15 @@ export default function StoresPage() {
       <>
         <Header />
         <main className="min-h-screen bg-cream pb-16">
-          <div className="px-5 md:px-8 max-w-7xl mx-auto py-12">
-            <div className="text-center py-12">
-              <span className="material-icons text-6xl text-error mb-4">error</span>
-              <p className="text-error font-label-md">{error}</p>
-              <button
-                onClick={fetchStores}
-                className="mt-4 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/80 transition"
-              >
-                Coba Lagi
-              </button>
-            </div>
+          <div className="px-5 md:px-8 max-w-7xl mx-auto py-16 text-center">
+            <span className="material-icons text-6xl text-error mb-4">error</span>
+            <p className="text-error font-label-md mb-6">{error}</p>
+            <button
+              onClick={fetchStores}
+              className="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md hover:bg-primary/80 transition"
+            >
+              Coba Lagi
+            </button>
           </div>
         </main>
         <Footer />
@@ -105,37 +97,51 @@ export default function StoresPage() {
       <Header />
       <main className="min-h-screen bg-cream pb-16">
         <section className="px-5 md:px-8 max-w-7xl mx-auto py-12">
-          <h1 className="font-headline-md text-2xl text-primary mb-2">Daftar Toko</h1>
-          <p className="font-body-sm text-sm text-on-surface-variant">
-            {stores.length} toko tersedia
+          <h1 className="font-headline-md text-2xl text-primary mb-2">UMKM Terdaftar</h1>
+          <p className="font-body-sm text-sm text-on-surface-variant mb-8">
+            {stores.length} toko mitra lokal
           </p>
-        </section>
 
-        <section className="px-5 md:px-8 max-w-7xl mx-auto pb-12">
           {stores.length === 0 ? (
             <div className="text-center py-16">
               <span className="material-icons text-6xl text-on-surface-variant mb-4 opacity-30">
-                store
+                storefront
               </span>
               <p className="font-body-md text-lg text-on-surface-variant">
-                Belum ada toko tersedia
+                Belum ada toko terdaftar
               </p>
               <p className="font-body-sm text-sm text-on-surface-variant mt-2">
-                Cek kembali nanti untuk toko baru!
+                Jadilah mitra pertama kami!
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {stores.map((store) => (
-                <StoreCard
+                <Link
                   key={store.id}
-                  id={store.id}
-                  name={store.name}
-                  slug={store.slug}
-                  description={store.description}
-                  ownerName={store.owner?.fullName || 'Anonim'}
-                  productCount={store.products?.length || 0}
-                />
+                  href={`/stores/${store.slug}`}
+                  className="group block bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:shadow-organic hover:border-primary transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="font-headline-md text-lg text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+                      {store.name}
+                    </h3>
+                    <span className="material-icons text-on-surface-variant text-sm">
+                      arrow_forward
+                    </span>
+                  </div>
+                  <p className="font-body-sm text-sm text-on-surface-variant mb-3 line-clamp-2">
+                    {store.description || 'Toko UMKM lokal'}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="font-label-sm text-xs text-on-surface-variant">
+                      {store.products?.length || 0} produk
+                    </span>
+                    <span className="font-label-sm text-xs text-secondary bg-secondary-container px-2 py-1 rounded-full">
+                      Dari {store.owner?.fullName || '-'}
+                    </span>
+                  </div>
+                </Link>
               ))}
             </div>
           )}
