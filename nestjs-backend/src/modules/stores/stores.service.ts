@@ -15,6 +15,15 @@ export class StoresService {
     return store;
   }
 
+  async findBySlug(slug: string) {
+    const store = await this.prisma.store.findUnique({
+      where: { slug },
+      include: { owner: true, products: { include: { category: true } } },
+    });
+    if (!store) throw new NotFoundException('Store tidak ditemukan');
+    return store;
+  }
+
   async create(dto: { name: string; slug: string; description?: string; ownerId: string }) {
     return this.prisma.store.create({ data: dto });
   }

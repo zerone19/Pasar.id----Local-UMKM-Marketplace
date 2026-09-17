@@ -11,6 +11,11 @@ export class StoresController {
     return this.storesService.findAll();
   }
 
+  @Get('slug/:slug')
+  async findBySlug(@Param('slug') slug: string) {
+    return this.storesService.findBySlug(slug);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.storesService.findById(id);
