@@ -24,12 +24,12 @@ Pasar.ID adalah marketplace UMKM lokal yang menghubungkan pedagang pasar tradisi
 
 | Layer | Technology |
 |-------|-----------|
-| **Web Frontend** | Next.js + TypeScript + React + Tailwind CSS |
+| **Web Frontend** | Next.js 14 + TypeScript + React + Tailwind CSS |
 | **Mobile** | Flutter + Dart (Android & iOS) |
 | **Backend API** | NestJS + TypeScript |
-| **Database** | PostgreSQL |
+| **Database** | PostgreSQL 16 |
 | **ORM** | Prisma |
-| **Cache & Queue** | Redis + BullMQ |
+| **Cache & Queue** | Redis 7 + BullMQ |
 | **Storage** | S3-compatible (Cloudflare R2, AWS S3, dll) |
 | **Authentication** | JWT access + refresh token |
 | **Infrastructure** | Docker + Docker Compose |
@@ -44,13 +44,13 @@ Pasar.ID adalah marketplace UMKM lokal yang menghubungkan pedagang pasar tradisi
 ## 📋 Fitur Utama
 
 ### 👤 Untuk Pembeli (Buyer)
-- Register & login dengan email/HP
-- Jelajahi produk lokal berdasarkan kategori
-- Pencarian & filter canggih
-- Detail produk & toko
-- Keranjang belanja multi-seller
-- Checkout dengan COD & transfer manual
-- Riwayat pesanan
+- ✅ Register & login dengan email/HP
+- ✅ Jelajahi produk lokal berdasarkan kategori
+- ✅ Pencarian & filter canggih
+- ✅ Detail produk & toko
+- ✅ Keranjang belanja multi-seller
+- ✅ Checkout dengan COD & transfer manual
+- ✅ Riwayat pesanan
 - Profil & alamat
 - Review & rating
 
@@ -111,13 +111,13 @@ Pasar.ID adalah marketplace UMKM lokal yang menghubungkan pedagang pasar tradisi
 | Phase | Fokus | Status |
 |-------|-------|--------|
 | **Phase 0** | Planning & Design | ✅ Selesai |
-| **Phase 1** | Foundation (Docker, Auth, DB) | 🔜 Selanjutnya |
-| **Phase 2** | Marketplace (Product, Store, Category) | 📋 Planned |
-| **Phase 3** | Transaction (Cart, Checkout, Order) | 📋 Planned |
-| **Phase 4** | Seller (Dashboard, Product Mgmt) | 📋 Planned |
+| **Phase 1** | Foundation (Docker, Auth, DB, Frontend Pages, .env) | ✅ **Selesai (17 Sept 2026)** |
+| **Phase 2** | Marketplace (Category, Search, Store Profile) | 🔜 Selanjutnya |
+| **Phase 3** | Transaction (Address, Order Lifecycle, Payment) | 📋 Planned |
+| **Phase 4** | Seller (Dashboard, Product Mgmt, Order Mgmt) | 📋 Planned |
 | **Phase 5** | Admin (Management, Moderation) | 📋 Planned |
 | **Phase 6** | Mobile (Flutter App) | 📋 Planned |
-| **Phase 7** | Growth (Notifications, Reviews, etc.) | 📋 Planned |
+| **Phase 7** | Growth (Notifications, Reviews, Vouchers, Analytics, Chat) | 📋 Planned |
 
 ### MVP Sprint Plan
 
@@ -169,6 +169,8 @@ Pasar Id -- Marketplace UMKM Local/
 ├── 06-Teknologi-Brief-PasarID.md       → Tech stack & alasan
 ├── progress.md                          → Progress tracker
 ├── README.md                            → File ini
+├── docker-compose.yml                   → Docker orchestration
+├── .gitignore                           → Git ignore rules
 ├── stitch_pasar.id_local_digital_marketplace/
 │   ├── pasar.id_design_system/
 │   │   └── DESIGN.md                   → Design system documentation
@@ -184,6 +186,39 @@ Pasar Id -- Marketplace UMKM Local/
 │   ├── manajemen_produk_umkm_pasar.id/ → Product management mockup
 │   ├── riwayat_transaksi_penjual_pasar.id/ → Order history mockup
 │   └── logo_pasar_id.png/              → Logo screen mockup
+├── nestjs-backend/
+│   ├── src/
+│   │   ├── app.module.ts
+│   │   ├── main.ts
+│   │   ├── config/
+│   │   ├── modules/{auth,users,stores,products,orders}
+│   │   └── prisma/
+│   ├── prisma/
+│   │   ├── schema.prisma
+│   │   ├── migrations/
+│   │   └── seed.ts
+│   ├── package.json
+│   ├── Dockerfile
+│   └── .env.example
+├── nextjs-web/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── (products)/
+│   │   │   ├── (stores)/
+│   │   │   ├── (cart)/
+│   │   │   ├── layout.tsx
+│   │   │   └── globals.css
+│   │   ├── components/
+│   │   │   ├── Header.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   └── AddToCartButton.tsx
+│   │   └── contexts/
+│   │       └── CartContext.tsx
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── tailwind.config.ts
+│   ├── postcss.config.js
+│   └── .env.example
 └── .git/
 ```
 
@@ -195,32 +230,39 @@ Pasar Id -- Marketplace UMKM Local/
 - Docker & Docker Compose
 - Node.js 18+
 - Flutter SDK (untuk mobile development)
-- PostgreSQL
-- Redis
 
 ### Mulai Development
+
 ```bash
 # Clone repository
 git clone https://github.com/zerone19/Pasar.id----Local-UMKM-Marketplace.git
-cd Pasar.Id----Local-UMKM-Marketplace
+cd "Pasar Id -- Marketplace UMKM Local"
 
 # Mulai semua layanan dengan Docker
 docker-compose up -d
 
-# Setup database
-npx prisma migrate dev
+# Backend API: http://localhost:3000
+# Frontend Web: http://localhost:3001
+# phpMyAdmin: http://localhost:8080
 
-# Jalankan backend API
-cd api && npm run start:dev
-
-# Jalankan web frontend
-cd web && npm run dev
-
-# Jalankan mobile app (Flutter)
-cd mobile && flutter run
+# Setup environment files (opsional - Docker sudah pakai env vars)
+cp nestjs-backend/.env.example nestjs-backend/.env
+cp nextjs-web/.env.example nextjs-web/.env.local
 ```
 
-> **Catatan:** Backend API, web, dan mobile dapat dijalankan secara terpisah karena berbasis REST API.
+> **Catatan:** Backend API (NestJS), Web (Next.js), dan Mobile (Flutter) dapat dijalankan secara terpisah karena berbasis REST API. Docker Compose sudah include: API, Web, PostgreSQL, Redis, phpMyAdmin.
+
+---
+
+## 📊 API Endpoints (Current)
+
+| Module | Endpoints |
+|--------|-----------|
+| **Auth** | `POST /auth/register`, `POST /auth/login` |
+| **Users** | `GET /users`, `GET /users/:id`, `POST /users` |
+| **Stores** | `GET /stores`, `GET /stores/:id`, `GET /stores/slug/:slug`, `POST /stores` |
+| **Products** | `GET /products`, `GET /products/:id`, `GET /products/slug/:slug`, `POST /products` |
+| **Orders** | `GET /orders`, `GET /orders/:id`, `POST /orders` |
 
 ---
 
