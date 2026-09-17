@@ -17,7 +17,7 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - CORS untuk localhost:3001 — sudah diverifikasi
 - **Fix kritis:** Hapus @nestjs/swagger v12 yang crash (loadPackageSync mismatch)
 - Seeder jalan — 4 products, 3 users (admin/seller/buyer), 3 categories, 1 store
-- Endpoint baru: `GET /products/slug/:slug`
+- Endpoint baru: `GET /products/slug/:slug`, `GET /stores/slug/:slug`
 
 ### Frontend — Next.js (port 3001) ✅ JALAN
 - Docker container running (Next.js 14.2 + App Router)
@@ -89,7 +89,8 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - [x] Cart (`app/cart/page.tsx`) — full implementation (Context, qty adjust, clear cart, checkout)
 - [x] CartContext (`src/contexts/CartContext.tsx`) — localStorage persistence
 - [x] AddToCartButton (`components/AddToCartButton.tsx`) — quantity picker + dynamic state
-- [ ] Login/Register (`app/auth/login/page.tsx`, `app/auth/register/page.tsx`)
+- [x] Login/Register (`app/auth/login/page.tsx`, `app/auth/register/page.tsx`) — full API integration
+- [ ] Checkout flow
 
 ### 🔜 .env Setup
 - [ ] Buat file `.env` untuk NestJS backend
