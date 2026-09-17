@@ -112,7 +112,7 @@ Pasar.ID adalah marketplace UMKM lokal yang menghubungkan pedagang pasar tradisi
 |-------|-------|--------|
 | **Phase 0** | Planning & Design | ✅ Selesai |
 | **Phase 1** | Foundation (Docker, Auth, DB, Frontend Pages, .env) | ✅ **Selesai** |
-<| **Phase 2** | Marketplace (Category CRUD, Search & Filter, Store Profile) | ✅ **Selesai** |
+| **Phase 2** | Marketplace (Category CRUD, Search & Filter, Store Profile) | ✅ **Selesai** |
 | **Phase 3** | Transaction (Address, Order Lifecycle, Payment Abstraction) | ✅ **Selesai** |
 | **Phase 4** | Seller (Dashboard, Product Mgmt, Order Mgmt) | 📋 Planned |
 | **Phase 5** | Admin (Management, Moderation) | 📋 Planned |
