@@ -1,0 +1,226 @@
+{
+  "project": "Pasar.ID Local UMKM Marketplace",
+  "generated": "2026-09-17",
+  "backlog": [
+    {
+      "id": "CAT-API",
+      "title": "Category CRUD API (NestJS)",
+      "priority": "high",
+      "files_to_create": [
+        { "path": "nestjs-backend/src/modules/categories/categories.service.ts", "action": "create" },
+        { "path": "nestjs-backend/src/modules/categories/categories.controller.ts", "action": "create" },
+        { "path": "nestjs-backend/src/modules/categories/categories.module.ts", "action": "create" },
+        { "path": "nestjs-backend/src/common/dto/create-category.dto.ts", "action": "create" }
+      ],
+      "files_to_modify": [
+        { "path": "nestjs-backend/src/app.module.ts", "change": "imports: [..., CategoriesModule]" },
+        { "path": "shared-types/index.ts", "change": "add Category interface" }
+      ],
+      "prisma_fields": {
+        "create": "name, slug, description (optional)",
+        "read": "id, name, slug, description, createdAt, updatedAt",
+        "update": "name?, slug?, description?",
+        "delete": "id"
+      },
+      "endpoints": [
+        { "method": "GET",    "path": "/categories",      "desc": "list all categories, include product count" },
+        { "method": "GET",    "path": "/categories/:id",  "desc": "get one category by id or slug" },
+        { "method": "POST",   "path": "/categories",      "desc": "create category (ADMIN/SELLER)" },
+        { "method": "PUT",    "path": "/categories/:id",  "desc": "update category" },
+        { "method": "DELETE", "path": "/categories/:id",  "desc": "soft-delete (set isActive=false) or hard delete" }
+      ],
+      "notes": [
+        "Follow existing Users/Stores/Products module pattern: service + controller + module trio.",
+        "Category model already exists in prisma/schema.prisma with fields: id, name (unique), slug (unique), description, createdAt, updatedAt, products[] relation.",
+        "Use PrismaService from existing prisma module. No new Prisma client needed.",
+        "DTO: name (required, min 3 chars), slug (optional, auto-generated from name if omitted), description (optional).",
+        "Add @IsString(), @IsOptional(), @IsUrl() validators matching create-product.dto style if class-validator is wired in."
+      ]
+    },
+    {
+      "id": "SEED",
+      "title": "Seed script: categories + stores + products",
+      "priority": "high",
+      "files_to_create": [
+        { "path": "nestjs-backend/prisma/seed.ts", "action": "create (overwrites existing stub at root prisma/seed.ts — prefer nestjs-backend/prisma/seed.ts to keep backend self-contained)" }
+      ],
+      "files_to_modify": [
+        { "path": "nestjs-backend/package.json", "change": "add 'prisma': { 'seed': 'ts-node prisma/seed.ts' }" },
+        { "path": "nestjs-backend/tsconfig.json", "change": "ensure ts-node is in compilerOptions if not already" }
+      ],
+      "data_model": {
+        "categories": [
+          { "name": "Sayuran Segar",        "slug": "sayuran-segar" },
+          { "name": "Buah-buahan",          "slug": "buah-buahan" },
+          { "name": "Daging & Protein",     "slug": "daging-protein" },
+          { "name": "Keripik & Camilan",    "slug": "keripik-camilan" },
+          { "name": "Bahan Kue & Jajanan",  "slug": "bahan-kue-jajanan" },
+          { "name": "Bumbu & Rempah",       "slug": "bumbu-rempah" }
+        ],
+        "stores": "Create 3-5 stores; each store needs an existing User (SELLER role) as ownerId. Create sellers first in seed.",
+        "products": "10-15 products spread across categories and stores. Required fields: name, slug, description, price (Decimal→number in Prisma), stock (Int), images (String[]), categoryId, sellerId, storeId (optional)."
+      },
+      "seed_sequence": [
+        "Create SELLER-role users (if none exist).",
+        "Create categories (idempotent: upsert by slug).",
+        "Create stores linked to seller users.",
+        "Create products linked to categoryId + sellerId + storeId."
+      ],
+      "prisma_fields_used": {
+        "User": "id, email, passwordHash, fullName, role (SELLER)",
+        "Category": "id, name, slug, description",
+        "Store": "id, name, slug, description, ownerId (relation: owner User)",
+        "Product": "id, name, slug, description, price, stock, images, categoryId, sellerId, storeId, isActive=true"
+      },
+      "notes": [
+        "Use prisma.upsert for idempotency so seed is safe to re-run.",
+        "Price: Prisma Decimal maps to number in TS; store as number in seed data.",
+        "Images: use placeholder URLs like https://picsum.photos/seed/{slug}/400/400 or local asset paths.",
+        "Run with: npx prisma db seed (after wiring package.json prisma.seed) or npx ts-node prisma/seed.ts.",
+        "Existing root-level prisma/seed.ts is a Next.js page stub — do not use it; write to nestjs-backend/prisma/seed.ts."
+      ]
+    },
+    {
+      "id": "STORES-PAGE",
+      "title": "Stores listing page (Next.js)",
+      "priority": "high",
+      "files_to_create": [
+        { "path": "nextjs-web/src/app/stores/StoreCard.tsx", "action": "create" }
+      ],
+      "files_to_modify": [
+        { "path": "nextjs-web/src/app/stores/page.tsx", "change": "fetch stores from API, render grid of StoreCard" },
+        { "path": "nextjs-web/src/app/layout.tsx", "change": "add global font/tailwind setup if not present" }
+      ],
+      "api_to_consume": {
+        "endpoint": "GET /stores",
+        "expected_shape": "Array of { id, name, slug, description, owner: { id, fullName, email }, products: Product[] }"
+      },
+      "design_tokens": {
+        "colors": "text-primary (#154212), bg-cream (#fbf9f4), surface containers from DESIGN.md surface-* scale",
+        "typography": "headline-lg (32px Be Vietnam Pro 700) for page title; body-md (16px) for descriptions; label-md (Work Sans 14px 600) for metadata",
+        "spacing": "lg (40px) vertical gap between sections; gutter (16px) card padding; md (24px) grid gap",
+        "rounded": "rounded-lg (1rem) for store cards; rounded (0.5rem) for buttons inside cards",
+        "elevation": "1px border outline-variant (#c2c9bb), hover border → primary (#154212); no lift shadow — tonal approach"
+      },
+      "implementation_notes": [
+        "'use client' component with useState + useEffect fetching GET /stores (axios or fetch).",
+        "Render responsive grid: single column mobile, 2-col tablet, 3-col desktop (match 4/8/12 fluid grid from DESIGN.md).",
+        "StoreCard shows: store name (link to /stores/[slug] or /stores/[id]), owner name, product count badge, short description.",
+        "Add skeleton/loading state while data fetches.",
+        "Slug-based routing preferred: /stores/[slug] maps to store detail (future). For now, /stores/[id] works."
+      ]
+    },
+    {
+      "id": "CART",
+      "title": "Cart page + state management",
+      "priority": "high",
+      "files_to_create": [
+        { "path": "nextjs-web/src/contexts/CartContext.tsx", "action": "create" },
+        { "path": "nextjs-web/src/components/CartItem.tsx", "action": "create" },
+        { "path": "nextjs-web/src/components/AddToCartButton.tsx", "action": "create" }
+      ],
+      "files_to_modify": [
+        { "path": "nextjs-web/src/app/cart/page.tsx", "change": "full cart implementation using CartContext" },
+        { "path": "nextjs-web/src/app/layout.tsx", "change": "wrap <body> with <CartProvider>" }
+      ],
+      "state_management": {
+        "approach": "React Context + useReducer (not external library)",
+        "rationale": "Fits single-cart-tenant app; no auth-bound multi-cart yet; avoids Redux/Zustand overhead. Can migrate to Zustand later if cart logic grows.",
+        "context_shape": {
+          "items": "CartItem[] — { productId, name, slug, price, quantity, image, storeId, storeName }",
+          "addItem": "({ product, quantity }) => void — increment qty if already in cart",
+          "removeItem": "(productId) => void",
+          "updateQuantity": "(productId, quantity) => void",
+          "clearCart": "() => void",
+          "total": "number — computed from items",
+          "itemCount": "number — sum of quantities"
+        },
+        "persistence": "localStorage sync via useEffect in provider; re-read on mount. Optional: sync to server later when user auth is in place.",
+        "cart_item_id": "productId (one entry per product; quantity increments)"
+      },
+      "design_tokens": {
+        "colors": "cart item rows: surface-container (#f0eee9) bg; remove button: error-container tint; quantity controls: primary border on focus",
+        "typography": "body-md for item details, label-sm for quantity steppers, headline-md for cart title",
+        "spacing": "gutter (16px) item padding, md (24px) section gaps",
+        "rounded": "rounded (0.5rem) on inputs/buttons; rounded-lg (1rem) on cart container card"
+      },
+      "cart_page_layout": [
+        "Header: 'Keranjang Belanja' (headline-lg), item count badge.",
+        "Cart items list: each row = product image (1:1, rounded-lg), name+store, unit price, quantity stepper (− / count / +), line total, remove link.",
+        "Footer: subtotal, shipping note (free shipping threshold if applicable), 'Checkout' button (primary fill #154212 / on-primary #fff) — link to /checkout when ready.",
+        "Empty state: illustration-free message 'Keranjang masih kosong. Yuk cari produk!' with link back to /products."
+      ]
+    },
+    {
+      "id": "PRODUCT-DETAIL",
+      "title": "Product detail page",
+      "priority": "high",
+      "files_to_create": [
+        { "path": "nextjs-web/src/app/products/[slug]/page.tsx", "action": "create" },
+        { "path": "nextjs-web/src/components/ProductImageGallery.tsx", "action": "create" },
+        { "path": "nextjs-web/src/components/ProductInfo.tsx", "action": "create" }
+      ],
+      "files_to_modify": [
+        { "path": "nextjs-web/src/app/products/page.tsx", "change": "product cards link to /products/[slug]" },
+        { "path": "nextjs-web/src/app/layout.tsx", "change": "already covered; no separate change" }
+      ],
+      "api_to_consume": {
+        "endpoint": "GET /products/:id (or add GET /products?slug=:slug to products controller)",
+        "recommended": "Add slugs-based lookup: GET /products/slug/:slug → productsService.findBySlug(). Add to ProductsController + Service.",
+        "fallback": "Fetch all products once and find by slug client-side if slug endpoint not yet added (acceptable for small catalog; switch to server lookup when catalog grows)."
+      },
+      "data_to_fetch": {
+        "product": "id, name, slug, description, price, stock, images[], category: { id, name, slug }, store: { id, name, slug }, seller: { id, fullName }",
+        "related": "optional: GET /products?categoryId=:categoryId&exclude=:id&limit=4 for 'Produk Lainnya' section"
+      },
+      "prisma_fields": "All Product fields + relations category, store, seller (same as productsService.findById include).",
+      "design_tokens": {
+        "colors": "Image container: surface-container-highest (#e4e2dd) placeholder; title on-background (#1b1c19); price in primary (#154212) bold; stock badge tertiary-container (#6c4924) bg if low stock",
+        "typography": "headline-md (24px) product name; body-md description; label-md price + metadata; label-sm for seller/store attribution",
+        "rounded": "Product image rounded-lg (1rem); AddToCartButton rounded (0.5rem); info card rounded-lg",
+        "spacing": "xl (64px) top section gap; md (24px) between image and info on desktop; gutter (16px) internal",
+        "layout": "Desktop: 2-col grid — image left (sticky top on scroll), info right. Mobile: stacked, image first."
+      },
+      "components_breakdown": [
+        { "name": "ProductImageGallery", "role": "Renders primary image + thumbnail strip if multiple images. 1:1 aspect ratio. Lazy-load thumbnails." },
+        { "name": "ProductInfo", "role": "Name (linkable H1), price, stock indicator, category chip (Tertiary bg, dark text — per DESIGN.md chips), description, store card mini (store name → /stores/[slug]), AddToCartButton." },
+        { "name": "AddToCartButton", "role": "Uses CartContext. Disabled state when product not in catalog or stock 0. Shows 'Tambah ke Keranjang' / 'Sudah di Keranjang' toggle." }
+      ],
+      "notes": [
+        "Use next/link for internal navigation to keep SPA feel.",
+        "Price formatting: currency IDR, e.g. Rp 25.000 — write small formatPrice helper in shared utils.",
+        "Stock: if stock === 0, show 'Habis' badge and disable AddToCartButton.",
+        "Category chip uses tertiary (#52330f) bg + on-tertiary (#ffffff) text, rounded-full pill — matches DESIGN.md 'Chips & Tags' section."
+      ]
+    }
+  ],
+  "shared_design_tokens": {
+    "tailwind_config_extends": {
+      "colors": { "primary": "#154212", "secondary": "#456800", "tertiary": "#52330f", "background": "#fbf9f4", "cream": "#fbf9f4" },
+      "fontFamily": { "sans": ["Be Vietnam Pro", "sans-serif"], "body": ["Work Sans", "sans-serif"] }
+    },
+    "design_system_ref": "stitch_pasar.id_local_digital_marketplace/pasar.id_design_system/DESIGN.md",
+    "named_tokens_used_across_features": [
+      "primary / on-primary / primary-container (buttons, active states)",
+      "tertiary / tertiary-container (category chips, badges)",
+      "surface-container / surface-container-high (card backgrounds, placeholders)",
+      "outline / outline-variant (borders, dividers)",
+      "background / on-background (page bg + primary text)",
+      "spacing scale: xs(4px) sm(12px) md(24px) lg(40px) xl(64px) gutter(16px)",
+      "rounded scale: sm(4px) DEFAULT(8px) md(12px) lg(16px) xl(24px) full"
+    ]
+  },
+  "shared_types_to_add": {
+    "path": "shared-types/index.ts",
+    "additions": [
+      { "name": "Category", "fields": "id, name, slug, description?, createdAt, updatedAt" },
+      { "name": "CartItem", "fields": "productId, name, slug, price, quantity, image, storeId, storeName" }
+    ]
+  },
+  "crawl_before_implement": [
+    "Confirm NestJS is running on port 3000 and /products, /stores endpoints respond.",
+    "Confirm Next.js dev server runs and can reach NestJS at http://localhost:3000 (CORS configured? Check nestjs-main.ts or cors setup).",
+    "Confirm DATABASE_URL in nestjs-backend/.env points to a reachable Postgres with prisma migrate applied.",
+    "Run npx prisma generate in nestjs-backend if schema changed (not needed here — Category already in schema)."
+  ]
+}

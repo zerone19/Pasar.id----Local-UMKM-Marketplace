@@ -30,11 +30,13 @@ export default function ProductsPage() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get<Product[]>('http://localhost:3000/products');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+      const response = await axios.get<Product[]>(`${apiUrl}/products`);
       const activeProducts = response.data.filter((p) => p.isActive);
       setProducts(activeProducts);
       setLoading(false);
     } catch (err) {
+      console.error('Failed to fetch products:', err);
       setError('Gagal memuat produk. Silakan coba lagi.');
       setLoading(false);
     }
