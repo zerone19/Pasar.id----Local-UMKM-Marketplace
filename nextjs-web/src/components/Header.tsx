@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useCart } from '@/contexts/CartContext';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { itemCount } = useCart();
 
   return (
     <nav className="bg-surface full-width top-0 z-50 border-b border-outline-variant sticky transition-all duration-300">
@@ -23,23 +25,23 @@ export default function Header() {
         <ul className="hidden md:flex items-center gap-6">
           <li>
             <Link href="/" className="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md">
-              Pasar
+              Beranda
             </Link>
           </li>
           <li>
             <Link
-              href="/categories"
+              href="/products"
               className="text-primary font-bold border-b-2 border-primary pb-1 text-label-md font-label-md"
             >
-              Kategori
+              Produk
             </Link>
           </li>
           <li>
             <Link
-              href="/umkm"
+              href="/stores"
               className="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md"
             >
-              UMKM Terdekat
+              UMKM
             </Link>
           </li>
           <li>
@@ -73,22 +75,26 @@ export default function Header() {
             <span className="material-icons">location_on</span>
           </button>
 
-          <button
+          <Link
+            href="/cart"
             aria-label="Shopping Basket"
             className="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full relative"
           >
             <span className="material-icons">shopping_basket</span>
-            <span className="absolute top-1 right-1 bg-error text-on-error text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
-              3
-            </span>
-          </button>
+            {itemCount > 0 && (
+              <span className="absolute top-1 right-1 bg-error text-on-error text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                {itemCount}
+              </span>
+            )}
+          </Link>
 
-          <button
+          <Link
+            href="/auth/login"
             aria-label="Account"
-            className="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full hidden md:block"
+            className="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full hidden md:flex"
           >
             <span className="material-icons">account_circle</span>
-          </button>
+          </Link>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -108,19 +114,19 @@ export default function Header() {
             href="/"
             className="block text-on-surface-variant hover:text-primary transition-colors py-2"
           >
-            Pasar
+            Beranda
           </Link>
           <Link
-            href="/categories"
+            href="/products"
             className="block text-on-surface-variant hover:text-primary transition-colors py-2"
           >
-            Kategori
+            Produk
           </Link>
           <Link
-            href="/umkm"
+            href="/stores"
             className="block text-on-surface-variant hover:text-primary transition-colors py-2"
           >
-            UMKM Terdekat
+            UMKM
           </Link>
           <Link
             href="/about"

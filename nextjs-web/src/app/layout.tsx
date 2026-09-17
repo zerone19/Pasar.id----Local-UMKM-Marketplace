@@ -1,5 +1,6 @@
 import './globals.css';
 import type { ReactNode } from 'react';
+import { CartProvider } from '@/contexts/CartContext';
 
 export const metadata = {
   title: {
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className="bg-background text-on-background font-sans antialiased">
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

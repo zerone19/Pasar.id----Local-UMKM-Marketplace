@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import AddToCartButton from '@/components/AddToCartButton';
 import Link from 'next/link';
 
 interface Category {
@@ -190,13 +191,18 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </div>
 
               <div className="pt-6">
-                <Link
-                  href="/cart"
-                  className="w-full bg-primary text-on-primary py-3 px-6 rounded-lg font-label-md text-center hover:bg-primary/80 transition flex items-center justify-center gap-2"
-                >
-                  <span className="material-icons text-sm">shopping_cart</span>
-                  Tambah ke Keranjang
-                </Link>
+                <AddToCartButton
+                  product={{
+                    id: product.id,
+                    slug: product.slug,
+                    name: product.name,
+                    price: product.price,
+                    images: product.images,
+                  }}
+                  sellerName={product.seller?.fullName}
+                  sellerId={product.seller?.id || ''}
+                  disabled={product.stock === 0}
+                />
               </div>
             </div>
           </div>
