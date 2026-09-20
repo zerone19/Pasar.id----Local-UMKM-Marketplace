@@ -1,112 +1,85 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
+const categories = [
+  { name: 'Sayur Segar', image: '/stitch/category-vegetables.jpg', href: '/products?category=sayur' },
+  { name: 'Jajanan Pasar', image: '/stitch/category-snacks.jpg', href: '/products?category=jajanan' },
+  { name: 'Kerajinan Lokal', image: '/stitch/category-crafts.jpg', href: '/products?category=kerajinan' },
+  { name: 'Daging & Ikan', image: '/stitch/category-meat.jpg', href: '/products?category=daging' },
+];
+
+const featuredStores = [
+  { name: 'Bu Ning Buah Segar', location: 'Pasar Beringharjo', image: '/stitch/store-bu-ning.jpg', size: 'large' },
+  { name: 'Kriya Anyam Mbah Tarjo', location: 'Bantul', image: '/stitch/store-kriya.jpg', size: 'small' },
+  { name: 'Toko Jajanan Ayu', location: 'Pasar Senen', image: '/stitch/store-jajanan.jpg', size: 'small' },
+];
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-cream pb-16">
-        {/* Hero Section */}
-        <section className="px-5 md:px-8 max-w-7xl mx-auto py-16">
-          <div className="relative rounded-xl overflow-hidden shadow-organic min-h-[400px] flex items-center bg-surface-container-high">
-            <div className="absolute inset-0 z-0 bg-primary opacity-20"></div>
-            <div className="relative z-10 p-8 md:p-12 max-w-2xl bg-primary/80 backdrop-blur-sm rounded-xl border border-primary-fixed/20 shadow-organic">
-              <h1 className="font-headline-xl text-4xl md:text-5xl text-surface-container-lowest mb-6 leading-tight">
-                Mendukung UMKM Lokal, Dari Pasar ke Pintu Anda.
+      <main className="min-h-screen bg-cream pb-20">
+        <section className="mx-auto max-w-7xl px-5 pb-14 pt-8 md:px-8 md:pt-12">
+          <div className="relative isolate grid min-h-[500px] overflow-hidden rounded-2xl bg-primary shadow-organic lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="relative z-10 flex flex-col justify-center p-8 md:p-12 lg:p-16">
+              <span className="mb-5 inline-flex w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1 font-label-sm text-white/80">
+                Pasar lokal, lebih dekat
+              </span>
+              <h1 className="max-w-xl font-headline-xl text-4xl leading-[1.08] tracking-tight text-white md:text-6xl">
+                Dari pasar lokal, sampai ke pintu Anda.
               </h1>
-              <p className="font-body-lg text-lg text-surface-container-lowest mb-8 max-w-md">
-                Temukan kesegaran sayur mayur, kelezatan jajanan pasar, dan keunikan kerajinan tangan dari ribuan penjual lokal terpercaya.
+              <p className="mt-6 max-w-lg font-body-lg text-base leading-7 text-white/80 md:text-lg">
+                Temukan bahan segar, jajanan pasar, dan karya tangan dari penjual lokal yang Anda percaya.
               </p>
-              <button className="bg-tertiary text-white font-label-md px-8 py-3 rounded-lg hover:bg-tertiary/80 transition-all flex items-center justify-center gap-2">
-                Mulai Belanja
-                <span className="material-icons text-sm">arrow_forward</span>
-              </button>
+              <Link href="/products" className="mt-8 inline-flex w-fit items-center gap-3 rounded-lg bg-[#bfef73] px-6 py-3 font-label-md text-[#173b14] transition-transform hover:-translate-y-0.5 active:scale-[0.98]">
+                Mulai Belanja <span aria-hidden="true" className="text-lg">↗</span>
+              </Link>
+            </div>
+            <div className="relative min-h-[280px] overflow-hidden lg:min-h-full">
+              <Image src="/stitch/hero-market.jpg" alt="Suasana pasar tradisional Indonesia" fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/20 to-transparent lg:from-primary/50 lg:via-transparent" />
+              <div className="absolute bottom-5 right-5 rounded-lg bg-white/90 px-4 py-3 text-sm text-on-surface shadow-organic backdrop-blur-sm">
+                Belanja dari penjual sekitar
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Categories Section */}
-        <section className="px-5 md:px-8 max-w-7xl mx-auto py-12">
-          <div className="flex justify-between items-end mb-6">
+        <section className="mx-auto max-w-7xl px-5 py-10 md:px-8">
+          <div className="mb-7 flex items-end justify-between gap-4">
             <div>
-              <h2 className="font-headline-md text-2xl text-primary mb-1">Kategori Pilihan</h2>
-              <p className="font-body-sm text-sm text-on-surface-variant">
-                Jelajahi kebutuhan harian Anda
-              </p>
+              <h2 className="font-headline-md text-3xl text-primary">Kategori pilihan</h2>
+              <p className="mt-2 font-body-sm text-on-surface-variant">Jelajahi kebutuhan harian Anda</p>
             </div>
+            <Link href="/products" className="hidden font-label-md text-primary hover:underline sm:block">Lihat semua produk →</Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {categories.map((cat) => (
-              <div
-                key={cat.id}
-                className="block relative overflow-hidden rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm hover:border-primary hover:shadow-organic transition-all"
-              >
-                <div className="h-32 bg-surface-container-high flex items-center justify-center">
-                  <span className="material-icons text-4xl text-secondary">{cat.icon}</span>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+            {categories.map((category) => (
+              <Link key={category.name} href={category.href} className="group overflow-hidden rounded-xl border border-outline-variant bg-white transition-colors hover:border-primary">
+                <div className="relative aspect-[1.15] overflow-hidden bg-surface-container-high">
+                  <Image src={category.image} alt={category.name} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <div className="p-3 text-center">
-                  <span className="font-label-md text-sm text-on-surface">{cat.name}</span>
+                <div className="flex items-center justify-between px-4 py-4">
+                  <span className="font-label-md text-on-surface">{category.name}</span>
+                  <span aria-hidden="true" className="text-primary opacity-0 transition-opacity group-hover:opacity-100">↗</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
 
-        {/* Featured MSME Section */}
-        <section className="px-5 md:px-8 max-w-7xl mx-auto py-16">
-          <h2 className="font-headline-md text-2xl text-primary mb-1">UMKM Unggulan</h2>
-          <p className="font-body-sm text-sm text-on-surface-variant mb-8">
-            Dukung penggerak ekonomi sekitar Anda
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Main Feature */}
-            <div className="md:col-span-2 relative rounded-xl overflow-hidden group shadow-organic border border-outline-variant">
-              <div className="bg-primary/30 h-[400px] flex items-center justify-center">
-                <span className="material-icons text-8xl text-primary">store</span>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6 w-full">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="bg-tertiary text-white font-label-sm px-2 py-1 rounded-sm text-xs">
-                    Pilihan Editor
-                  </span>
-                  <span className="flex items-center text-surface-container-lowest font-label-sm text-xs">
-                    <span className="material-icons text-xs mr-1">location_on</span>
-                    Pasar Beringharjo
-                  </span>
-                </div>
-                <h3 className="font-headline-md text-xl text-surface-container-lowest">
-                  Bu Ning Buah Segar
-                </h3>
-                <p className="font-body-sm text-sm text-surface-variant mt-1 max-w-md">
-                  Menyediakan buah-buahan lokal kualitas terbaik sejak 1995. Langsung dari petani.
-                </p>
-              </div>
-            </div>
-
-            {/* Secondary Features */}
-            <div className="flex flex-col gap-6">
-              {featuredStores.slice(0, 2).map((store) => (
-                <div
-                  key={store.id}
-                  className="relative rounded-xl overflow-hidden group shadow-sm border border-outline-variant flex-1"
-                >
-                  <div className="bg-secondary/20 h-48 flex items-center justify-center">
-                    <span className="material-icons text-5xl text-secondary">favorite</span>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 p-4 w-full">
-                    <h3 className="font-headline-md text-lg text-surface-container-lowest">
-                      {store.name}
-                    </h3>
-                    <span className="flex items-center text-surface-variant font-label-sm text-xs mt-1">
-                      <span className="material-icons text-xs mr-1">location_on</span>
-                      {store.location}
-                    </span>
-                  </div>
-                </div>
-              ))}
+        <section className="mx-auto max-w-7xl px-5 py-12 md:px-8">
+          <div className="mb-7">
+            <h2 className="font-headline-md text-3xl text-primary">UMKM unggulan</h2>
+            <p className="mt-2 font-body-sm text-on-surface-variant">Dukung penggerak ekonomi di sekitar Anda</p>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-[1.45fr_0.8fr]">
+            <StoreCard store={featuredStores[0]} large />
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+              <StoreCard store={featuredStores[1]} />
+              <StoreCard store={featuredStores[2]} />
             </div>
           </div>
         </section>
@@ -116,14 +89,16 @@ export default function Home() {
   );
 }
 
-const categories = [
-  { id: 1, name: 'Sayur Segar', icon: 'eco' },
-  { id: 2, name: 'Jajanan Pasar', icon: 'favorite' },
-  { id: 3, name: 'Kerajinan Lokal', icon: 'handcraft' },
-  { id: 4, name: 'Daging & Ikan', icon: 'restaurant' },
-];
-
-const featuredStores = [
-  { id: 1, name: 'Kriya Anyam Mbah Tarjo', location: 'Bantul' },
-  { id: 2, name: 'Toko Jajanan Ayu', location: 'Pasar Senen' },
-];
+function StoreCard({ store, large = false }: { store: typeof featuredStores[number]; large?: boolean }) {
+  return (
+    <Link href="/stores" className={`group relative block overflow-hidden rounded-xl bg-primary ${large ? 'min-h-[420px]' : 'min-h-[200px]'}`}>
+      <Image src={store.image} alt={store.name} fill sizes={large ? '(max-width: 1024px) 100vw, 65vw' : '(max-width: 1024px) 50vw, 35vw'} className="object-cover transition-transform duration-700 group-hover:scale-105" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 p-5 text-white md:p-6">
+        <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-white/70">UMKM lokal</p>
+        <h3 className={`${large ? 'text-2xl md:text-3xl' : 'text-xl'} font-headline-md`}>{store.name}</h3>
+        <p className="mt-1 text-sm text-white/75">{store.location}</p>
+      </div>
+    </Link>
+  );
+}

@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import Icon from '@/components/Icon';
+import ProductCard from '@/components/ProductCard';
 
 interface Category {
   id: string;
@@ -43,8 +45,8 @@ export default function ProductsPage() {
   const fetchProducts = async () => {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-      const response = await axios.get<Product[]>(`${apiUrl}/products`);
-      const activeProducts = response.data.filter((p) => p.isActive);
+      const response = await axios.get<{ data: Product[] }>(`${apiUrl}/products`);
+      const activeProducts = response.data.data.filter((p) => p.isActive);
       setProducts(activeProducts);
       setLoading(false);
     } catch (err) {
@@ -89,7 +91,7 @@ export default function ProductsPage() {
         <main className="min-h-screen bg-cream pb-16">
           <div className="px-5 md:px-8 max-w-7xl mx-auto py-12">
             <div className="text-center py-12">
-              <span className="material-icons text-6xl text-error mb-4">error</span>
+              <Icon name="error" size={48} className="mb-4 text-error" />
               <p className="text-error font-label-md">{error}</p>
               <button
                 onClick={fetchProducts}
@@ -121,9 +123,7 @@ export default function ProductsPage() {
         <section className="px-5 md:px-8 max-w-7xl mx-auto pb-12">
           {products.length === 0 ? (
             <div className="text-center py-16">
-              <span className="material-icons text-6xl text-on-surface-variant mb-4 opacity-30">
-                inventory_2
-              </span>
+              <Icon name="inventory_2" size={48} className="mb-4 text-on-surface-variant opacity-30" />
               <p className="font-body-md text-lg text-on-surface-variant">
                 Belum ada produk tersedia
               </p>
@@ -133,42 +133,7 @@ export default function ProductsPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {products.map((product) => (
-                <Link
-                  key={product.id}
-                  href={`/products/${product.slug}`}
-                  className="group relative bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm hover:shadow-organic hover:border-primary transition-all overflow-hidden"
-                >
-                  <div className="aspect-square h-48 bg-surface-container-high rounded-t-xl overflow-hidden">
-                    {product.images && product.images.length > 0 ? (
-                      <img
-                        src={product.images[0]}
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-primary/10">
-                        <span className="material-icons text-4xl text-primary">
-                          image
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-headline-md text-base text-on-surface group-hover:text-primary transition-colors line-clamp-1">
-                      {product.name}
-                    </h3>
-                    {product.seller && (
-                      <p className="font-body-sm text-xs text-on-surface-variant mt-1">
-                        Dari {product.seller.fullName}
-                      </p>
-                    )}
-                    <p className="font-label-md text-sm text-primary mt-2">
-                      Rp {formatPrice(product.price)}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+              {products.map((product) => <ProductCard key={product.id} product={product} />)}
             </div>
           )}
         </section>

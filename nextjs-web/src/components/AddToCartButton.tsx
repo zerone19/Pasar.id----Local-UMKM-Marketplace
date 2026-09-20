@@ -2,6 +2,7 @@
 
 import { useCart } from '@/contexts/CartContext';
 import { useState } from 'react';
+import Icon from '@/components/Icon';
 
 interface AddToCartButtonProps {
   product: {
@@ -57,39 +58,41 @@ export default function AddToCartButton({
   }
 
   return (
-    <div className="flex gap-3">
-      <div className="flex items-center border border-outline-variant rounded-lg bg-surface-container-lowest">
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-stretch gap-2">
+      <div className="flex h-11 items-center rounded-lg border border-outline-variant bg-surface-container-lowest">
         <button
           type="button"
+          aria-label="Kurangi jumlah"
+          disabled={quantity === 1}
           onClick={() => setQuantity(Math.max(1, quantity - 1))}
-          className="px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-l-lg transition"
+          className="flex h-full w-9 items-center justify-center rounded-l-lg text-on-surface-variant transition hover:bg-surface-container-high hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-35"
         >
-          <span className="material-icons text-sm">remove</span>
+          <Icon name="remove" size={15} />
         </button>
-        <span className="px-3 py-1 font-body-md text-on-surface min-w-[3rem] text-center">
+        <span aria-label={`Jumlah ${quantity}`} className="flex h-full min-w-8 items-center justify-center border-x border-outline-variant px-1 text-sm font-semibold text-on-surface">
           {quantity}
         </span>
         <button
           type="button"
+          aria-label="Tambah jumlah"
           onClick={() => setQuantity(quantity + 1)}
-          className="px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r-lg transition"
+          className="flex h-full w-9 items-center justify-center rounded-r-lg text-on-surface-variant transition hover:bg-surface-container-high hover:text-on-surface"
         >
-          <span className="material-icons text-sm">add</span>
+          <Icon name="add" size={15} />
         </button>
       </div>
 
       <button
+        type="button"
         onClick={handleAdd}
-        className={`flex-1 py-3 px-6 rounded-lg font-label-md transition flex items-center justify-center gap-2 ${
+        className={`flex h-11 min-w-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg px-3 text-xs font-semibold transition sm:text-sm ${
           inCart
             ? 'bg-secondary text-on-secondary hover:bg-secondary/80'
             : 'bg-primary text-on-primary hover:bg-primary/80'
         }`}
       >
-        <span className="material-icons text-sm">
-          {inCart ? 'done' : 'shopping_cart'}
-        </span>
-        {added ? 'Ditambahkan!' : inCart ? 'Di Keranjang' : 'Tambah ke Keranjang'}
+        <Icon name={inCart ? 'check' : 'shopping_cart'} size={16} />
+        <span className="truncate">{added ? 'Ditambahkan' : inCart ? 'Di Keranjang' : 'Tambah ke Keranjang'}</span>
       </button>
     </div>
   );

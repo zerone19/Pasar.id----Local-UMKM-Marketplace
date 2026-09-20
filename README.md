@@ -119,6 +119,15 @@ Pasar.ID adalah marketplace UMKM lokal yang menghubungkan pedagang pasar tradisi
 | **Phase 6** | Mobile (Flutter App) | ✅ MVP scaffold |
 | **Phase 7** | Growth (Notifications, Reviews, Vouchers, Analytics, Chat) | ✅ MVP selesai |
 
+### Audit UI & Data Terbaru — 21 September 2026
+- 8 toko UMKM aktif dengan minimal 4 produk per toko; runtime saat ini terverifikasi 36 produk aktif.
+- Gambar produk dibuat sebagai asset lokal di `nextjs-web/public/stitch/products/` dan dipetakan berdasarkan kategori.
+- Backend menormalisasi gambar kosong, URL eksternal, dan URL legacy ke fallback gambar kategori untuk semua toko dan produk baru.
+- Halaman toko memakai kartu katalog yang dapat diklik menuju detail produk; aksi `Tambah ke Keranjang` tersedia di detail produk, bukan di kartu toko.
+- Frame produk dibuat konsisten dan responsif; tombol aksi tidak lagi pecah menjadi beberapa baris.
+- Header dan footer memakai `/stitch/logo-mark.jpg` di samping nama Pasar.ID.
+- Icon marketplace publik menggunakan SVG lokal agar tidak tampil sebagai nama literal ketika font eksternal gagal dimuat.
+
 ### MVP Sprint Plan
 
 | Sprint | Deliverable |

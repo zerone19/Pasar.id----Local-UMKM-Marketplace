@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { normalizeProductImages } from '../../common/product-images';
 
 interface ProductFilters {
   category?: string;
@@ -64,8 +65,13 @@ export class ProductsService {
       this.prisma.product.count({ where }),
     ]);
 
+    const normalizedProducts = products.map((product) => ({
+      ...product,
+      images: normalizeProductImages(product.images, product.category?.slug),
+    }));
+
     return {
-      data: products,
+      data: normalizedProducts,
       meta: {
         total,
         page,
@@ -85,7 +91,7 @@ export class ProductsService {
       },
     });
     if (!product) throw new NotFoundException('Product tidak ditemukan');
-    return product;
+    return { ...product, images: normalizeProductImages(product.images, product.category?.slug) };
   }
 
   async findBySlug(slug: string) {
@@ -98,10 +104,13 @@ export class ProductsService {
       },
     });
     if (!product) throw new NotFoundException('Product tidak ditemukan');
-    return product;
+    return { ...product, images: normalizeProductImages(product.images, product.category?.slug) };
   }
 
   async create(data: { name: string; slug: string; description?: string; price: number; stock: number; images: string[]; categoryId: string; sellerId: string; storeId?: string }) {
-    return this.prisma.product.create({ data });
+    const category = await this.prisma.category.findUnique({ where: { id: data.categoryId }, select: { slug: true } });
+    return this.prisma.product.create({
+      data: { ...data, images: normalizeProductImages(data.images, category?.slug) },
+    });
   }
 }

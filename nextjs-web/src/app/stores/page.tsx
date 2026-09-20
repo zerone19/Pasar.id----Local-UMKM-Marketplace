@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import Icon from '@/components/Icon';
 
 interface User {
   id: string;
@@ -77,7 +78,7 @@ export default function StoresPage() {
         <Header />
         <main className="min-h-screen bg-cream pb-16">
           <div className="px-5 md:px-8 max-w-7xl mx-auto py-16 text-center">
-            <span className="material-icons text-6xl text-error mb-4">error</span>
+            <Icon name="error" size={48} className="mb-4 text-error" />
             <p className="text-error font-label-md mb-6">{error}</p>
             <button
               onClick={fetchStores}
@@ -104,9 +105,7 @@ export default function StoresPage() {
 
           {stores.length === 0 ? (
             <div className="text-center py-16">
-              <span className="material-icons text-6xl text-on-surface-variant mb-4 opacity-30">
-                storefront
-              </span>
+              <Icon name="storefront" size={48} className="mb-4 text-on-surface-variant opacity-30" />
               <p className="font-body-md text-lg text-on-surface-variant">
                 Belum ada toko terdaftar
               </p>
@@ -126,9 +125,7 @@ export default function StoresPage() {
                     <h3 className="font-headline-md text-lg text-on-surface group-hover:text-primary transition-colors line-clamp-1">
                       {store.name}
                     </h3>
-                    <span className="material-icons text-on-surface-variant text-sm">
-                      arrow_forward
-                    </span>
+                    <Icon name="arrow_forward" size={18} className="text-on-surface-variant" />
                   </div>
                   <p className="font-body-sm text-sm text-on-surface-variant mb-3 line-clamp-2">
                     {store.description || 'Toko UMKM lokal'}

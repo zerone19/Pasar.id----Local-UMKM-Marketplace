@@ -1,11 +1,11 @@
+import Image from 'next/image';
+
 export default function Footer() {
   return (
     <footer className="bg-surface-container-high full-width py-8 border-t border-outline-variant mt-16">
       <div className="flex flex-col md:flex-row justify-between items-center w-full px-5 md:px-8 max-w-7xl mx-auto gap-6">
         <div className="flex items-center gap-3">
-          <div className="bg-primary rounded-full p-2">
-            <span className="material-icons text-white text-xl">shopping_cart</span>
-          </div>
+          <Image src="/stitch/logo-mark.jpg" alt="Logo Pasar.ID" width={40} height={40} className="h-10 w-10 rounded-lg object-cover" />
           <span className="font-headline-md text-xl text-primary">Pasar.ID</span>
         </div>
 

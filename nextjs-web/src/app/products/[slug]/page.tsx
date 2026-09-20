@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AddToCartButton from '@/components/AddToCartButton';
 import Link from 'next/link';
+import Icon from '@/components/Icon';
 
 interface Category {
   id: string;
@@ -91,7 +92,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         <Header />
         <main className="min-h-screen bg-cream pb-16">
           <div className="px-5 md:px-8 max-w-7xl mx-auto py-16 text-center">
-            <span className="material-icons text-6xl text-error mb-4">error</span>
+            <Icon name="error" size={48} className="mb-4 text-error" />
             <p className="text-error font-label-md mb-6">{error}</p>
             <Link
               href="/products"
@@ -137,9 +138,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <span className="material-icons text-6xl text-on-surface-variant opacity-30">
-                      image
-                    </span>
+                    <Icon name="image" size={48} className="text-on-surface-variant opacity-30" />
                   </div>
                 )}
               </div>

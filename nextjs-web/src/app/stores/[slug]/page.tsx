@@ -4,8 +4,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import AddToCartButton from '@/components/AddToCartButton';
 import Link from 'next/link';
+import Icon from '@/components/Icon';
 
 interface Category {
   id: string;
@@ -90,7 +90,7 @@ export default function StoreDetailPage({ params }: { params: { slug: string } }
         <Header />
         <main className="min-h-screen bg-cream pb-16">
           <div className="px-5 md:px-8 max-w-7xl mx-auto py-16 text-center">
-            <span className="material-icons text-6xl text-error mb-4">error</span>
+            <Icon name="error" size={48} className="mb-4 text-error" />
             <p className="text-error font-label-md mb-6">{error}</p>
             <Link
               href="/stores"
@@ -135,9 +135,7 @@ export default function StoreDetailPage({ params }: { params: { slug: string } }
                   Dikelola oleh: <span className="text-primary">{store.owner?.fullName || '-'}</span>
                 </p>
               </div>
-              <span className="material-icons text-4xl text-primary">
-                storefront
-              </span>
+              <Icon name="storefront" size={36} className="text-primary" />
             </div>
 
             {store.description && (
@@ -155,9 +153,7 @@ export default function StoreDetailPage({ params }: { params: { slug: string } }
 
             {store.products && store.products.length === 0 ? (
               <div className="text-center py-12">
-                <span className="material-icons text-4xl text-on-surface-variant mb-3 opacity-30">
-                  inventory_2
-                </span>
+                <Icon name="inventory_2" size={36} className="mb-3 text-on-surface-variant opacity-30" />
                 <p className="font-body-md text-on-surface-variant">
                   Toko ini belum memiliki produk
                 </p>
@@ -165,59 +161,41 @@ export default function StoreDetailPage({ params }: { params: { slug: string } }
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {store.products?.map((product) => (
-                  <div
+                  <Link
                     key={product.id}
-                    className="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-organic hover:border-primary transition-all"
+                    href={`/products/${product.slug}`}
+                    aria-label={`Lihat detail ${product.name}`}
+                    className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-outline-variant bg-surface-container-lowest shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-organic focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   >
-                    <div className="aspect-square h-48 bg-surface-container-high relative">
+                    <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-surface-container-high">
                       {product.images && product.images.length > 0 ? (
                         <img
                           src={product.images[0]}
                           alt={product.name}
-                          className="w-full h-full object-cover"
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <span className="material-icons text-3xl text-on-surface-variant opacity-30">
-                            image
-                          </span>
+                        <div className="flex h-full w-full items-center justify-center text-on-surface-variant opacity-30">
+                          <Icon name="image" size={36} />
                         </div>
                       )}
                     </div>
 
-                    <div className="p-4">
-                      <h3 className="font-headline-md text-base text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+                    <div className="flex min-h-[138px] flex-1 flex-col p-4">
+                      <h3 className="min-h-[2.75rem] line-clamp-2 text-sm font-semibold leading-5 text-on-surface transition group-hover:text-primary">
                         {product.name}
                       </h3>
-                      <p className="font-label-md text-sm text-primary mt-1">
+                      <p className="mt-auto pt-3 text-base font-bold text-primary">
                         Rp {formatPrice(product.price)}
                       </p>
-                      {product.stock > 0 ? (
-                        <p className="font-body-sm text-xs text-secondary mt-1">
-                          {product.stock} tersedia
-                        </p>
-                      ) : (
-                        <p className="font-body-sm text-xs text-error mt-1">
-                          Stok habis
-                        </p>
-                      )}
-
-                      <div className="mt-3" onClick={(e) => e.stopPropagation()}>
-                        <AddToCartButton
-                          product={{
-                            id: product.id,
-                            slug: product.slug,
-                            name: product.name,
-                            price: product.price,
-                            images: product.images,
-                          }}
-                          sellerName={store.owner?.fullName}
-                          sellerId={store.owner?.id || ''}
-                          disabled={product.stock === 0}
-                        />
-                      </div>
+                      <p className={`mt-1 text-xs ${product.stock > 0 ? 'text-secondary' : 'text-error'}`}>
+                        {product.stock > 0 ? `${product.stock} tersedia` : 'Stok habis'}
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                        Lihat detail <Icon name="arrow_forward" size={14} />
+                      </span>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}

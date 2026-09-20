@@ -7,7 +7,37 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 
 ---
 
+## 📊 STATUS TERKINI — 21 September 2026
+
+### Audit UI & Data Produk — SELESAI
+- [x] Homepage `/` tetap menjadi route awal Beranda; tidak ada redirect otomatis ke `/products`.
+- [x] Header dan footer memakai logo lokal Pasar.ID dari `/stitch/logo-mark.jpg`.
+- [x] Icon publik dimigrasikan dari teks `material-icons` yang rawan tampil literal ke komponen SVG lokal.
+- [x] Product listing membaca kontrak API `{ data, meta }` dengan benar.
+- [x] Kartu produk menggunakan rasio gambar dan tinggi konten yang konsisten.
+- [x] Halaman detail toko UMKM menampilkan kartu sebagai link ke `/products/[slug]`; selector jumlah dan tombol keranjang tidak lagi berada di kartu toko.
+- [x] Aksi tambah ke keranjang tetap tersedia di halaman detail produk.
+- [x] Empat asset gambar produk lokal dibuat untuk kopi, sayur, kerajinan, dan jajanan.
+- [x] Seed idempotent menghasilkan 8 toko dan minimal 4 produk per toko; runtime terverifikasi 36 produk aktif karena data legacy dipertahankan.
+- [x] Normalisasi gambar backend berlaku untuk semua toko dan produk baru: URL eksternal/legacy atau gambar kosong memakai fallback berdasarkan kategori.
+- [x] API audit: 8 toko, 36 produk, 0 produk dengan gambar non-lokal.
+- [x] Docker web/API direcreate setelah perubahan untuk menghindari cache/HMR stale; halaman toko dan detail produk HTTP 200.
+- [x] Frontend production build, backend type-check, dan `git diff --check` berhasil.
+
+---
+
 ## 📊 STATUS TERKINI — 20 September 2026
+**Catatan historis:** status di bawah ini adalah snapshot sebelum audit UI/data 21 September 2026.
+
+### Backend — NestJS API (port 3000) ✅ JALAN
+
+#### Update 21 September 2026
+- Seed lama yang tertulis di bagian historis tidak lagi menjadi ukuran runtime; gunakan audit terbaru di atas sebagai sumber status.
+- Material Icons tetap tercatat di beberapa halaman internal lama, tetapi area marketplace publik menggunakan SVG lokal.
+
+---
+
+### Backend — NestJS API (port 3000) ✅ JALAN
 
 ### Backend — NestJS API (port 3000) ✅ JALAN
 - Docker Compose running

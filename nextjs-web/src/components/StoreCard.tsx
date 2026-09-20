@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Icon from '@/components/Icon';
 
 interface StoreCardProps {
   id: string;
@@ -25,7 +26,7 @@ export default function StoreCard({
       <div className="p-5">
         <div className="flex items-start justify-between mb-2">
           <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-            <span className="material-icons text-primary text-lg">store</span>
+            <Icon name="store" size={20} />
           </div>
           <span className="bg-tertiary-container text-on-tertiary text-xs font-label-sm px-2 py-1 rounded-full">
             {productCount} produk

@@ -1,5 +1,6 @@
 import { Injectable, ForbiddenException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { normalizeProductImages } from '../../common/product-images';
 import { OrderStatus } from '@prisma/client';
 
 @Injectable()
@@ -96,6 +97,8 @@ export class SellerService {
       storeId?: string;
     },
   ) {
+    const category = await this.prisma.category.findUnique({ where: { id: data.categoryId }, select: { slug: true } });
+    const images = normalizeProductImages(data.images, category?.slug);
     return await this.prisma.product.create({
       data: {
         name: data.name,
@@ -108,7 +111,7 @@ export class SellerService {
         description: data.description,
         price: data.price,
         stock: data.stock,
-        images: data.images,
+        images,
         category: { connect: { id: data.categoryId } },
         seller: { connect: { id: userId } },
         store: data.storeId

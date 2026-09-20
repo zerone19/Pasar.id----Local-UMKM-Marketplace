@@ -1,33 +1,42 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { clearToken, getUser, getUserRole } from '@/lib/auth';
+import Icon from '@/components/Icon';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const [search, setSearch] = useState('');
+  const [pathname, setPathname] = useState('');
   const router = useRouter();
   const { itemCount } = useCart();
 
   useEffect(() => {
     setUserRole(getUserRole());
     setUserName(getUser()?.fullName || null);
+    setPathname(window.location.pathname);
   }, []);
 
   return (
     <nav className="bg-surface full-width top-0 z-50 border-b border-outline-variant sticky transition-all duration-300">
       <div className="flex justify-between items-center w-full px-5 md:px-8 py-4 max-w-7xl mx-auto">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="bg-primary rounded-full p-2">
-            <span className="material-icons text-white text-2xl">shopping_cart</span>
-          </div>
-          <span className="font-headline-lg text-xl text-primary tracking-tight hidden md:block">
+        <Link href="/" className="flex items-center gap-2.5 shrink-0" aria-label="Pasar.ID Beranda">
+          <Image
+            src="/stitch/logo-mark.jpg"
+            alt=""
+            width={42}
+            height={42}
+            priority
+            className="h-10 w-10 rounded-lg object-cover"
+          />
+          <span className="font-headline-lg text-xl text-primary tracking-tight">
             Pasar.ID
           </span>
         </Link>
@@ -35,14 +44,14 @@ export default function Header() {
         {/* Navigation Links (Desktop) */}
         <ul className="hidden md:flex items-center gap-6">
           <li>
-            <Link href="/" className="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md">
+            <Link href="/" className={`text-label-md font-label-md transition-colors ${pathname === '/' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-on-surface-variant hover:text-primary'}`}>
               Beranda
             </Link>
           </li>
           <li>
             <Link
               href="/products"
-              className="text-primary font-bold border-b-2 border-primary pb-1 text-label-md font-label-md"
+              className={`text-label-md font-label-md transition-colors ${pathname.startsWith('/products') ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-on-surface-variant hover:text-primary'}`}
             >
               Produk
             </Link>
@@ -101,16 +110,14 @@ export default function Header() {
                 }
               }}
             />
-            <span className="material-icons-outlined absolute left-3 top-2.5 text-on-surface-variant">
-              search
-            </span>
+            <span aria-hidden="true" className="absolute left-3 top-2.5 text-on-surface-variant"><Icon name="search" size={18} /></span>
           </div>
 
           <button
             aria-label="Location"
             className="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full"
           >
-            <span className="material-icons">location_on</span>
+            <Icon name="location_on" size={19} />
           </button>
 
           <Link
@@ -118,7 +125,7 @@ export default function Header() {
             aria-label="Shopping Basket"
             className="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full relative"
           >
-            <span className="material-icons">shopping_basket</span>
+            <Icon name="shopping_bag" size={19} />
             {itemCount > 0 && (
               <span className="absolute top-1 right-1 bg-error text-on-error text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
                 {itemCount}
@@ -133,7 +140,7 @@ export default function Header() {
               onClick={() => { clearToken(); setUserName(null); setUserRole(null); router.push('/'); }}
               className="hidden md:flex items-center gap-1 text-sm text-primary"
             >
-              <span className="material-icons">account_circle</span>
+              <Icon name="person" size={19} />
               <span className="max-w-24 truncate">{userName}</span>
             </button>
           ) : (
@@ -142,7 +149,7 @@ export default function Header() {
               aria-label="Account"
               className="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full hidden md:flex"
             >
-              <span className="material-icons">account_circle</span>
+              <Icon name="person" size={19} />
             </Link>
           )}
 
@@ -152,7 +159,7 @@ export default function Header() {
             className="md:hidden p-2 text-on-surface-variant"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <span className="material-icons">menu</span>
+            <Icon name="menu" size={21} />
           </button>
         </div>
       </div>
