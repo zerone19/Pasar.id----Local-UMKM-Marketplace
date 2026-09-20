@@ -138,22 +138,52 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - [x] Header updated — Seller Dashboard link (conditional for SELLER/ADMIN role)
 - [x] Login page updated — save user data to localStorage
 
-### 🔜 Phase 5 — Admin
-- [ ] Admin dashboard
-- [ ] User/seller management
-- [ ] Product moderation
-- [ ] Order monitoring
+### ✅ Phase 5 — Admin (SELESAI)
+- [x] Admin dashboard API dan frontend (`/admin`) dengan statistik users, sellers, products, inactive products, orders, dan revenue
+- [x] User/seller management: daftar user ber-pagination dan perubahan role
+- [x] Proteksi admin terakhir dan pencegahan admin menurunkan role dirinya sendiri
+- [x] Product moderation: aktif/nonaktif produk melalui endpoint admin terproteksi
+- [x] Order monitoring: daftar order ber-pagination dengan customer, item, status, dan total
+- [x] Admin dapat memperbarui status order
+- [x] Mutasi kategori sekarang hanya dapat dilakukan ADMIN
+- [x] Product creation publik ditutup; seller ID diambil dari JWT
+- [x] Produk nonaktif tidak tampil melalui endpoint publik
+- [x] Audit runtime dan production build berhasil diverifikasi
+- [ ] Moderation history/rejection reason — membutuhkan model database baru, ditunda ke enhancement terpisah
 
-### 🔜 Phase 6 — Mobile
-- [ ] Flutter customer app
-- [ ] Shared API integration
+### 🔎 Phase 5 Audit Findings
+- Fixed: AdminModule awalnya belum mengimpor PrismaModule sehingga API gagal bootstrap; diperbaiki dan diverifikasi melalui Docker logs.
+- Fixed: Order access check memakai field JWT `userId` pada satu cabang; diseragamkan ke `id ?? userId`.
+- Fixed: Endpoint product detail publik dapat membaca produk nonaktif; sekarang hanya produk aktif yang dikembalikan.
+- Fixed: Category mutation dan public product creation sebelumnya tidak memiliki otorisasi; sekarang dilindungi JWT/RBAC.
+- No unresolved critical bugs ditemukan pada audit final.
+- Docker image rebuild sempat gagal karena timeout registry `node:20-slim`; container existing berhasil direstart dan runtime source terverifikasi.
 
-### 🔜 Phase 7 — Growth
-- [ ] Notifications
-- [ ] Reviews & ratings
-- [ ] Vouchers & promotions
-- [ ] Analytics
-- [ ] Chat
+### ✅ Phase 6 — Mobile (MVP scaffold selesai)
+- [x] Flutter customer app scaffold di `mobile/`
+- [x] Konfigurasi API base URL dan REST client untuk products, categories, auth, cart, dan orders
+- [x] Halaman dasar mobile: katalog produk
+- [x] REST client mobile: products, categories, login, dan orders
+- [ ] UI detail produk, cart, login, dan orders — slice mobile berikutnya
+- [ ] Device build/runtime Flutter — belum dapat diverifikasi karena Flutter SDK tidak tersedia di environment ini
+
+### ✅ Phase 7 — Growth (MVP selesai)
+- [x] Notifications: model, user-scoped API, mark-as-read, dan notifikasi order dibuat dalam transaksi checkout
+- [x] Reviews & ratings: product reviews dengan rating 1–5 dan validasi pembelian bila order ID diberikan
+- [x] Vouchers & promotions: validasi masa berlaku, usage limit, minimum purchase, percentage discount, dan max discount
+- [x] Analytics: overview terproteksi untuk ADMIN
+- [x] Chat: conversation dan message API dengan access control, batas panjang pesan, dan transaksi update timestamp
+- [x] Migration database `phase7_growth` dibuat dan diaplikasikan
+- [x] Backend build, Prisma validate/migrate status, Docker bootstrap, dan endpoint auth boundary diaudit
+- [ ] Push notification realtime, moderation history, voucher CRUD UI, dan chat realtime — enhancement lanjutan
+
+### 🔎 Phase 6–7 Audit Findings
+- Fixed: Prisma client di container stale setelah schema growth; regenerate dan recreate container dilakukan, API kembali bootstrap normal.
+- Fixed: Docker Compose kini me-mount folder Prisma agar schema/migration dan generated client tetap sinkron saat development.
+- Fixed: Analytics dibatasi untuk ADMIN; voucher validation memakai JWT dan role guard.
+- Fixed: Checkout sekarang membuat notification `ORDER_CREATED` dalam transaksi database.
+- No unresolved critical bugs ditemukan pada backend MVP scope.
+- Limitation: Flutter SDK tidak tersedia, sehingga `flutter analyze` dan device run belum bisa dilakukan.
 
 ---
 

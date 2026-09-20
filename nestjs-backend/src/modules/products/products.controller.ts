@@ -1,4 +1,9 @@
-import { Controller, Get, Param, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Query, Req, UseGuards } from '@nestjs/common';
+import { Request } from 'express';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
+import { Role } from '@prisma/client';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from '../../common/dto/create-product';
 
@@ -40,8 +45,16 @@ export class ProductsController {
   }
 
   @Post()
-  async create(@Body() dto: CreateProductDto) {
-    const data = { ...dto, slug: dto.slug || dto.name.toLowerCase().replace(/\s+/g, '-') };
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SELLER, Role.ADMIN)
+  async create(@Req() req: Request, @Body() dto: CreateProductDto) {
+    const user = req.user as { id?: string; userId?: string };
+    const sellerId = user.id ?? user.userId;
+    const data = {
+      ...dto,
+      sellerId,
+      slug: dto.slug || dto.name.toLowerCase().replace(/\s+/g, '-'),
+    };
     return this.productsService.create(data);
   }
 }

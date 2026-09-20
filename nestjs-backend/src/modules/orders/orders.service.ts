@@ -139,6 +139,15 @@ export class OrdersService {
         });
       }
 
+      await tx.notification.create({
+        data: {
+          userId: dto.userId,
+          title: 'Pesanan berhasil dibuat',
+          message: `Pesanan ${orderNumber} sedang menunggu diproses.`,
+          type: 'ORDER_CREATED',
+        },
+      });
+
       // Return order with items and user
       return tx.order.findUnique({
         where: { id: order.id },

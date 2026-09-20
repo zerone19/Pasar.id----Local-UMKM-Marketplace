@@ -115,9 +115,9 @@ Pasar.ID adalah marketplace UMKM lokal yang menghubungkan pedagang pasar tradisi
 | **Phase 2** | Marketplace (Category CRUD, Search & Filter, Store Profile) | ✅ **Selesai** |
 | **Phase 3** | Transaction (Address, Order Lifecycle, Payment Abstraction) | ✅ **Selesai** |
 | **Phase 4** | Seller (Dashboard, Product Mgmt, Order Mgmt) | ✅ Selesai |
-| **Phase 5** | Admin (Management, Moderation) | 📋 Planned |
-| **Phase 6** | Mobile (Flutter App) | 📋 Planned |
-| **Phase 7** | Growth (Notifications, Reviews, Vouchers, Analytics, Chat) | 📋 Planned |
+| **Phase 5** | Admin (Management, Moderation) | ✅ Selesai |
+| **Phase 6** | Mobile (Flutter App) | ✅ MVP scaffold |
+| **Phase 7** | Growth (Notifications, Reviews, Vouchers, Analytics, Chat) | ✅ MVP selesai |
 
 ### MVP Sprint Plan
 
@@ -260,9 +260,9 @@ cp nextjs-web/.env.example nextjs-web/.env.local
 
 ---
 
-## ✅ Status Implementasi Terkini — 20 September 2026
+## ✅ Status Implementasi Terkini — 21 September 2026
 
-Phase 1 sampai Phase 4 sudah selesai dan diverifikasi.
+Phase 1 sampai Phase 5 selesai, Phase 6 tersedia sebagai mobile scaffold, dan Phase 7 MVP backend sudah selesai serta diaudit.
 
 - Backend NestJS dan frontend Next.js berhasil production build.
 - Docker Compose menjalankan API, web, PostgreSQL, Redis, dan phpMyAdmin.
@@ -272,6 +272,15 @@ Phase 1 sampai Phase 4 sudah selesai dan diverifikasi.
 - Seller dashboard menghitung revenue berdasarkan harga dikali quantity.
 - Halaman tersedia: `/about`, `/orders`, `/seller/products/new`, `/seller/products/[id]/edit`.
 - Header search, logout, dan navigasi riwayat pesanan sudah aktif.
+- Admin dashboard tersedia di `/admin` dengan user management, product moderation, dan order monitoring.
+- Admin API menggunakan JWT + RBAC dan pagination pada daftar users, products, dan orders.
+- Mutasi kategori dan pembuatan produk sekarang memerlukan autentikasi/role yang sesuai.
+- Produk nonaktif tidak ditampilkan pada endpoint publik.
+- Audit Phase 5: tidak ada bug kritis tersisa; moderation history/rejection reason ditunda karena membutuhkan schema baru.
+- Phase 6 menyediakan scaffold Flutter customer di `mobile/`; device build menunggu Flutter SDK.
+- Phase 7 menyediakan MVP API untuk notifications, reviews, vouchers, analytics, dan chat.
+- Migration `phase7_growth` sudah diaplikasikan dan API container berhasil bootstrap dengan seluruh route Growth.
+- Audit Phase 6–7 tidak menemukan bug kritis pada backend MVP; realtime push/chat dan UI Growth menjadi enhancement berikutnya.
 
 ## 📊 API Endpoints (Current)
 
@@ -283,6 +292,7 @@ Phase 1 sampai Phase 4 sudah selesai dan diverifikasi.
 | **Products** | `GET /products`, `GET /products/:id`, `GET /products/slug/:slug`, `POST /products` |
 | **Categories** | `GET /categories`, `GET /categories/:id`, `GET /categories/slug/:slug`, `POST /categories`, `PUT /categories/:id`, `DELETE /categories/:id` |
 | **Orders** | `GET /orders`, `GET /orders/:id`, `GET /orders/user/:userId`, `POST /orders`, `PUT /orders/:id/status` |
+| **Growth** | Notifications, reviews, vouchers, analytics, and chat endpoints (JWT/RBAC protected where applicable) |
 
 ---
 
@@ -312,4 +322,4 @@ Project ini dilisensikan di bawah MIT License. Lihat file [LICENSE](LICENSE) unt
 
 ---
 
-*Dibangun dengan ❤️ untuk UMKM Indonesia*
+*Dibangun dengan ❤️ untuk UMKM Indonesia — Phase 5 Admin selesai dan diaudit*

@@ -47,7 +47,7 @@ export class OrdersController {
     if (user.role !== Role.ADMIN && order.userId !== currentUserId) {
       // Check if user is a seller who has products in this order
       const hasSellerProduct = order.items.some(
-        (item: any) => item.product?.sellerId === user.userId,
+        (item: any) => item.product?.sellerId === currentUserId,
       );
       if (!hasSellerProduct) {
         throw new ForbiddenException('Anda tidak berhak mengakses pesanan ini.');

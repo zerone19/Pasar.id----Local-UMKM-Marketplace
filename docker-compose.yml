@@ -54,6 +54,7 @@ services:
         condition: service_healthy
     volumes:
       - ./nestjs-backend/src:/app/src
+      - ./nestjs-backend/prisma:/app/prisma
       - /app/node_modules
 
   web:

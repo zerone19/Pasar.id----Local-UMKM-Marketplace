@@ -63,7 +63,17 @@ export default function Header() {
               Tentang Kami
             </Link>
           </li>
-          {(userRole === 'SELLER' || userRole === 'ADMIN') && (
+          {userRole === 'ADMIN' && (
+            <li>
+              <Link
+                href="/admin"
+                className="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md"
+              >
+                Admin Dashboard
+              </Link>
+            </li>
+          )}
+          {userRole === 'SELLER' && (
             <li>
               <Link
                 href="/seller"

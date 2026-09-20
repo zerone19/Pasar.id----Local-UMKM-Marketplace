@@ -76,8 +76,8 @@ export class ProductsService {
   }
 
   async findById(id: string) {
-    const product = await this.prisma.product.findUnique({
-      where: { id },
+    const product = await this.prisma.product.findFirst({
+      where: { id, isActive: true },
       include: {
         category: true,
         store: { select: { id: true, name: true, slug: true, description: true } },
@@ -89,8 +89,8 @@ export class ProductsService {
   }
 
   async findBySlug(slug: string) {
-    const product = await this.prisma.product.findUnique({
-      where: { slug },
+    const product = await this.prisma.product.findFirst({
+      where: { slug, isActive: true },
       include: {
         category: true,
         store: { select: { id: true, name: true, slug: true, description: true } },

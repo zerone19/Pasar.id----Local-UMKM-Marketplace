@@ -9,21 +9,26 @@ datasource db {
 
 // ── User ────────────────────────────────────────────────────
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  passwordHash  String
-  fullName      String
-  role          Role      @default(BUYER)
-  phone         String?
-  address       String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  fullName     String
+  role         Role     @default(BUYER)
+  phone        String?
+  address      String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   // Relations
-  refreshTokens RefreshToken[]
-  stores        Store[]
-  orders        Order[]
-  products      Product[]
+  refreshTokens  RefreshToken[]
+  stores         Store[]
+  orders         Order[]
+  products       Product[]
+  notifications  Notification[]
+  reviews        Review[]
+  chatAsCustomer ChatConversation[] @relation("CustomerConversations")
+  chatAsSeller   ChatConversation[] @relation("SellerConversations")
+  sentMessages   ChatMessage[]
 
   @@map("users")
 }
@@ -36,27 +41,27 @@ enum Role {
 
 // ── Store ───────────────────────────────────────────────────
 model Store {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   name        String
-  slug        String   @unique
+  slug        String    @unique
   description String?
   ownerId     String
-  owner       User     @relation(fields: [ownerId], references: [id])
+  owner       User      @relation(fields: [ownerId], references: [id])
   products    Product[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@map("stores")
 }
 
 // ── Category ────────────────────────────────────────────────
 model Category {
-  id          String    @id @default(cuid())
-  name        String    @unique
-  slug        String    @unique
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
   description String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   products Product[]
 
@@ -83,23 +88,25 @@ model Product {
   updatedAt   DateTime @updatedAt
 
   orderItems OrderItem[]
+  reviews    Review[]
+  vouchers   Voucher[]
 
   @@map("products")
 }
 
 // ── Order ───────────────────────────────────────────────────
 model Order {
-  id              String       @id @default(cuid())
-  orderNumber     String       @unique
-  status          OrderStatus  @default(PENDING)
-  totalAmount     Decimal      @db.Decimal(10, 2)
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique
+  status          OrderStatus @default(PENDING)
+  totalAmount     Decimal     @db.Decimal(10, 2)
   paymentMethod   String?
-  paymentStatus   String       @default("PENDING")
+  paymentStatus   String      @default("PENDING")
   userId          String
-  user            User         @relation(fields: [userId], references: [id])
+  user            User        @relation(fields: [userId], references: [id])
   shippingAddress String
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 
   items OrderItem[]
 
@@ -118,13 +125,13 @@ enum OrderStatus {
 
 // ── Order Item ──────────────────────────────────────────────
 model OrderItem {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   quantity  Int
-  price     Decimal  @db.Decimal(10, 2)
+  price     Decimal @db.Decimal(10, 2)
   orderId   String
-  order     Order    @relation(fields: [orderId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id])
   productId String
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 
   @@map("order_items")
 }
@@ -139,4 +146,81 @@ model RefreshToken {
   createdAt DateTime @default(now())
 
   @@map("refresh_tokens")
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, createdAt])
+  @@map("notifications")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  orderId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, productId, orderId])
+  @@index([productId, createdAt])
+  @@map("reviews")
+}
+
+model Voucher {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  discountPercent Int
+  maxDiscount     Decimal? @db.Decimal(10, 2)
+  minPurchase     Decimal? @db.Decimal(10, 2)
+  usageLimit      Int?
+  usedCount       Int      @default(0)
+  startsAt        DateTime
+  expiresAt       DateTime
+  isActive        Boolean  @default(true)
+  productId       String?
+  product         Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+
+  @@index([code, isActive, expiresAt])
+  @@map("vouchers")
+}
+
+model ChatConversation {
+  id         String        @id @default(cuid())
+  customerId String
+  customer   User          @relation("CustomerConversations", fields: [customerId], references: [id], onDelete: Cascade)
+  sellerId   String
+  seller     User          @relation("SellerConversations", fields: [sellerId], references: [id], onDelete: Cascade)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  messages   ChatMessage[]
+
+  @@unique([customerId, sellerId])
+  @@map("chat_conversations")
+}
+
+model ChatMessage {
+  id             String           @id @default(cuid())
+  conversationId String
+  conversation   ChatConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User             @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  message        String
+  createdAt      DateTime         @default(now())
+
+  @@index([conversationId, createdAt])
+  @@map("chat_messages")
 }
