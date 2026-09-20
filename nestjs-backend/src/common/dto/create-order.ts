@@ -1,11 +1,21 @@
-import { IsString, IsArray, IsOptional } from 'class-validator';
+import { IsString, IsArray, IsOptional, IsInt, Min } from 'class-validator';
+
+export class CreateOrderItemDto {
+  @IsString()
+  productId!: string;
+
+  @IsInt()
+  @Min(1)
+  quantity!: number;
+}
 
 export class CreateOrderDto {
+  @IsOptional()
   @IsString()
-  userId!: string;
+  userId?: string;
 
   @IsArray()
-  items!: { productId: string; quantity: number }[];
+  items!: CreateOrderItemDto[];
 
   @IsString()
   shippingAddress!: string;

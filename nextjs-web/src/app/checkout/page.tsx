@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useCart } from '@/contexts/CartContext';
 import Header from '@/components/Header';
@@ -10,7 +10,6 @@ import Link from 'next/link';
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { items, itemCount, total, clearCart } = useCart();
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
@@ -18,7 +17,6 @@ export default function CheckoutPage() {
   const [step, setStep] = useState<'address' | 'payment' | 'review'>('address');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -54,7 +52,7 @@ export default function CheckoutPage() {
     setLoading(true);
     setError(null);
 
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('token');
     if (!token) {
       setError('Silakan login terlebih dahulu untuk melanjutkan checkout.');
       setLoading(false);
@@ -68,7 +66,6 @@ export default function CheckoutPage() {
       const response = await axios.post(
         `${apiUrl}/orders`,
         {
-          userId: '',
           items: items.map((item) => ({
             productId: item.productId,
             quantity: item.quantity,
@@ -89,7 +86,7 @@ export default function CheckoutPage() {
       }
     } catch (err: any) {
       if (err.response?.status === 401) {
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem('token');
         setError('Sesi habis. Silakan login ulang.');
         router.push(`/auth/login?redirect=/checkout`);
       } else {

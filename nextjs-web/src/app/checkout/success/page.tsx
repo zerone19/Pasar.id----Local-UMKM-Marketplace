@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -9,8 +9,11 @@ import Link from 'next/link';
 
 export default function CheckoutSuccessPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const orderId = searchParams.get('orderId');
+  const [orderId, setOrderId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setOrderId(new URLSearchParams(window.location.search).get('orderId'));
+  }, []);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
   const [order, setOrder] = useState<any>(null);
@@ -30,7 +33,7 @@ export default function CheckoutSuccessPage() {
 
     const fetchOrder = async () => {
       try {
-        const token = localStorage.getItem('accessToken');
+        const token = localStorage.getItem('token');
         if (!token) {
           setError('Silakan login untuk melihat detail pesanan.');
           setLoading(false);

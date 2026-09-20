@@ -24,7 +24,8 @@ export class SellerController {
   constructor(private readonly sellerService: SellerService) {}
 
   private getUserId(req: Request): string {
-    return (req.user as any).userId;
+    const user = req.user as any;
+    return user.id ?? user.userId;
   }
 
   // ── Dashboard ──
@@ -98,7 +99,8 @@ export class SellerController {
     @Param('id') id: string,
     @Body() body: { status: string },
   ) {
-    return await this.sellerService.updateOrderStatus(id, body.status);
+    const userId = this.getUserId(req);
+    return await this.sellerService.updateOrderStatus(userId, id, body.status);
   }
 
   // ── Store Management ──

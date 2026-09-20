@@ -5,12 +5,27 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class StoresService {
   constructor(private readonly prisma: PrismaService) {}
 
+  private readonly ownerSelect = {
+    id: true,
+    fullName: true,
+    email: true,
+    phone: true,
+  };
+
   async findAll() {
-    return this.prisma.store.findMany({ include: { owner: true, products: true } });
+    return this.prisma.store.findMany({
+      include: {
+        owner: { select: this.ownerSelect },
+        products: true,
+      },
+    });
   }
 
   async findById(id: string) {
-    const store = await this.prisma.store.findUnique({ where: { id }, include: { owner: true } });
+    const store = await this.prisma.store.findUnique({
+      where: { id },
+      include: { owner: { select: this.ownerSelect } },
+    });
     if (!store) throw new NotFoundException('Store tidak ditemukan');
     return store;
   }
@@ -18,7 +33,10 @@ export class StoresService {
   async findBySlug(slug: string) {
     const store = await this.prisma.store.findUnique({
       where: { slug },
-      include: { owner: true, products: { include: { category: true } } },
+      include: {
+        owner: { select: this.ownerSelect },
+        products: { include: { category: true } },
+      },
     });
     if (!store) throw new NotFoundException('Store tidak ditemukan');
     return store;

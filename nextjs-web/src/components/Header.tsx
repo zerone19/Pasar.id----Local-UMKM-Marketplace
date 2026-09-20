@@ -1,17 +1,22 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
-import { getUserRole } from '@/lib/auth';
+import { clearToken, getUser, getUserRole } from '@/lib/auth';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
+  const router = useRouter();
   const { itemCount } = useCart();
 
   useEffect(() => {
     setUserRole(getUserRole());
+    setUserName(getUser()?.fullName || null);
   }, []);
 
   return (
@@ -78,6 +83,13 @@ export default function Header() {
               className="pl-10 pr-4 py-2 rounded-full border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-sm font-body-sm text-on-surface w-64 placeholder-on-surface-variant"
               placeholder="Cari produk lokal..."
               type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && search.trim()) {
+                  router.push(`/products?search=${encodeURIComponent(search.trim())}`);
+                }
+              }}
             />
             <span className="material-icons-outlined absolute left-3 top-2.5 text-on-surface-variant">
               search
@@ -104,13 +116,25 @@ export default function Header() {
             )}
           </Link>
 
-          <Link
-            href="/auth/login"
-            aria-label="Account"
-            className="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full hidden md:flex"
-          >
-            <span className="material-icons">account_circle</span>
-          </Link>
+          {userName ? (
+            <button
+              type="button"
+              aria-label="Logout"
+              onClick={() => { clearToken(); setUserName(null); setUserRole(null); router.push('/'); }}
+              className="hidden md:flex items-center gap-1 text-sm text-primary"
+            >
+              <span className="material-icons">account_circle</span>
+              <span className="max-w-24 truncate">{userName}</span>
+            </button>
+          ) : (
+            <Link
+              href="/auth/login"
+              aria-label="Account"
+              className="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full hidden md:flex"
+            >
+              <span className="material-icons">account_circle</span>
+            </Link>
+          )}
 
           {/* Mobile Menu Toggle */}
           <button
@@ -149,6 +173,12 @@ export default function Header() {
             className="block text-on-surface-variant hover:text-primary transition-colors py-2"
           >
             Tentang Kami
+          </Link>
+          <Link
+            href="/orders"
+            className="block text-on-surface-variant hover:text-primary transition-colors py-2"
+          >
+            Pesanan Saya
           </Link>
           {(userRole === 'SELLER' || userRole === 'ADMIN') && (
             <Link

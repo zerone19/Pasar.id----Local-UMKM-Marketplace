@@ -85,7 +85,7 @@ export default function SellerOrdersPage() {
       const token = getToken();
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
       await axios.put(
-        `${apiUrl}/seller/orders/${orderItemId}/status`,
+        `${apiUrl}/seller/orders/${orderId}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } },
       );

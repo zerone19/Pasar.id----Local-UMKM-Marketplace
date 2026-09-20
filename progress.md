@@ -7,7 +7,7 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 
 ---
 
-## 📊 STATUS TERKINI — 17 September 2026
+## 📊 STATUS TERKINI — 20 September 2026
 
 ### Backend — NestJS API (port 3000) ✅ JALAN
 - Docker Compose running
@@ -20,6 +20,10 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - **Fix:** OrdersService price bug — order items store correct product prices
 - Seeder jalan — 4 products, 3 users (admin/seller/buyer), 3 categories, 1 store
 - Endpoint baru: `GET /products/slug/:slug`, `GET /stores/slug/:slug`
+- Security hardening: JWT + role guard untuk users/orders; passwordHash tidak bocor pada response publik
+- Validasi order: user/product aktif, quantity positif, stok mencukupi, dan stock decrement atomik dalam transaksi
+- Seller dashboard: revenue dihitung berdasarkan `price × quantity`, total sold/order diperbaiki
+- Backend build berhasil diverifikasi dengan `npm run build`
 
 ### Frontend — Next.js (port 3001) ✅ JALAN
 - Docker container running (Next.js 14.2 + App Router)
@@ -40,6 +44,10 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - **Header** — sudah update: link ke rute nyata, cart badge dinamis via CartContext, auth links
 - AddToCartButton komponen — quantity picker + dynamic state
 - CartContext — React Context + useReducer + localStorage persistence
+- Auth flow diperbaiki: token konsisten, checkout mengambil identitas dari JWT
+- Halaman baru: `/about`, `/orders`, `/seller/products/new`, `/seller/products/[id]/edit`
+- Header: pencarian aktif, nama user, logout, dan link riwayat pesanan
+- Production build berhasil diverifikasi dengan `npm run build`
 
 ### Issues / yang perlu diperhatikan
 - `nestjs-backend/src/prisma/seed.ts` (file anomali) sudah dihapus
@@ -101,21 +109,21 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 - [x] Buat file `.env.local` untuk Next.js
 - [x] Koneksi database stabil (sudah jalan via Docker)
 
-### 🔜 Phase 2 — Marketplace
+### ✅ Phase 2 — Marketplace (SELESAI)
 - [x] Product CRUD API (sudah ada)
 - [x] Category management (`GET /categories`, `GET /categories/:id`, `GET /categories/slug/:slug`, `POST /categories`, `PUT /categories/:id`, `DELETE /categories/:id`)
 - [x] Search & filter API (`GET /products?search=&category=&minPrice=&maxPrice=&sortBy=&sortOrder=&page=&limit=`)
 - [x] Store/profile management (`GET /stores/:id` — includes owner + products, `PUT /stores/:id`)
 - [x] Integrasi API → Frontend (products, stores, cart pages sudah jalan)
 
-### 🔜 Phase 3 — Transaction
+### ✅ Phase 3 — Transaction (SELESAI)
 - [x] Cart (multi-seller support — Context + localStorage)
 - [x] Checkout flow (`app/checkout/page.tsx`, `app/checkout/success/page.tsx`) — 3-step form, API integration
 - [x] Address management (checkout page: full address form with notes, shippingAddress stored in order)
 - [x] Order lifecycle (`GET /orders`, `GET /orders/:id`, `GET /orders/user/:userId`, `POST /orders`, `PUT /orders/:id/status` — supports PENDING → CONFIRMED → PROCESSING → READY/SHIPPED → COMPLETED)
 - [x] Payment abstraction (MVP: COD + Manual Transfer — status tracking, transfer instructions di success page)
 
-### 🔜 Phase 4 — Seller
+### ✅ Phase 4 — Seller (SELESAI)
 - [x] Seller module di backend (SellerModule, SellerController, SellerService)
 - [x] Role guard + JWT auth
 - [x] Seller dashboard API (`GET /seller/dashboard` — stats: totalProducts, totalStock, totalOrders, totalRevenue, totalSold, lowStock)
@@ -255,9 +263,10 @@ Pasar Id -- Marketplace UMKM Local/
 - Header & Footer components sudah siap pakai
 - .env file: CREATED (nestjs-backend/.env, nextjs-web/.env.local)
 - **GitHub repo:** github.com/zerone19/Pasar.id----Local-UMKM-Marketplace
-- **Latest commit:** 549a076 — feat: cart system, product detail, stores listing, header fix
-- **Latest fix:** OrdersService price bug fixed — order items now store correct product prices
+- **Latest verified scope:** Phase 1–4 audit fixes — checkout, RBAC, data exposure, stock validation, seller metrics, and missing frontend routes
+- **Latest verification:** NestJS build, Next.js production build, Docker smoke test, protected endpoint checks, and passwordHash exposure check
+- **Next milestone:** Phase 5 — Admin dashboard and marketplace moderation
 
 ---
-*Last updated: September 17, 2026*
+*Last updated: September 20, 2026*
 *Project owner: Ascjul Opreker (Ascjul Zerone)*

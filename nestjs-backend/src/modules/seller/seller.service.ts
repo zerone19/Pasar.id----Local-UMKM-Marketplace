@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ForbiddenException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { OrderStatus } from '@prisma/client';
 
@@ -15,65 +15,52 @@ export class SellerService {
 
     const productIds = products.map((p) => p.id);
 
-    const orderItems = await this.prisma.orderItem.findMany({
-      where: { productId: { in: productIds } },
-      select: {
-        price: true,
-        orderId: true,
-        product: { select: { id: true } },
-      },
-    });
+    if (productIds.length === 0) {
+      return {
+        totalProducts: 0,
+        totalStock: 0,
+        totalOrders: 0,
+        totalRevenue: 0,
+        totalSold: 0,
+        lowStock: 0,
+      };
+    }
 
-    const completedOrderItems = orderItems.filter(async (item) => {
-      const order = await this.prisma.order.findUnique({
-        where: { id: item.orderId },
-        select: { status: true },
-      });
-      return order?.status === 'COMPLETED';
-    });
-
-    // Simpler: fetch orders with their items directly
-    const orders = await this.prisma.orderItem.groupBy({
-      by: ['productId'],
+    // Fetch completed order items to calculate real revenue and units sold
+    const completedItems = await this.prisma.orderItem.findMany({
       where: {
         productId: { in: productIds },
+        order: { status: 'COMPLETED' },
       },
-      _sum: { quantity: true },
+      select: {
+        price: true,
+        quantity: true,
+      },
     });
 
-    const totalQuantitySold = orders.reduce(
-      (sum, item) => sum + (Number(item._sum.quantity) || 0),
+    const totalRevenue = completedItems.reduce(
+      (sum, item) => sum + Number(item.price) * item.quantity,
       0,
     );
 
-    const totalCompletedItems = await this.prisma.orderItem.count({
-      where: {
-        productId: { in: productIds },
-        order: { status: 'COMPLETED' },
-      },
-    });
+    const totalSold = completedItems.reduce(
+      (sum, item) => sum + item.quantity,
+      0,
+    );
 
-    const revenueAgg = await this.prisma.orderItem.aggregate({
-      where: {
-        productId: { in: productIds },
-        order: { status: 'COMPLETED' },
-      },
-      _sum: { price: true },
+    // Total distinct orders that contain this seller's products
+    const sellerOrderItems = await this.prisma.orderItem.findMany({
+      where: { productId: { in: productIds } },
+      select: { orderId: true },
+      distinct: ['orderId'],
     });
 
     return {
       totalProducts: products.length,
-      totalStock: products.reduce(
-        (sum, p) => sum + p.stock,
-        0,
-      ),
-      totalOrders: await this.prisma.orderItem.count({
-        where: {
-          productId: { in: productIds },
-        },
-      }),
-      totalRevenue: Number(revenueAgg._sum.price || 0),
-      totalSold: totalCompletedItems,
+      totalStock: products.reduce((sum, p) => sum + p.stock, 0),
+      totalOrders: sellerOrderItems.length,
+      totalRevenue,
+      totalSold,
       lowStock: products.filter((p) => p.stock <= 5).length,
     };
   }
@@ -136,8 +123,12 @@ export class SellerService {
     productId: string,
     data: any,
   ) {
-    return await this.prisma.product.update({
+    const product = await this.prisma.product.findFirst({
       where: { id: productId, sellerId: userId },
+    });
+    if (!product) throw new NotFoundException('Produk tidak ditemukan.');
+    return await this.prisma.product.update({
+      where: { id: productId },
       data,
     });
   }
@@ -187,7 +178,18 @@ export class SellerService {
     return orderItem;
   }
 
-  async updateOrderStatus(orderId: string, status: string) {
+  async updateOrderStatus(userId: string, orderId: string, status: string) {
+    // Verify that this order contains products belonging to this seller
+    const orderItem = await this.prisma.orderItem.findFirst({
+      where: {
+        orderId,
+        product: { sellerId: userId },
+      },
+    });
+    if (!orderItem) {
+      throw new ForbiddenException('Pesanan tidak ditemukan atau tidak memuat produk dari toko Anda.');
+    }
+
     return await this.prisma.order.update({
       where: { id: orderId },
       data: {

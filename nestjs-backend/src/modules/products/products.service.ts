@@ -47,10 +47,16 @@ export class ProductsService {
       if (maxPrice !== undefined) where.price.lte = maxPrice;
     }
 
+    const productInclude = {
+      category: true,
+      store: { select: { id: true, name: true, slug: true, description: true } },
+      seller: { select: { id: true, fullName: true, email: true, phone: true } },
+    };
+
     const [products, total] = await Promise.all([
       this.prisma.product.findMany({
         where,
-        include: { category: true, seller: true },
+        include: productInclude,
         orderBy: { [sortBy]: sortOrder },
         skip: (page - 1) * limit,
         take: limit,
@@ -72,7 +78,11 @@ export class ProductsService {
   async findById(id: string) {
     const product = await this.prisma.product.findUnique({
       where: { id },
-      include: { category: true, seller: true },
+      include: {
+        category: true,
+        store: { select: { id: true, name: true, slug: true, description: true } },
+        seller: { select: { id: true, fullName: true, email: true, phone: true } },
+      },
     });
     if (!product) throw new NotFoundException('Product tidak ditemukan');
     return product;
@@ -81,7 +91,11 @@ export class ProductsService {
   async findBySlug(slug: string) {
     const product = await this.prisma.product.findUnique({
       where: { slug },
-      include: { category: true, seller: true },
+      include: {
+        category: true,
+        store: { select: { id: true, name: true, slug: true, description: true } },
+        seller: { select: { id: true, fullName: true, email: true, phone: true } },
+      },
     });
     if (!product) throw new NotFoundException('Product tidak ditemukan');
     return product;
