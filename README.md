@@ -325,9 +325,9 @@ Project ini dilisensikan di bawah MIT License. Lihat file [LICENSE](LICENSE) unt
 
 ## 📬 Hubungi Kami
 
-- **Project Owner:** Ascjul Opreker (Ascjul Zerone)
+- **Project Owner:** Ascjul Nur Hidayah (Ascjul Anomaly)
 - **Repository:** [github.com/zerone19/Pasar.id----Local-UMKM-Marketplace](https://github.com/zerone19/Pasar.id----Local-UMKM-Marketplace)
-- **Email:** [kontak@bisa-melalui-issue.github.com]
+- **Email:** [ascnurhidayah19@gmail.com]
 
 ---
 
