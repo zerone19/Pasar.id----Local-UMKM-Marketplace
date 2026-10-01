@@ -65,18 +65,18 @@ export default function AddToCartButton({
           aria-label="Kurangi jumlah"
           disabled={quantity === 1}
           onClick={() => setQuantity(Math.max(1, quantity - 1))}
-          className="flex h-full w-9 items-center justify-center rounded-l-lg text-on-surface-variant transition hover:bg-surface-container-high hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-35"
+          className="flex h-full w-11 items-center justify-center rounded-l-lg text-on-surface-variant transition hover:bg-surface-container-high hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-35"
         >
           <Icon name="remove" size={15} />
         </button>
-        <span aria-label={`Jumlah ${quantity}`} className="flex h-full min-w-8 items-center justify-center border-x border-outline-variant px-1 text-sm font-semibold text-on-surface">
+        <span aria-label={`Jumlah ${quantity}`} className="flex h-full min-w-10 items-center justify-center border-x border-outline-variant px-1 text-sm font-semibold text-on-surface">
           {quantity}
         </span>
         <button
           type="button"
           aria-label="Tambah jumlah"
           onClick={() => setQuantity(quantity + 1)}
-          className="flex h-full w-9 items-center justify-center rounded-r-lg text-on-surface-variant transition hover:bg-surface-container-high hover:text-on-surface"
+          className="flex h-full w-11 items-center justify-center rounded-r-lg text-on-surface-variant transition hover:bg-surface-container-high hover:text-on-surface"
         >
           <Icon name="add" size={15} />
         </button>
@@ -85,7 +85,7 @@ export default function AddToCartButton({
       <button
         type="button"
         onClick={handleAdd}
-        className={`flex h-11 min-w-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg px-3 text-xs font-semibold transition sm:text-sm ${
+        className={`flex h-11 w-full min-w-0 items-center justify-center gap-1.5 whitespace-normal rounded-lg px-3 text-xs font-semibold transition sm:whitespace-nowrap sm:text-sm ${
           inCart
             ? 'bg-secondary text-on-secondary hover:bg-secondary/80'
             : 'bg-primary text-on-primary hover:bg-primary/80'

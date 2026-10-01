@@ -6,6 +6,7 @@ type IconName =
   | 'check'
   | 'close'
   | 'error'
+  | 'home'
   | 'image'
   | 'inventory_2'
   | 'location_on'
@@ -30,6 +31,7 @@ const paths: Record<IconName, string> = {
   check: 'M5 12l4 4L19 6',
   close: 'M6 6l12 12M18 6L6 18',
   error: 'M12 8v4M12 16h.01M10.3 3.7L2.8 17a2 2 0 001.75 3h14.9a2 2 0 001.75-3L13.7 3.7a2 2 0 00-3.4 0z',
+  home: 'M12 3l9 8h-3v9a2 2 0 01-2 2h-4a2 2 0 01-2-2V11H6l-3-8z',
   image: 'M4 5h16v14H4zM4 15l4-4 3 3 2-2 7 7M15.5 9h.01',
   inventory_2: 'M4 5h16v14H4zM8 9h8M8 13h5',
   location_on: 'M12 21s7-5.1 7-11a7 7 0 10-14 0c0 5.9 7 11 7 11zM12 12a2.5 2.5 0 100-5 2.5 2.5 0 000 5z',

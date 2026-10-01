@@ -7,6 +7,33 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 
 ---
 
+## 📊 STATUS TERKINI — 1 Oktober 2026
+### Mobile UX — "Seperti aplikasi online shop" & device-aware — PROGRES
+- [x] `layout.tsx`: tambah `<meta name="viewport" content="width=device-width, initial-scale=1">` — fondasi device-aware. Sebelumnya tak ada → mobile render lebar 980px & zoom out.
+- [x] `Icon.tsx`: tambah ikon `home` (untuk bottom nav).
+- [x] `Footer.tsx`: footer mobile → **bottom tab-bar native-app style** (Home/Produk/UMKM/Keranjang/Akun), `fixed inset-x-0 bottom-0 md:hidden`, `z-40`, safe-area inset notch. Desktop footer tetap.
+- [x] `AddToCartButton.tsx`: qty tombol `w-9`→`w-11` (≥44px min touch target); tombol "Tambah ke Keranjang" `w-full` + `whitespace-normal sm:whitespace-nowrap` anti overflow.
+- [ ] **Production build (`next build`) — PRE-EXISTING FAILURE, tidak berkaitan mobile:** `TypeError: Cannot read properties of null (reading 'useContext')` saat SSG prerender semua route. Akar: `Header` pakai `useCart()` (CartContext) yang null di prerender; `localStorage` hanya di `useEffect` (bukan root cause). Dev & runtime normal; perlu perbaikan terpisah bila deploy production dibutuhkan.
+
+### 📱 Backlog / hal-hal yang mau diperbaiki di tampilan mobile (roadmap)
+- [ ] Migrasi Material Icons (46 occ, 9 halaman: cart/checkout/auth/{login,register}/seller/*) → `<Icon/>` SVG lokal agar ikon andal di mobile (hilangkan dependensi font Google Fonts; cegah FOIT/ikon-kotak bila jaringan lambat). Perlu tambah ikon: lock, edit, delete, attach_money, check_circle.
+- [ ] Audit touch target ≥44×44px di semua halaman (tombol qty, add-to-cart, nav link, form button) term. seller & admin tables.
+- [ ] List produk & toko: ketatkan `sm:` gap & `px-5` konsisten agar tidak terlipat ketepi; tambah `mb-16`+safe-area agar konten tak tertutup bottom tab-bar.
+- [ ] `next/image` `sizes` audit (produk & gambar) agar beban gambar mobile optimal (lazy + resize).
+- [ ] Sticky cart summary/CTA di halaman cart & checkout (native feel) + safe-area notch.
+- [ ] Header mobile: backdrop blur/shadow saat scroll; drawer menu tertutup otomatis setelah pilih link.
+- [ ] Pull-to-refresh / infinite scroll di /products & /stores (native-ish).
+- [ ] Konfirmasi visual di perangkat asli (vision dev env down → QA terbatas audit kode+SSR; minta screenshot device sebenarnya bila ada elemen masih belum rapi).
+
+### Verifikasi runtime — 1 Oktober 2026
+- [x] docker: api(3000), web(3001), db(PG16), redis, phpmyadmin(8080) running.
+- [x] db push + seed: 10 users/8 stores/32 produk/8 kategori.
+- [x] Auth e2e: login → 200, /admin/dashboard w/ Bearer → 200, no token → 401.
+- [x] Frontend (dev) compile clean & SSR markup terkonfirmasi: viewport meta + mobile nav (`aria-label="Navigasi bawah"`) + AddToCart `w-full`/`whitespace-normal` + qty `w-11` (44px) di semua halaman publik.
+- [ ] Vision/screenshot & device-resize tak tersedia di env ini → mobile QA terbatas audit kode+SSR.
+
+---
+
 ## 📊 STATUS TERKINI — 21 September 2026
 
 ### Audit UI & Data Produk — SELESAI
@@ -217,6 +244,73 @@ Pasar.ID adalah marketplace UMKM lokal berbasis multi-vendor e-commerce.
 
 ---
 
+## 🔍 Audit Project & Rekomendasi Fitur Mendatang
+
+Audit ini membandingkan README/PRD, struktur NestJS–Prisma–Next.js–Flutter, model database, endpoint backend, dan dependensi aktual. Rekomendasi di bawah adalah backlog produk/teknis; belum dianggap selesai sampai implementasi dan verifikasi dicentang.
+
+### Temuan utama saat ini
+- Fondasi buyer, seller, admin, katalog, multi-seller cart, checkout, order lifecycle, voucher validation, review, notification, analytics, dan chat API sudah tersedia.
+- Growth API belum memiliki seluruh UI web yang sepadan: UI voucher, review, notification center, dan chat realtime masih perlu dibangun.
+- Pembayaran masih berupa COD/manual transfer; belum ada payment gateway, bukti transfer upload, webhook, refund, atau rekonsiliasi pembayaran.
+- Pengiriman masih disimpan sebagai satu string alamat; belum ada ongkir, kurir, tracking number, split shipment, atau estimasi tiba.
+- Model Store belum memiliki data operasional seperti logo/banner, alamat terstruktur, koordinat, jam buka, status buka/tutup, dan verifikasi seller.
+- Model Product belum memiliki wishlist/favorite, varian, berat/dimensi, SKU, atau riwayat harga; upload gambar masih perlu alur storage yang aman.
+- `nestjs-backend` belum memiliki test file yang terdeteksi; perlu regression suite agar perubahan transaksi, stok, role, dan normalisasi gambar tidak mudah rusak.
+- Beberapa halaman internal masih memakai `material-icons`, berbeda dengan area publik yang sudah memakai SVG lokal.
+- Docker Compose development masih memuat credential placeholder langsung di file; konfigurasi production harus memakai secret manager atau environment yang tidak di-commit.
+- Flutter masih berupa scaffold katalog/API client; Flutter SDK tidak tersedia di environment saat audit sehingga build perangkat belum tervalidasi.
+
+### Backlog prioritas P0 — Production readiness & keamanan
+- [ ] Tambahkan unit test dan integration/e2e test untuk auth/RBAC, stok atomik, checkout, order ownership, voucher, review ownership, normalisasi gambar, dan endpoint admin.
+- [ ] Tambahkan CI pipeline: install reproducible, Prisma validate/migrate check, backend build, frontend build/lint, test, dan smoke test Docker.
+- [ ] Pindahkan semua secret/credential Compose ke `.env` atau secret manager; rotasi secret development yang pernah ditulis di konfigurasi dan dokumentasikan `.env.example` tanpa nilai rahasia.
+- [ ] Tambahkan rate limiting, validasi ukuran/format upload, sanitasi input chat/review, security headers, dan audit log untuk perubahan role, produk, voucher, serta status order.
+- [ ] Sediakan error handling terstandar, request ID, structured logging, health/readiness endpoint, dan monitoring untuk API, database, Redis, serta job gagal.
+
+### Backlog prioritas P1 — Transaksi marketplace nyata
+- [ ] Integrasikan payment gateway secara adapter-based dengan signature verification, idempotency key, webhook, status payment yang konsisten, expiry order, refund, dan rekonsiliasi.
+- [ ] Buat modul shipping: alamat terstruktur, ongkir, kurir, nomor resi, tracking event, estimasi tiba, dan dukungan order multi-toko/split shipment.
+- [ ] Tambahkan upload bukti transfer dan alur verifikasi admin bila manual transfer tetap dipertahankan.
+- [ ] Perjelas state machine order/payment agar transisi ilegal ditolak dan perubahan status tercatat dalam riwayat.
+- [ ] Tambahkan seller verification/KYC ringan, profil toko lengkap, jam operasional, lokasi peta, dan status toko buka/tutup.
+
+### Backlog prioritas P1 — Pengalaman buyer & seller
+- [ ] Selesaikan UI reviews/ratings, notification center, vouchers, dan chat; tambahkan unread count, pagination, dan empty/error states.
+- [ ] Tambahkan wishlist/favorite, recently viewed, share produk, laporan produk, dan rekomendasi berdasarkan kategori/riwayat.
+- [ ] Tambahkan varian produk, SKU, berat/dimensi, minimum order, stok per varian, dan riwayat perubahan harga.
+- [ ] Tambahkan seller image upload dengan storage object/S3-compatible, thumbnail, validasi MIME, batas ukuran, dan penghapusan asset yatim.
+- [ ] Tambahkan bulk product import/export, low-stock alert, promo seller, laporan CSV, dan dashboard tren penjualan.
+- [ ] Migrasikan icon internal yang masih memakai `material-icons` ke komponen SVG bersama agar tidak ada icon literal saat font eksternal gagal.
+
+### Backlog prioritas P1 — Mobile & aksesibilitas
+- [ ] Selesaikan Flutter: login/register, detail produk, cart, checkout, order history, notifications, dan deep link.
+- [ ] Jalankan `flutter analyze`, test, Android build, dan smoke test perangkat/emulator setelah Flutter SDK tersedia.
+- [ ] Audit WCAG: keyboard navigation, focus state, contrast, semantic labels, alt text, error announcement, dan responsive layout pada mobile/tablet.
+- [ ] Tambahkan PWA/offline read cache secara selektif untuk katalog dan halaman error/retry yang jelas.
+
+### Backlog prioritas P2 — Scale, discovery & growth
+- [ ] Tambahkan PostgreSQL full-text search yang terindeks; evaluasi Meilisearch/OpenSearch setelah volume katalog dan kebutuhan typo search meningkat.
+- [ ] Tambahkan cache invalidation yang jelas untuk katalog, pagination/filter yang stabil, cursor pagination, dan query/index audit database.
+- [ ] Tambahkan observability funnel: search → detail → cart → checkout → paid/completed, conversion seller, dan retention buyer tanpa menyimpan data sensitif berlebihan.
+- [ ] Tambahkan loyalty/referral, bundling produk, subscription/recurring order, dan program kurasi produk lokal setelah transaksi inti stabil.
+- [ ] Siapkan backup/restore PostgreSQL, disaster recovery runbook, object storage lifecycle, staging environment, dan deployment production yang repeatable.
+
+### Urutan implementasi yang direkomendasikan
+1. P0: test/regression, CI, secret hygiene, rate limit, logging, dan health checks.
+2. P1 transaksi: payment gateway atau bukti transfer yang aman, shipping, dan order state history.
+3. P1 UX: UI Growth, seller verification/profile, image upload, wishlist, dan varian produk.
+4. P1 mobile: selesaikan alur end-to-end dan validasi device build.
+5. P2: search scale, observability funnel, loyalty/referral, backup, dan production operations.
+
+### Definition of Done untuk setiap fitur backlog
+- Kontrak API/DTO dan authorization diuji.
+- Migration/seed aman untuk data existing dan idempotent bila relevan.
+- UI memiliki loading, empty, error, success, responsive, dan accessibility state.
+- Test otomatis serta build/lint terkait berhasil.
+- Docker/runtime smoke test dilakukan dan progress diperbarui berdasarkan output nyata.
+
+---
+
 ## Sprint Plan (MVP)
 
 | Sprint | Focus | Deliverable |
@@ -328,5 +422,5 @@ Pasar Id -- Marketplace UMKM Local/
 - **Next milestone:** Phase 5 — Admin dashboard and marketplace moderation
 
 ---
-*Last updated: September 20, 2026*
+*Last updated: September 21, 2026*
 *Project owner: Ascjul Opreker (Ascjul Zerone)*
